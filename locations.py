@@ -1,4 +1,6 @@
 
+#TODO: remove print commands
+
 class Location:
     name = ''
     description = ''
@@ -8,6 +10,7 @@ class Location:
     def contact(self, ship):
         pass
 
+
 class SpaceStation(Location):
     name = 'Terran Outpost'
     description = 'A small space station marks the border of the Terran Federation.'
@@ -16,6 +19,7 @@ class SpaceStation(Location):
     def contact(self, ship):
         print('''Good luck on your mission!''')
         input()
+
 
 class SmugglerShip(Location):
     name = 'Smuggler Ship'
@@ -79,6 +83,7 @@ class AncientShipwreck(Location):
         else:
             print('You discover an abandoned shipwreck emitting the pulse. However, there is lots of nuclear debris that you will need to clean up before you can enter.')
         input()
+
 
 class AquaCity(Location):
     name = 'Aquatic City'

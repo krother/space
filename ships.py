@@ -7,9 +7,6 @@ class Spaceship:
         self.artifacts = 0
         self.cargo = ''
 
-    def moveto(self, planet):
-        self.location = planet
-
     def colonize(self, planet):
         if self.colonists:
             self.colonists -= 1
@@ -21,9 +18,6 @@ class Spaceship:
             self.colonists += 1
             planet.population -= 1
 
-    def load_cargo(self, cargo):
-        self.cargo = cargo
-            
     def get_report(self):
         result = '''
 Spaceship Controller

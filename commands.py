@@ -1,3 +1,9 @@
+"""
+User actions.
+
+Implementation of the Command Design Pattern.
+"""
+#TODO: watch Raymond Hettingers talk and then use super() 
 
 class Command:
 
@@ -17,7 +23,7 @@ class Warp(Command):
         self.planet = planet
 
     def execute(self):
-        self.ship.moveto(self.planet)
+        self.ship.location = self.planet
 
 
 class Harvest(Command):
@@ -28,7 +34,7 @@ class Harvest(Command):
         self.ship = ship
 
     def execute(self):
-        self.ship.load_cargo(self.resource)
+        self.ship.cargo = self.resource
 
 
 class Colonize(Command):
@@ -63,10 +69,9 @@ class Contact(Command):
     def execute(self):
         self.planet.location.contact(self.ship)
 
+
 SearchArtifacts = Contact
 
-def get_commands(self, planet):
-    commands = []
 
 def get_commands(ship, planet):
     commands = []
@@ -76,9 +81,6 @@ def get_commands(ship, planet):
     # move
     for resource in planet.resources:
         commands.append(Harvest(resource, ship))
-    # search artifacts
-    #if planet.colonized:
-    #    commands.append(SearchArtifacts(ship, planet))
     # colonize / pickup
     commands.append(Colonize(ship, planet))
     commands.append(Pickup(ship, planet))
@@ -86,5 +88,4 @@ def get_commands(ship, planet):
     if planet.location and planet.location.name and planet.location.active:
         commands.append(Contact(ship, planet))
     return commands
-
 

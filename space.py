@@ -15,7 +15,7 @@ from commands import get_commands
 def travel(galaxy):
     ship = Spaceship()
     planet = galaxy[0]
-    ship.moveto(planet)
+    ship.location = planet
     while planet.name != 'Olympus' or planet.location.active:
         planet = ship.location
         shipreport = ship.get_report()

@@ -70,6 +70,16 @@ class Contact(Command):
         self.planet.location.contact(self.ship)
 
 
+class Exit(Command):
+
+    def __init__(self, ship):
+        Command.__init__(self, 'x', 'exit game')
+        self.ship = ship
+        
+    def execute(self):
+        self.ship.active = False
+
+
 SearchArtifacts = Contact
 
 
@@ -87,5 +97,7 @@ def get_commands(ship, planet):
     # talk to people
     if planet.location and planet.location.name and planet.location.active:
         commands.append(Contact(ship, planet))
+    # exit
+    commands.append(Exit(ship))
     return commands
 

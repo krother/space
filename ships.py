@@ -6,6 +6,7 @@ class Spaceship:
         self.location = None
         self.artifacts = 0
         self.cargo = ''
+        self.active = True
 
     def colonize(self, planet):
         if self.colonists:

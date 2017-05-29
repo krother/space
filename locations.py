@@ -14,7 +14,7 @@ class Location:
 class SpaceStation(Location):
     name = 'Terran Outpost'
     description = 'A small space station marks the border of the Terran Federation.'
-    action_name = 'contact %s'%name
+    action_name = 'contact %s' % name
 
     def contact(self, ship):
         print('''Good luck on your mission!''')
@@ -24,7 +24,7 @@ class SpaceStation(Location):
 class SmugglerShip(Location):
     name = 'Smuggler Ship'
     description = "A small vessel hidden in an asteroid belt. You had almost overlooked them if they hadn't contacted you."
-    action_name = 'board %s'%name
+    action_name = 'board %s' % name
 
     def contact(self, ship):
         print('''"We are in dire need of repairs and ran out of gas."''')
@@ -59,15 +59,15 @@ class Caves(Location):
 
     def contact(self, ship):
         if ship.cargo == 'food':
-            print('After two months of search, you discover a strange artifact at the bottom of the caves.')
+            print('After two weeks of search, you discover a strange artifact at the bottom of the caves.')
             ship.cargo = ''
             ship.artifacts += 1
             self.active = False
         else:
-            print('You abandon the search after a week. You need more supplies to explore the caves deeper.')
+            print('You abandon the search after a week. You need more food supplies to explore the caves deeper.')
         input()
 
-    
+
 class AncientShipwreck(Location):
 
     name = 'Strange signal'
@@ -81,7 +81,7 @@ class AncientShipwreck(Location):
             ship.artifacts += 1
             self.active = False
         else:
-            print('You discover an abandoned shipwreck emitting the pulse. However, there is lots of nuclear debris that you will need to clean up before you can enter.')
+            print('You discover an abandoned shipwreck emitting the pulse. However, there is lots of nuclear debris. You will need a stron neutron source to clean it up before you can enter.')
         input()
 
 
@@ -92,12 +92,12 @@ class AquaCity(Location):
 
     def contact(self, ship):
         if ship.cargo == 'trinkets':
-            print('After a long negotiation you trade a container of cheap jewellery, waving cats and rubber ducks for a strange artifact. You wonder who made the better deal.')
+            print('After a long bargain you trade a container of waving cats and rubber ducks for a strange artifact. You wonder who made the better deal.')
             ship.cargo = ''
             ship.artifacts += 1
             self.active = False
         else:
-            print('The aliens are friendly and seem to enjoy trading. For a couple of tools you get an impressive collection of sea shells.')
+            print('The aliens are friendly and seem to enjoy trading. They ask you for goods from your home world.')
         input()
 
 
@@ -111,4 +111,3 @@ class SiliconValley(Location):
         ship.artifacts += 1
         self.active = False
         input()
-

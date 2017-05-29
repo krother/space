@@ -10,7 +10,8 @@ __author__ = "Kristian Rother"
 from planets import GALAXY
 from ships import Spaceship
 from views import intro, outro, print_twocolumn
-from commands import get_commands       
+from commands import get_commands
+
 
 class SpaceGame:
 
@@ -21,7 +22,7 @@ class SpaceGame:
     @property
     def is_running(self):
         return self.ship.active and not self.solved
-    
+
     @property
     def solved(self):
         planet = self.ship.location
@@ -38,9 +39,9 @@ class SpaceGame:
             print("\nAvailable commands:")
             commands = get_commands(self.ship, planet)
             for cmd in commands:
-                print("[%s] %s"%(cmd.key, cmd.description))
+                print("[%s] %s" % (cmd.key, cmd.description))
             print()
-            
+
             key = input("What shall we do? ")
             for cmd in commands:
                 if key == cmd.key:

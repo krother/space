@@ -1,4 +1,13 @@
 
+SKIP_INPUT = False
+SLOW_MOTION = False
+
+
+def wait_for_input():
+    if not SKIP_INPUT:
+        input()
+
+
 def wordwrap(lines):
     result = []
     for line in lines:

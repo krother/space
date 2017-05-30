@@ -7,10 +7,12 @@ Space Traveller - main controller
 __author__ = "Kristian Rother"
 
 
-from planets import GALAXY
+from planets import create_galaxy
 from ships import Spaceship
 from views import intro, outro, print_twocolumn
+import views
 from commands import get_commands
+import time
 
 
 class SpaceGame:
@@ -45,12 +47,16 @@ class SpaceGame:
             key = input("What shall we do? ")
             for cmd in commands:
                 if key == cmd.key:
+                    print(key)
+                    if views.SLOW_MOTION:
+                        time.sleep(3)                    
                     cmd.execute()
 
 
 if __name__ == '__main__':
     intro()
-    sg = SpaceGame(GALAXY)
+    galaxy = create_galaxy()
+    sg = SpaceGame(galaxy)
     sg.travel()
     if sg.solved:
         outro()

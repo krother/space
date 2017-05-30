@@ -1,5 +1,7 @@
 
 #TODO: remove print commands
+from views import wait_for_input
+
 
 class Location:
     name = ''
@@ -18,7 +20,7 @@ class SpaceStation(Location):
 
     def contact(self, ship):
         print('''Good luck on your mission!''')
-        input()
+        wait_for_input()
 
 
 class SmugglerShip(Location):
@@ -33,7 +35,7 @@ class SmugglerShip(Location):
             ship.artifacts += 1
             ship.cargo = 0
             self.active = False
-        input() 
+        wait_for_input() 
 
 
 class AncientVault(Location):
@@ -49,7 +51,7 @@ class AncientVault(Location):
             self.active = False
         else:
             print('''The monument does not react to anything you try.''')
-        input()
+        wait_for_input()
 
 
 class Caves(Location):
@@ -65,7 +67,7 @@ class Caves(Location):
             self.active = False
         else:
             print('You abandon the search after a week. You need more food supplies to explore the caves deeper.')
-        input()
+        wait_for_input()
 
 
 class AncientShipwreck(Location):
@@ -82,7 +84,7 @@ class AncientShipwreck(Location):
             self.active = False
         else:
             print('You discover an abandoned shipwreck emitting the pulse. However, there is lots of nuclear debris. You will need a stron neutron source to clean it up before you can enter.')
-        input()
+        wait_for_input()
 
 
 class AquaCity(Location):
@@ -98,7 +100,7 @@ class AquaCity(Location):
             self.active = False
         else:
             print('The aliens are friendly and seem to enjoy trading. They ask you for goods from your home world.')
-        input()
+        wait_for_input()
 
 
 class SiliconValley(Location):
@@ -110,4 +112,4 @@ class SiliconValley(Location):
         print('In the valley you find an uninhabited cave with an artifact!')
         ship.artifacts += 1
         self.active = False
-        input()
+        wait_for_input()

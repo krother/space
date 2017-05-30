@@ -33,47 +33,46 @@ resources : %s
         return result
 
 
-GALAXY = [
-    Planet('Terra', 'The cradle of mankind. A blue jewel floating in space.',
-           ['food', 'trinkets'],
-           ['Centauri', 'Sirius']
-           ),
-    Planet('Rorke', 'A hot white star surrounded by a vast asteroid belt.',
-           ['ore'],
-           ['X2475', 'New Haven', 'Octygon'],
-           SmugglerShip()),
-    Planet('Magminus', 'A volcanic planet inhabited by a silicon-based species.',
-           ['minerals'],
-           ['Octygon', 'Kucharsky'],
-           SiliconValley()),
-    Planet('Vega', 'A fertile world with rich aquatic life forms.',
-           ['biotics'],
-           ['Sirius', 'Centauri', 'Octygon'], AquaCity()),
-    Planet('X2475', 'Neutron star with really nothing going on.',
-           ['nucleons'], ['Rorke', 'Olympus']),
-    Planet('Sirius', 'A sandy desert with seven beautiful orange moons.',
-           ['ore'],
-           ['Terra', 'Centauri', 'Vega'], AncientShipwreck()),
-    Planet('Octygon', 'A dead rocky planet with mysterious underground caves.',
-           ['ore'],
-           ['Rorke', 'Magminus', 'New Haven', 'Vega'],
-           Caves()),
-    Planet('Kucharsky', 'A huge dark ochre gas planet.',
-           ['gas'],
-           ['New Haven', 'Centauri', 'Magminus']),
-    Planet('Centauri', 'Civilizations outpost in space.',
-           ['minerals', 'nucleons'],
-           ['Kucharsky', 'Terra', 'Vega', 'Sirius'],
-           SpaceStation()),
-    Planet('New Haven', 'A earth-like yet uninhabited world.',
-           ['food', 'biotics'], ['Rorke', 'Octygon', 'Kucharsky']),
-    Planet('Olympus', 'The home world of the Firstborn.',
-           [], ['X2475'], AncientVault())
-]
+def create_galaxy():
+    galaxy = [
+        Planet('Terra', 'The cradle of mankind. A blue jewel floating in space.',
+               ['food', 'trinkets'],
+               ['Centauri', 'Sirius']
+               ),
+        Planet('Rorke', 'A hot white star surrounded by a vast asteroid belt.',
+               ['ore'],
+               ['X2475', 'New Haven', 'Octygon'],
+               SmugglerShip()),
+        Planet('Magminus', 'A volcanic planet inhabited by a silicon-based species.',
+               ['minerals'],
+               ['Octygon', 'Kucharsky'],
+               SiliconValley()),
+        Planet('Vega', 'A fertile world with rich aquatic life forms.',
+               ['biotics'],
+               ['Sirius', 'Centauri', 'Octygon'], AquaCity()),
+        Planet('X2475', 'Neutron star with really nothing going on.',
+               ['nucleons'], ['Rorke', 'Olympus']),
+        Planet('Sirius', 'A sandy desert with seven beautiful orange moons.',
+               ['ore'],
+               ['Terra', 'Centauri', 'Vega'], AncientShipwreck()),
+        Planet('Octygon', 'A dead rocky planet with mysterious underground caves.',
+               ['ore'],
+               ['Rorke', 'Magminus', 'New Haven', 'Vega'],
+               Caves()),
+        Planet('Kucharsky', 'A huge dark ochre gas planet.',
+               ['gas'],
+               ['New Haven', 'Centauri', 'Magminus']),
+        Planet('Centauri', 'Civilizations outpost in space.',
+               ['minerals', 'nucleons'],
+               ['Kucharsky', 'Terra', 'Vega', 'Sirius'],
+               SpaceStation()),
+        Planet('New Haven', 'A earth-like yet uninhabited world.',
+               ['food', 'biotics'], ['Rorke', 'Octygon', 'Kucharsky']),
+        Planet('Olympus', 'The home world of the Firstborn.',
+               [], ['X2475'], AncientVault())
+    ]
 
-
-def set_connections(galaxy):
-    '''builds the connection graph'''
+    # builds connection graph
     for planet in galaxy:
         for targetname in planet.connection_names:
             target = None
@@ -82,5 +81,4 @@ def set_connections(galaxy):
                     target = p
             planet.add_connection(target)
 
-
-set_connections(GALAXY)
+    return galaxy

@@ -1,0 +1,13 @@
+
+language: python
+before_script:
+  - sleep 3
+python:
+  - "3.6"
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+  - pip install --editable .
+# command to run tests
+script:
+- pylint *.py

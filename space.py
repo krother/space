@@ -1,7 +1,5 @@
 '''
-
 Space Traveller - main controller
-
 '''
 
 __author__ = "Kristian Rother"

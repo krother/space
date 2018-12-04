@@ -4,7 +4,7 @@ User actions.
 Implementation of the Command Design Pattern.
 """
 
-# TODO: watch Raymond Hettingers talk and then use super() 
+# TODO: watch Raymond Hettingers talk and then use super()
 
 
 class Command:

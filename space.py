@@ -5,19 +5,19 @@ Space Traveller - main controller
 __author__ = "Kristian Rother"
 
 
-from planets import create_galaxy
+import time
+from commands import get_commands
 from ships import Spaceship
+from planets import create_galaxy
 from views import intro, outro, print_twocolumn
 import views
-from commands import get_commands
-import time
 
 
 class SpaceGame:
 
-    def __init__(self, galaxy):
+    def __init__(self, galaxy_obj):
         self.ship = Spaceship()
-        self.ship.location = galaxy[0]
+        self.ship.location = galaxy_obj[0]
 
     @property
     def is_running(self):
@@ -47,7 +47,7 @@ class SpaceGame:
                 if key == cmd.key:
                     print(key)
                     if views.SLOW_MOTION:
-                        time.sleep(3)                    
+                        time.sleep(3)
                     cmd.execute()
 
 

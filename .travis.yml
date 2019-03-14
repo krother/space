@@ -11,5 +11,5 @@ install:
   # - pip install --editable .
 # command to run tests
 script:
-- pylint space.py
+- pylint *.py
 - pytest test_space.py

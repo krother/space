@@ -1,5 +1,5 @@
 
-from unittest import TestCase, main
+from unittest import TestCase
 from unittest.mock import patch
 from space import SpaceGame, create_galaxy
 from locations import AncientShipwreck
@@ -24,42 +24,39 @@ class SpaceTests(TestCase):
     def test_pickup(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
-        self.assertEqual(sg.ship.cargo, 'food')
+        assert sg.ship.cargo == 'food'
 
     @patch('builtins.input', lambda x: next(MOVE))
     def test_warp(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
-        self.assertEqual(sg.ship.location.name, 'Centauri')
+        assert sg.ship.location.name == 'Centauri'
 
     @patch('builtins.input', lambda x: next(TRIPLE_JUMP))
     def test_triple_warp(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
-        self.assertEqual(sg.ship.location.name, 'New Haven')
+        assert sg.ship.location.name == 'New Haven'
 
     @patch('builtins.input', lambda *args: next(FIRST_ARTIFACT))
     def test_pickup_artifact(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
-        self.assertEqual(sg.ship.artifacts, 1)
+        assert sg.ship.artifacts == 1
 
+    @staticmethod
     @patch('builtins.input', lambda: None)
-    def test_other_input(self):
+    def test_other_input():
         asw = AncientShipwreck()
         ship = Spaceship()
         asw.contact(ship)
-        self.assertEqual(ship.artifacts, 0)
+        assert ship.artifacts == 0
         ship.cargo = 'nucleons'
         asw.contact(ship)
-        self.assertEqual(ship.artifacts, 1)
+        assert ship.artifacts == 1
 
     @patch('builtins.input', lambda x: next(COMPLETE_SOLUTION))
     def test_finish_game(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
-        self.assertTrue(sg.solved)
-
-
-if __name__ == '__main__':
-    main(buffer=True)
+        assert sg.solved

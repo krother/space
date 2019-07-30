@@ -8,7 +8,7 @@ views.SKIP_INPUT = True
 views.SLOW_MOTION = True
 
 
-@patch('builtins.input', lambda x:next(COMPLETE_SOLUTION))
+@patch('builtins.input', lambda x: next(COMPLETE_SOLUTION))
 def show_walkthrough():
     galaxy = create_galaxy()
     sg = SpaceGame(galaxy)

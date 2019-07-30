@@ -25,11 +25,9 @@ class Planet:
 
 resources : %s
 ''' % (self.name, '='*(len(self.name)+7), self.description,
-     ', '.join(self.resources))
-        if self.location and self.location.name:
-            result += '''
-%s:
-%s''' % (self.location.name, self.location.description)
+       ', '.join(self.resources))
+        if self.location:
+            result += self.location.get_report()
         return result
 
 
@@ -38,7 +36,7 @@ def create_galaxy():
         Planet('Terra', 'The cradle of mankind. A blue jewel floating in space.',
                ['food', 'trinkets'],
                ['Centauri', 'Sirius']
-               ),
+              ),
         Planet('Rorke', 'A hot white star surrounded by a vast asteroid belt.',
                ['ore'],
                ['X2475', 'New Haven', 'Octygon'],

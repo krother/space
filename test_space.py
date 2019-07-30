@@ -20,31 +20,31 @@ class SpaceTests(TestCase):
     def setUp(self):
         self.galaxy = create_galaxy()
 
-    @patch('builtins.input', lambda x:next(PICKUP))
+    @patch('builtins.input', lambda x: next(PICKUP))
     def test_pickup(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
         self.assertEqual(sg.ship.cargo, 'food')
 
-    @patch('builtins.input', lambda x:next(MOVE))
+    @patch('builtins.input', lambda x: next(MOVE))
     def test_warp(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
         self.assertEqual(sg.ship.location.name, 'Centauri')
 
-    @patch('builtins.input', lambda x:next(TRIPLE_JUMP))
+    @patch('builtins.input', lambda x: next(TRIPLE_JUMP))
     def test_triple_warp(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
         self.assertEqual(sg.ship.location.name, 'New Haven')
 
-    @patch('builtins.input', lambda *args:next(FIRST_ARTIFACT))
+    @patch('builtins.input', lambda *args: next(FIRST_ARTIFACT))
     def test_pickup_artifact(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
         self.assertEqual(sg.ship.artifacts, 1)
 
-    @patch('builtins.input', lambda :None)
+    @patch('builtins.input', lambda: None)
     def test_other_input(self):
         asw = AncientShipwreck()
         ship = Spaceship()
@@ -54,7 +54,7 @@ class SpaceTests(TestCase):
         asw.contact(ship)
         self.assertEqual(ship.artifacts, 1)
 
-    @patch('builtins.input', lambda x:next(COMPLETE_SOLUTION))
+    @patch('builtins.input', lambda x: next(COMPLETE_SOLUTION))
     def test_finish_game(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()

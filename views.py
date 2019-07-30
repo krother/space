@@ -13,7 +13,7 @@ def wordwrap(lines):
     for line in lines:
         while len(line) > 35:
             i = 34
-            while i > 0 and line[i]!=' ':
+            while i > 0 and line[i] != ' ':
                 i -= 1
             if i == 0:
                 i = len(line)

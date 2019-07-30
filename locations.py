@@ -12,6 +12,11 @@ class Location:
     def contact(self, ship):
         pass
 
+    def get_report(self):
+        if self.name:
+            return '\n{}: \n{}'.format(self.name, self.description)
+        return ''
+
 
 class SpaceStation(Location):
     name = 'Terran Outpost'
@@ -35,7 +40,7 @@ class SmugglerShip(Location):
             ship.artifacts += 1
             ship.cargo = 0
             self.active = False
-        wait_for_input() 
+        wait_for_input()
 
 
 class AncientVault(Location):

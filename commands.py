@@ -4,8 +4,6 @@ User actions.
 Implementation of the Command Design Pattern.
 """
 
-# TODO: watch Raymond Hettingers talk and then use super()
-
 
 class Command:
 
@@ -16,6 +14,9 @@ class Command:
     def execute(self):
         pass
 
+    def __repr__(self):
+        return f"<command: {self.key} : {self.description}>"
+
 
 class Warp(Command):
 
@@ -25,7 +26,7 @@ class Warp(Command):
         self.planet = planet
 
     def execute(self):
-        self.ship.location = self.planet
+        self.ship.move_to(self.planet)
 
 
 class Collect(Command):

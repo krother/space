@@ -16,7 +16,7 @@ class Planet:
 
     @property
     def contactable(self):
-      return self.location and self.location.name and self.location.active
+        return self.location and self.location.name and self.location.active
 
     def add_connection(self, planet):
         self.connections.append(planet)
@@ -44,34 +44,40 @@ def create_galaxy():
         Planet('Rorke', 'A hot white star surrounded by a vast asteroid belt.',
                ['ore'],
                ['X2475', 'New Haven', 'Octygon'],
-               SmugglerShip()),
+               SmugglerShip),
         Planet('Magminus', 'A volcanic planet inhabited by a silicon-based species.',
                ['minerals'],
                ['Octygon', 'Kucharsky'],
-               SiliconValley()),
+               SiliconValley),
         Planet('Vega', 'A fertile world with rich aquatic life forms.',
                ['biotics'],
-               ['Sirius', 'Centauri', 'Octygon'], AquaCity()),
+               ['Sirius', 'Centauri', 'Octygon'],
+               AquaCity),
         Planet('X2475', 'Neutron star with really nothing going on.',
-               ['nucleons'], ['Rorke', 'Olympus']),
+               ['nucleons'],
+               ['Rorke', 'Olympus']),
         Planet('Sirius', 'A sandy desert with seven beautiful orange moons.',
                ['ore'],
-               ['Terra', 'Centauri', 'Vega'], AncientShipwreck()),
+               ['Terra', 'Centauri', 'Vega'],
+               AncientShipwreck),
         Planet('Octygon', 'A dead rocky planet with mysterious underground caves.',
                ['ore'],
                ['Rorke', 'Magminus', 'New Haven', 'Vega'],
-               Caves()),
+               Caves),
         Planet('Kucharsky', 'A huge dark ochre gas planet.',
                ['gas'],
                ['New Haven', 'Centauri', 'Magminus']),
         Planet('Centauri', 'Civilizations outpost in space.',
                ['minerals', 'nucleons'],
                ['Kucharsky', 'Terra', 'Vega', 'Sirius'],
-               SpaceStation()),
+               SpaceStation),
         Planet('New Haven', 'A earth-like yet uninhabited world.',
-               ['food', 'biotics'], ['Rorke', 'Octygon', 'Kucharsky']),
+               ['food', 'biotics'],
+               ['Rorke', 'Octygon', 'Kucharsky']),
         Planet('Olympus', 'The home world of the Firstborn.',
-               [], ['X2475'], AncientVault())
+               [],
+               ['X2475'],
+               AncientVault)
     ]
 
     # builds connection graph

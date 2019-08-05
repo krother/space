@@ -14,9 +14,9 @@ import views
 
 class SpaceGame:
 
-    def __init__(self, galaxy_obj):
+    def __init__(self, start_planet):
         self.ship = Spaceship()
-        self.ship.planet = galaxy_obj[0]
+        self.ship.planet = start_planet
 
     @property
     def is_running(self):
@@ -27,32 +27,42 @@ class SpaceGame:
         planet = self.ship.planet
         return planet.name == 'Olympus' and not planet.location.active
 
+    def print_report(self):
+        planet = self.ship.planet
+        shipreport = self.ship.get_report()
+        planet_report = planet.get_report()
+        print('\n' * 30)
+        print_twocolumn(planet_report, shipreport)
+
+    @staticmethod
+    def print_commands(commands):
+        print("\nAvailable commands:")
+        for cmd in commands:
+            print(f"[{cmd.key}] {cmd.description}")
+        print()
+
+    @staticmethod
+    def enter_command(commands):
+        key = input("What shall we do? ")
+        for cmd in commands:
+            if key == cmd.key:
+                print(key)
+                if views.SLOW_MOTION:
+                    time.sleep(3)
+                cmd.action()
+
     def travel(self):
         while self.is_running:
-            planet = self.ship.planet
-            shipreport = self.ship.get_report()
-            planet_report = planet.get_report()
-            print('\n' * 30)
-            print_twocolumn(planet_report, shipreport)
-            print("\nAvailable commands:")
+            self.print_report()
             commands = self.ship.get_commands()
-            for cmd in commands:
-                print("[%s] %s" % (cmd.key, cmd.description))
-            print()
-
-            key = input("What shall we do? ")
-            for cmd in commands:
-                if key == cmd.key:
-                    print(key)
-                    if views.SLOW_MOTION:
-                        time.sleep(3)
-                    cmd.action()
+            self.print_commands(commands)
+            self.enter_command(commands)
 
 
 if __name__ == '__main__':
     intro()
     galaxy = create_galaxy()
-    sg = SpaceGame(galaxy)
+    sg = SpaceGame(galaxy[0])
     sg.travel()
     if sg.solved:
         outro()

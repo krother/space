@@ -14,7 +14,7 @@ class Spaceship:
         self.active = True
 
     def move_to(self, planet):
-        print('MOVE TO ', planet)
+        print('MOVE TO ', planet.name)
         self.planet = planet
 
     def load_cargo(self, resource):
@@ -50,6 +50,6 @@ artifacts found    : {}/5
             contact = Command('t', self.planet.location.action_name, partial(self.planet.location.contact, self))
             commands.append(contact)
 
-        exit = Command('x', 'exit game', self.exit)
-        commands.append(exit)
+        exit_game = Command('x', 'exit game', self.exit)
+        commands.append(exit_game)
         return commands

@@ -6,7 +6,6 @@ __author__ = "Kristian Rother"
 
 
 import time
-from commands import get_commands
 from ships import Spaceship
 from planets import create_galaxy
 from views import intro, outro, print_twocolumn
@@ -17,7 +16,7 @@ class SpaceGame:
 
     def __init__(self, galaxy_obj):
         self.ship = Spaceship()
-        self.ship.location = galaxy_obj[0]
+        self.ship.planet = galaxy_obj[0]
 
     @property
     def is_running(self):
@@ -25,19 +24,18 @@ class SpaceGame:
 
     @property
     def solved(self):
-        planet = self.ship.location
-        return planet.name == 'Olympus' and \
-            not planet.location.active
+        planet = self.ship.planet
+        return planet.name == 'Olympus' and not planet.location.active
 
     def travel(self):
         while self.is_running:
-            planet = self.ship.location
+            planet = self.ship.planet
             shipreport = self.ship.get_report()
-            planreport = planet.get_report()
+            planet_report = planet.get_report()
             print('\n' * 30)
-            print_twocolumn(planreport, shipreport)
+            print_twocolumn(planet_report, shipreport)
             print("\nAvailable commands:")
-            commands = get_commands(self.ship, planet)
+            commands = self.ship.get_commands()
             for cmd in commands:
                 print("[%s] %s" % (cmd.key, cmd.description))
             print()
@@ -48,7 +46,7 @@ class SpaceGame:
                     print(key)
                     if views.SLOW_MOTION:
                         time.sleep(3)
-                    cmd.execute()
+                    cmd.action()
 
 
 if __name__ == '__main__':

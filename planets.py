@@ -14,6 +14,10 @@ class Planet:
         self.resources = resources
         self.location = location
 
+    @property
+    def contactable(self):
+      return self.location and self.location.name and self.location.active
+
     def add_connection(self, planet):
         self.connections.append(planet)
 

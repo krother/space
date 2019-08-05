@@ -30,13 +30,13 @@ class SpaceTests(TestCase):
     def test_warp(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
-        assert sg.ship.location.name == 'Centauri'
+        assert sg.ship.planet.name == 'Centauri'
 
     @patch('builtins.input', lambda x: next(TRIPLE_JUMP))
     def test_triple_warp(self):
         sg = SpaceGame(self.galaxy)
         sg.travel()
-        assert sg.ship.location.name == 'New Haven'
+        assert sg.ship.planet.name == 'New Haven'
 
     @patch('builtins.input', lambda *args: next(FIRST_ARTIFACT))
     def test_pickup_artifact(self):

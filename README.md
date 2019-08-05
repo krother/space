@@ -10,4 +10,4 @@ This is my shot at a space travel game.
 
 ## Usage
 
-python3 space.py
+python space.py

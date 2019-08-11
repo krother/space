@@ -1,0 +1,75 @@
+[
+{"name": "Terra",
+  "description": "The cradle of mankind.\nA blue jewel floating in space.",
+  "image": "P05",
+  "goods": ["food", "medical"],
+  "connections": ["Centauri", "Sirius"]
+},
+{"name": "Rorke",
+  "description": "A hot white star surrounded by a vast asteroid belt.",
+  "image": "orange01",
+  "goods": ["ore"],
+  "connections": ["X2475", "New Haven", "Octygon"],
+  "location": "SmugglerShip"
+},
+{"name": "Magminus",
+  "description": "A volcanic planet inhabited by a silicon-based species.",
+  "image": "redgiant02",
+  "goods": ["minerals"],
+  "connections": ["Octygon", "Kucharsky"],
+  "location": "SiliconValley"
+},
+{"name": "Vega",
+  "description": "A fertile world with rich aquatic life forms.",
+  "image": "O05",
+  "goods": ["spices"],
+  "connections": ["Sirius", "Centauri", "Octygon"],
+  "location": "AquaCity"
+},
+{"name": "X2475",
+  "description": "Neutron star with really nothing going on.",
+  "image": "green01",
+  "goods": ["nucleons"],
+  "connections": ["Rorke", "Olympus"]
+},
+{"name": "Sirius",
+  "description": "A sandy desert with seven beautiful orange moons.",
+  "image": "H04",
+  "goods": ["ore"],
+  "connections": ["Terra", "Centauri", "Vega"],
+  "location": "AncientShipwreck"
+},
+{"name": "Octygon",
+  "description": "A dead rocky planet with mysterious underground caves.",
+  "image": "D01",
+  "goods": ["ore"],
+  "connections": ["Rorke", "Magminus", "New Haven", "Vega"],
+  "location": "Caves"
+},
+{"name": "Kucharsky",
+  "description": "A huge light blue gas planet.",
+  "image": "white01",
+  "goods": ["gas"],
+  "connections": ["New Haven", "Centauri", "Magminus"]
+},
+{"name": "Centauri",
+  "description": "Civilizations outpost in space.",
+  "image": "J00",
+  "goods": ["minerals", "nucleons"],
+  "connections": ["Kucharsky", "Terra", "Vega", "Sirius"],
+  "location": "SpaceStation"
+},
+{"name": "New Haven",
+  "description": "A earth-like yet uninhabited world.",
+  "image": "M10",
+  "goods": ["food", "biotics"],
+  "connections": ["Rorke", "Octygon", "Kucharsky"]
+},
+{"name": "Olympus",
+  "description": "The home world of the Firstborn.",
+  "image": "station-agriculture",
+  "goods": [],
+  "connections": ["X2475"],
+  "location": "AncientVault"
+}
+]

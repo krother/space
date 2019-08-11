@@ -1,35 +1,39 @@
 
 from functools import partial
 from collections import namedtuple
+import arcade
+from views import IMAGES
 
-Command = namedtuple('Command', ('key', 'description', 'action'))
+
+Command = namedtuple('Command', ('description', 'action'))
 
 
 class Spaceship:
 
     def __init__(self):
         self.planet = None
-        self.artifacts = 0
+        self.artifacts = 5
         self.cargo = ''
-        self.active = True
+
+    def draw(self):
+        report = self.get_report()
+        arcade.draw_text(report, 700, 400, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
+        if self.cargo:
+            IMAGES[self.cargo].draw(770, 300, 128, 128)
+        for i in range(1, self.artifacts+1):
+            IMAGES[f"artifact{i}"].draw(630 + i * 140, 120, 128, 128)
+
 
     def move_to(self, planet):
-        print('MOVE TO ', planet.name)
         self.planet = planet
+        #return fMOVE TO {planet.name}'
 
     def load_cargo(self, resource):
         self.cargo = resource
-
-    def exit(self):
-        self.active = False
+        #return f'PICKED UP {resource}'
 
     def get_report(self):
-        result = '''
-Spaceship Bridge
-================
-cargo              : {}
-artifacts found    : {}/5
-'''.format(self.cargo, self.artifacts)
+        result = f'''Cargo Bay:\n\n\n\n\n\n\n\n\nArtifacts:'''
         return result
 
     def __repr__(self):
@@ -38,18 +42,16 @@ artifacts found    : {}/5
     def get_commands(self):
         commands = []
         # move
-        for i, planet in enumerate(self.planet.connections):
-            warp = Command(str(i + 1), f"warp to {planet.name}", partial(self.move_to, planet))
+        for planet in self.planet.connections:
+            warp = Command(f"warp to {planet.name}", partial(self.move_to, planet))
             commands.append(warp)
         # load goods
         for resource in self.planet.resources:
-            load = Command(resource[0].upper(), f"collect {resource}", partial(self.load_cargo, resource))
+            load = Command(f"collect {resource}", partial(self.load_cargo, resource))
             commands.append(load)
         # talk to people
         if self.planet.contactable:
-            contact = Command('t', self.planet.location.action_name, partial(self.planet.location.contact, self))
+            contact = Command(self.planet.location.action_name, partial(self.planet.location.contact, self))
             commands.append(contact)
 
-        exit_game = Command('x', 'exit game', self.exit)
-        commands.append(exit_game)
         return commands

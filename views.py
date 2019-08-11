@@ -1,46 +1,30 @@
 
+import os
+import arcade
+from arcade import load_texture
+
+def load_images(path, image_dict):
+    #name,file,x,y,w,h
+    for fn in os.listdir(path):
+        if fn.endswith('.png'):
+            name = fn[:-4]
+            fn = os.path.join(path, fn)
+            image_dict[name] = load_texture(fn, 0, 0)
+
+
+IMAGES = {}
+load_images('images/planets', IMAGES)
+load_images('images/exterior', IMAGES)
+load_images('images/goods', IMAGES)
+load_images('images/artifacts', IMAGES)
+
 SKIP_INPUT = False
 SLOW_MOTION = False
 
 
-def wait_for_input():
-    if not SKIP_INPUT:
-        input()
+def print_message(msg):
+    arcade.draw_text(msg, 300, 200, arcade.color.ALIZARIN_CRIMSON, 20, font_name='GARA')
 
-
-def wordwrap(lines):
-    result = []
-    for line in lines:
-        while len(line) > 35:
-            i = 34
-            while i > 0 and line[i] != ' ':
-                i -= 1
-            if i == 0:
-                i = len(line)
-            result.append(line[:i].strip())
-            line = line[i:].strip()
-        result.append(line)
-    return result
-
-def print_twocolumn(r1, r2):
-    r1 = wordwrap(r1.split('\n'))
-    r2 = wordwrap(r2.split('\n'))
-    ldiff = len(r1) - len(r2)
-    if ldiff < 0:
-        r1 += [''] * (-ldiff)
-    elif ldiff > 0:
-        r2 += [''] * ldiff
-    for line1, line2 in zip(r1, r2):
-        print("%-35s     %-35s"%(line1, line2))
-
-
-
-def intro():
-    print('''
-This is the journey of the spaceship Controller
-on its quest to explore the depths of space
-in search of the legendary planet Olympus.
-''')
 
 def outro():
     print('''

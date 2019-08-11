@@ -2,17 +2,28 @@
 from locations import SpaceStation, Caves, AncientVault
 from locations import AncientShipwreck, SiliconValley
 from locations import AquaCity, SmugglerShip
+from views import IMAGES
+import arcade
+import json
 
 
 class Planet:
 
-    def __init__(self, name, desc, resources, connection_names, location=None):
-        self.name = name
-        self.description = desc
-        self.connection_names = connection_names
+    def __init__(self, json_record):
+        self.name = json_record['name']
+        self.description = json_record['description']
+        self.image = json_record['image']
+        self.connection_names = json_record['connections']
         self.connections = []
-        self.resources = resources
-        self.location = location
+        self.resources = json_record['goods']
+        self.location = None # json_record['location']
+
+    def draw(self):
+        IMAGES[self.image].draw(150, 800, 200, 200)
+        report = self.get_report()
+        arcade.draw_text(report, 300, 900, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
+        if self.location:
+            self.location.draw()
 
     @property
     def contactable(self):
@@ -26,59 +37,13 @@ class Planet:
 %s system
 %s
 %s
-
-resources : %s
-''' % (self.name, '='*(len(self.name)+7), self.description,
-       ', '.join(self.resources))
-        if self.location:
-            result += self.location.get_report()
+''' % (self.name, '='*(len(self.name)+7), self.description)
         return result
 
 
 def create_galaxy():
-    galaxy = [
-        Planet('Terra', 'The cradle of mankind. A blue jewel floating in space.',
-               ['food', 'trinkets'],
-               ['Centauri', 'Sirius']
-              ),
-        Planet('Rorke', 'A hot white star surrounded by a vast asteroid belt.',
-               ['ore'],
-               ['X2475', 'New Haven', 'Octygon'],
-               SmugglerShip),
-        Planet('Magminus', 'A volcanic planet inhabited by a silicon-based species.',
-               ['minerals'],
-               ['Octygon', 'Kucharsky'],
-               SiliconValley),
-        Planet('Vega', 'A fertile world with rich aquatic life forms.',
-               ['biotics'],
-               ['Sirius', 'Centauri', 'Octygon'],
-               AquaCity),
-        Planet('X2475', 'Neutron star with really nothing going on.',
-               ['nucleons'],
-               ['Rorke', 'Olympus']),
-        Planet('Sirius', 'A sandy desert with seven beautiful orange moons.',
-               ['ore'],
-               ['Terra', 'Centauri', 'Vega'],
-               AncientShipwreck),
-        Planet('Octygon', 'A dead rocky planet with mysterious underground caves.',
-               ['ore'],
-               ['Rorke', 'Magminus', 'New Haven', 'Vega'],
-               Caves),
-        Planet('Kucharsky', 'A huge dark ochre gas planet.',
-               ['gas'],
-               ['New Haven', 'Centauri', 'Magminus']),
-        Planet('Centauri', 'Civilizations outpost in space.',
-               ['minerals', 'nucleons'],
-               ['Kucharsky', 'Terra', 'Vega', 'Sirius'],
-               SpaceStation),
-        Planet('New Haven', 'A earth-like yet uninhabited world.',
-               ['food', 'biotics'],
-               ['Rorke', 'Octygon', 'Kucharsky']),
-        Planet('Olympus', 'The home world of the Firstborn.',
-               [],
-               ['X2475'],
-               AncientVault)
-    ]
+    j = json.load(open('galaxy.json'))
+    galaxy = [Planet(loc) for loc in j]
 
     # builds connection graph
     for planet in galaxy:

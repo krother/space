@@ -43,17 +43,18 @@ MOVES = {
 
 class SpaceGame(arcade.Window):
 
-    def __init__(self, start_planet):
+    def __init__(self, start_location):
         super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)
         arcade.set_background_color(arcade.color.BLACK)
         self.ship = Spaceship()
-        self.ship.planet = start_planet
+        self.ship.location = start_location
         self.commands = self.ship.get_commands()
         self.message = ''
+        self._keylog = ''
 
     def on_draw(self):
         arcade.start_render()
-        self.ship.planet.draw()
+        self.ship.location.draw()
         self.ship.draw()
         self.draw_commands()
         if self.message:
@@ -68,23 +69,24 @@ class SpaceGame(arcade.Window):
 
     @property
     def solved(self):
-        planet = self.ship.planet
-        return planet.name == 'Olympus' and not planet.location.active
+        location = self.ship.location
+        return location.name == 'Alien Space Station' and not location.active
 
     def draw_commands(self):
         commands = "Available commands:\n\n"
         for i, cmd in enumerate(self.commands, 1):
             commands += f"[{i}] {cmd.description}\n"
         commands += "\n[Esc] Exit"
-        arcade.draw_text(commands, 300, 400, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
+        arcade.draw_text(commands, 300, 600, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
 
     def on_key_press(self, symbol, mod):
         """Handle player movement"""
+        key = MOVES.get(symbol, ' ')
+        self._keylog += str(key)
         if self.message:
             self.message = ''
             return
 
-        key = MOVES.get(symbol)
         for i, cmd in enumerate(self.commands, 1):
             if key == i:
                 if views.SLOW_MOTION:
@@ -100,3 +102,4 @@ if __name__ == '__main__':
     galaxy = create_galaxy()
     sg = SpaceGame(galaxy[0])
     arcade.run()
+    #print(sg._keylog)

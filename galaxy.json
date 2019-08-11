@@ -1,30 +1,64 @@
 [
 {"name": "Terra",
-  "description": "The cradle of mankind.\nA blue jewel floating in space.",
-  "image": "P05",
-  "goods": ["food", "medical"],
-  "connections": ["Centauri", "Sirius"]
+ "description": "The cradle of mankind.\nA blue jewel floating in space.",
+ "image": "P05",
+ "goods": ["food", "medical"],
+ "connections": ["Centauri", "Sirius"]
 },
 {"name": "Rorke",
-  "description": "A hot white star surrounded by a vast asteroid belt.",
-  "image": "orange01",
-  "goods": ["ore"],
-  "connections": ["X2475", "New Haven", "Octygon"],
-  "location": "SmugglerShip"
+ "description": "A hot white star surrounded by a vast asteroid belt.",
+ "image": "orange01",
+ "goods": ["ore"],
+ "connections": ["X2475", "New Haven", "Octygon", "Smuggler Ship"]
+},
+{
+    "name": "Smuggler Ship",
+    "description": "A small vessel hidden in an asteroid belt. You had almost overlooked them if they hadn't contacted you.",
+    "image": "phalanx_comm",
+    "type": "ship",
+    "connections": ["Rorke"],
+    "action_name": "board the ship",
+    "not_activated_message": "We are in dire need of repairs and ran out of gas.",
+    "require_good": "gas",
+    "activated_message": "In exchange for your supplies we will give you this priceless artifact.",
+    "activate_clear_cargo": "True",
+    "activate_gain_artifact": "True"
 },
 {"name": "Magminus",
   "description": "A volcanic planet inhabited by a silicon-based species.",
   "image": "redgiant02",
   "goods": ["minerals"],
-  "connections": ["Octygon", "Kucharsky"],
-  "location": "SiliconValley"
+  "connections": ["Octygon", "Kucharsky", "Silicon Valley"]
+},
+{
+    "name": "Silicon Valley",
+    "description": "A valley near a volcanic geyser seems to be where the strange organisms gather.",
+    "image": "lava",
+    "type": "surface",
+    "connections": ["Magminus"],
+    "action_name": "explore the valley",
+    "require_artifacts": 0,
+    "activated_message": "In the valley you find an uninhabited cave with an artifact!",
+    "activate_gain_artifact": "True"
 },
 {"name": "Vega",
   "description": "A fertile world with rich aquatic life forms.",
   "image": "O05",
-  "goods": ["spices"],
-  "connections": ["Sirius", "Centauri", "Octygon"],
-  "location": "AquaCity"
+  "connections": ["Sirius", "Centauri", "Octygon", "Aquatic City"]
+},
+{
+    "name": "Aquatic City",
+    "type": "surface",
+    "description": "a huge coral reef hosts a submarine sentient species",
+    "image": "aquatic3",
+    "connections": ["Vega"],
+    "goods": ["spices"],
+    "action_name": "contact aliens",
+    "require_good": "medical",
+    "activated_message": "After a long bargain you trade a container of medical goods for a strange artifact. You wonder who made the better deal.",
+    "activate_clear_cargo": "True",
+    "activate_gain_artifact": "True",
+    "not_activated_message": "The aliens are friendly and seem to enjoy trading. They seem to have problems with aggressive bacteria though."
 },
 {"name": "X2475",
   "description": "Neutron star with really nothing going on.",
@@ -33,18 +67,42 @@
   "connections": ["Rorke", "Olympus"]
 },
 {"name": "Sirius",
-  "description": "A sandy desert with seven beautiful orange moons.",
+  "description": "A sandy desert with seven beautiful orange moons.\n\nA regular radar pulse emanates from the desert surface.",
   "image": "H04",
   "goods": ["ore"],
-  "connections": ["Terra", "Centauri", "Vega"],
-  "location": "AncientShipwreck"
+  "connections": ["Terra", "Centauri", "Vega", "Sirian Desert"]
+},
+{
+    "name": "Sirian Desert",
+    "description": "Lots of nothing. The radar pulse is stronger here. It might come from a settlement or a ship.\nHowever, the radiation level is rising in that direction as well.",
+    "image": "desertic",
+    "type": "surface",
+    "connections": ["Sirius"],
+    "action_name": "explore",
+    "require_good": "nucleons",
+    "activated_message": "You discover an ancient shipwreck. Using a cache of gluons you clear up the radiation and enter. Inside you find an ancient artifact!",
+    "activate_clear_cargo": "True",
+    "activate_gain_artifact": "True",
+    "not_activated_message": "You discover an abandoned shipwreck emitting the pulse.\n However, there is lots of nuclear debris. You will need a stron neutron source to clean it up before you can enter."
 },
 {"name": "Octygon",
   "description": "A dead rocky planet with mysterious underground caves.",
   "image": "D01",
   "goods": ["ore"],
-  "connections": ["Rorke", "Magminus", "New Haven", "Vega"],
-  "location": "Caves"
+  "connections": ["Rorke", "Magminus", "New Haven", "Vega", "Underground Caves"]
+},
+{
+    "name": "Underground Caves",
+    "description": "The caves are many miles deep and stretch over half of the planets surface.",
+    "image": "uninhabited-rocky-airless-00",
+    "type": "surface",
+    "connections": ["Octygon"],
+    "action_name": "explore caves",
+    "require_good": "food",
+    "activated_message": "After two weeks of search, you discover a strange artifact at the bottom of the caves.",
+    "not_activated_message": "You abandon the search after a week. You need more food supplies to explore the caves deeper.",
+    "activate_clear_cargo": "True",
+    "activate_gain_artifact": "True"
 },
 {"name": "Kucharsky",
   "description": "A huge light blue gas planet.",
@@ -55,21 +113,39 @@
 {"name": "Centauri",
   "description": "Civilizations outpost in space.",
   "image": "J00",
+  "connections": ["Kucharsky", "Terra", "Vega", "Sirius", "Centauri Station"]
+},
+{"name": "Centauri Station",
+  "description": "A small space station marks the border of the Terran Federation.",
+  "image": "wrath",
+  "type": "ship",
   "goods": ["minerals", "nucleons"],
-  "connections": ["Kucharsky", "Terra", "Vega", "Sirius"],
-  "location": "SpaceStation"
+  "connections": ["Centauri"],
+  "location": "SpaceStation",
+  "action_name": "contact outpost",
+  "not_activated_message": "Good luck on your mission!"
 },
 {"name": "New Haven",
   "description": "A earth-like yet uninhabited world.",
   "image": "M10",
-  "goods": ["food", "biotics"],
+  "goods": ["food", "spices"],
   "connections": ["Rorke", "Octygon", "Kucharsky"]
 },
 {"name": "Olympus",
   "description": "The home world of the Firstborn.",
   "image": "station-agriculture",
-  "goods": [],
-  "connections": ["X2475"],
+  "connections": ["X2475", "Alien Space Station"],
   "location": "AncientVault"
+},
+{
+    "name": "Alien Space Station",
+    "description": "A huge monument made by an unknown civilization. It has five openings that fit small objects.",
+    "image": "000",
+    "type": "ship",
+    "connections": ["Olympus"],
+    "action_name": "examine Ancient Vault",
+    "require_artifacts": 5,
+    "not_activated_message": "The openings seem to be made for some kind of alien artifacts.",
+    "activated_message": "You insert five artifacts into the hole. The monolith opens!!!."
 }
 ]

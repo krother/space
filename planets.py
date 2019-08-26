@@ -1,7 +1,7 @@
 
-from views import IMAGES
-import arcade
 import json
+import arcade
+from views import IMAGES
 
 DEFAULT_GALAXY = 'galaxy.json'
 
@@ -48,8 +48,8 @@ class Location:
                (self.require_artifacts >= 0 and ship.artifacts >= self.require_artifacts):
                 self.activate(ship)
                 return self.activated_message
-            else:
-                return self.not_activated_message
+            return self.not_activated_message
+        return ''
 
 
 def create_galaxy(fn=DEFAULT_GALAXY):

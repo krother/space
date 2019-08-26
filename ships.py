@@ -3,16 +3,16 @@ from functools import partial
 from collections import namedtuple
 import arcade
 from views import IMAGES
-
+from lang import EN as TEXT
 
 Command = namedtuple('Command', ('description', 'action'))
 
 TRANSITIONS = {
-    ('planet', 'planet'): 'warp to',
-    ('planet', 'ship'): 'board',
-    ('ship', 'planet'): 'back to',
-    ('planet', 'surface'): 'beam down to',
-    ('surface', 'planet'): 'back to orbit of',
+    ('planet', 'planet'): TEXT['warp to'],
+    ('planet', 'ship'): TEXT['board'],
+    ('ship', 'planet'): TEXT['back to'],
+    ('planet', 'surface'): TEXT['beam down to'],
+    ('surface', 'planet'): TEXT['back to orbit of'],
 }
 
 
@@ -25,11 +25,11 @@ class Spaceship:
 
     def draw(self):
         report = self.get_report()
-        arcade.draw_text(report, 700, 600, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
+        arcade.draw_text(report, 800, 600, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
         if self.cargo:
-            IMAGES[self.cargo].draw(770, 500, 128, 128)
+            IMAGES[self.cargo].draw(870, 500, 128, 128)
         for i in range(1, self.artifacts+1):
-            IMAGES[f"artifact{i}"].draw(630 + i * 140, 320, 128, 128)
+            IMAGES[f"artifact{i}"].draw(730 + i * 140, 320, 96, 96)
 
     def move_to(self, location):
         self.location = location
@@ -40,7 +40,7 @@ class Spaceship:
         #return f'PICKED UP {resource}'
 
     def get_report(self):
-        result = f'''Cargo Bay:\n\n\n\n\n\n\n\n\nArtifacts:'''
+        result = f'''{TEXT['cargo bay']}:\n\n\n\n\n\n\n\n\n{TEXT['artifacts']}:'''
         return result
 
     def __repr__(self):
@@ -56,7 +56,7 @@ class Spaceship:
             commands.append(move)
         # load goods
         for resource in self.location.resources:
-            load = Command(f"collect {resource}", partial(self.load_cargo, resource))
+            load = Command(f"{TEXT['collect']} {TEXT[resource]}", partial(self.load_cargo, resource))
             commands.append(load)
         # talk to people
         if self.location.active and self.location.action_name:

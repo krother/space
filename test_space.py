@@ -1,16 +1,11 @@
 
 from unittest.mock import patch
 from space import SpaceGame, create_galaxy
-from locations import AncientShipwreck
 import pytest
 from ships import Spaceship
 import views
 
-PICKUP = iter('Fx')
-MOVE = iter('1x')
-TRIPLE_JUMP = iter('111x')
-FIRST_ARTIFACT = iter('1N4t_x')
-COMPLETE_SOLUTION = iter(open('solution.txt').read())
+COMPLETE_SOLUTION = open('solution.txt').read().strip()
 
 views.SKIP_INPUT = True
 
@@ -19,43 +14,42 @@ def space():
     galaxy = create_galaxy()
     return SpaceGame(galaxy[0])
 
+def travel(galaxy, keys):
+    """executes some game moves"""
+    for k in keys:
+        galaxy.move(k)
 
 class TestSpace:
 
-    @patch('builtins.input', lambda x: next(PICKUP))
     def test_pickup(self, space):
-        space.travel()
+        space.move(3)
         assert space.ship.cargo == 'food'
 
-    @patch('builtins.input', lambda x: next(MOVE))
     def test_warp(self, space):
-        space.travel()
-        assert space.ship.planet.name == 'Centauri'
+        space.move(1)
+        assert space.ship.location.name == 'Centauri'
 
-    @patch('builtins.input', lambda x: next(TRIPLE_JUMP))
     def test_triple_warp(self, space):
-        space.travel()
-        assert space.ship.planet.name == 'New Haven'
+        travel(space, [1, 1, 1])
+        assert space.ship.location.name == 'New Haven'
 
-    @patch('builtins.input', lambda *args: next(FIRST_ARTIFACT))
     def test_pickup_artifact(self, space):
-        space.travel()
+        travel(space, [1, 5, 3, 1, 4, 4, 2])
         assert space.ship.artifacts == 1
 
-    @staticmethod
-    @patch('builtins.input', lambda: None)
-    def test_other_input():
-        asw = AncientShipwreck
-        asw.active = True
-        ship = Spaceship()
-        asw.contact(ship)
-        assert ship.artifacts == 0
-        ship.cargo = 'nucleons'
-        asw.contact(ship)
-        assert ship.artifacts == 1
-        asw.active = True
+    def test_aquacity_puzzle(self, space):
+        travel(space, [4, 2, 3, 4])
+        assert space.ship.artifacts == 0
+        assert space.ship.cargo == 'medical'
+        assert space.ship.location.active
+        travel(space, [3, 9])
+        assert space.ship.cargo == ''
+        assert space.ship.artifacts == 1
+        assert not space.ship.location.active
 
-    @patch('builtins.input', lambda x: next(COMPLETE_SOLUTION))
     def test_finish_game(self, space):
-        space.travel()
+        solution = [int(x) for x in COMPLETE_SOLUTION]
+        travel(space, solution)
+        print(space.ship.artifacts)
+        print(space.ship.location.name)
         assert space.solved

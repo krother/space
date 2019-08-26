@@ -15,6 +15,7 @@ import random
 import arcade
 from arcade.key import ESCAPE, SPACE
 from arcade import key as akeys
+from lang import EN as TEXT
 
 
 SIZEX, SIZEY = (1500, 1000)
@@ -70,21 +71,19 @@ class SpaceGame(arcade.Window):
     @property
     def solved(self):
         location = self.ship.location
-        return location.name == 'Alien Space Station' and not location.active
+        return location.name == TEXT['Alien Space Station'] and not location.active
 
     def draw_commands(self):
-        commands = "Available commands:\n\n"
+        commands = TEXT["Available commands"] + ":\n\n"
         for i, cmd in enumerate(self.commands, 1):
             commands += f"[{i}] {cmd.description}\n"
         commands += "\n[Esc] Exit"
         arcade.draw_text(commands, 300, 600, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
 
-    def on_key_press(self, symbol, mod):
-        """Handle player movement"""
-        key = MOVES.get(symbol, ' ')
-        self._keylog += str(key)
+    def move(self, key):
+        """Processes a key pressed"""
         if self.message:
-            self.message = ''
+            self.message = ''  # delete displayed message
             return
 
         for i, cmd in enumerate(self.commands, 1):
@@ -94,12 +93,17 @@ class SpaceGame(arcade.Window):
                 self.message = cmd.action()
                 self.commands = self.ship.get_commands()
 
+    def on_key_press(self, symbol, mod):
+        """Handle player movement"""
+        key = MOVES.get(symbol, ' ')
+        self._keylog += str(key)
+        self.move(key)
         if symbol == ESCAPE:
             arcade.window_commands.close_window()
 
 
 if __name__ == '__main__':
-    galaxy = create_galaxy()
+    galaxy = create_galaxy('galaxy.json')
     sg = SpaceGame(galaxy[0])
     arcade.run()
-    #print(sg._keylog)
+    print(sg._keylog)

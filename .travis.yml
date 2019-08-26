@@ -8,7 +8,6 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install pylint
-  # - pip install --editable .
 # command to run tests
 script:
 - pylint *.py

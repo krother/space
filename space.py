@@ -6,17 +6,15 @@ __author__ = "Kristian Rother"
 
 
 import time
-from ships import Spaceship
-from planets import create_galaxy
-from views import outro, print_message
-import views
-import re
-import random
-import arcade
-from arcade.key import ESCAPE, SPACE
-from arcade import key as akeys
-from lang import EN as TEXT
 
+import arcade
+from arcade import key as akeys
+from arcade.key import ESCAPE
+
+from lang import EN as TEXT
+from planets import create_galaxy
+from ships import Spaceship
+from views import outro, print_message, SLOW_MOTION
 
 SIZEX, SIZEY = (1500, 1000)
 
@@ -44,9 +42,10 @@ MOVES = {
 
 class SpaceGame(arcade.Window):
 
-    def __init__(self, start_location):
-        super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)
-        arcade.set_background_color(arcade.color.BLACK)
+    def __init__(self, start_location, no_window=False):
+        if not no_window:
+            super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)
+            arcade.set_background_color(arcade.color.BLACK)
         self.ship = Spaceship()
         self.ship.location = start_location
         self.commands = self.ship.get_commands()
@@ -63,7 +62,8 @@ class SpaceGame(arcade.Window):
             arcade.finish_render()
             arcade.pause(0.5)
 
-    def update(self, time_delta):
+    def update(self, delta_time):
+        # pylint: disable=unused-argument
         if self.solved:
             outro()
             arcade.window_commands.close_window()
@@ -88,13 +88,14 @@ class SpaceGame(arcade.Window):
 
         for i, cmd in enumerate(self.commands, 1):
             if key == i:
-                if views.SLOW_MOTION:
+                if SLOW_MOTION:
                     time.sleep(3)
                 self.message = cmd.action()
                 self.commands = self.ship.get_commands()
 
-    def on_key_press(self, symbol, mod):
+    def on_key_press(self, symbol, modifiers):
         """Handle player movement"""
+        # pylint: disable=unused-argument
         key = MOVES.get(symbol, ' ')
         self._keylog += str(key)
         self.move(key)
@@ -106,4 +107,4 @@ if __name__ == '__main__':
     galaxy = create_galaxy('galaxy.json')
     sg = SpaceGame(galaxy[0])
     arcade.run()
-    print(sg._keylog)
+    # print(sg._keylog)

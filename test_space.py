@@ -1,9 +1,8 @@
 
-from unittest.mock import patch
-from space import SpaceGame, create_galaxy
 import pytest
-from ships import Spaceship
+
 import views
+from space import SpaceGame, create_galaxy
 
 COMPLETE_SOLUTION = open('solution.txt').read().strip()
 
@@ -12,14 +11,15 @@ views.SKIP_INPUT = True
 @pytest.fixture
 def space():
     galaxy = create_galaxy()
-    return SpaceGame(galaxy[0])
+    return SpaceGame(galaxy[0], no_window=True)
 
 def travel(galaxy, keys):
-    """executes some game moves"""
+    """execute some game moves"""
     for k in keys:
         galaxy.move(k)
 
 class TestSpace:
+    # pylint: disable=no-self-use, redefined-outer-name
 
     def test_pickup(self, space):
         space.move(3)

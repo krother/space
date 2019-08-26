@@ -7,6 +7,7 @@ DEFAULT_GALAXY = 'galaxy.json'
 
 
 class Location:
+    # pylint: disable=too-many-instance-attributes
 
     def __init__(self, **kwargs):
         self.name = kwargs['name']

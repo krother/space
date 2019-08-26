@@ -24,7 +24,7 @@ class Spaceship:
         self.cargo = ''
 
     def draw(self):
-        report = self.get_report()
+        report = "{TEXT['cargo bay']}:\n\n\n\n\n\n\n\n\n{TEXT['artifacts']}:"
         arcade.draw_text(report, 800, 600, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
         if self.cargo:
             IMAGES[self.cargo].draw(870, 500, 128, 128)
@@ -38,10 +38,6 @@ class Spaceship:
     def load_cargo(self, resource):
         self.cargo = resource
         #return f'PICKED UP {resource}'
-
-    def get_report(self):
-        result = f'''{TEXT['cargo bay']}:\n\n\n\n\n\n\n\n\n{TEXT['artifacts']}:'''
-        return result
 
     def __repr__(self):
         return f"<spaceship at: {self.location.name}>"

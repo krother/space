@@ -6,7 +6,7 @@ python:
   - "3.6"
 # command to install dependencies
 install:
-  - apt-get install python-opengl
+  - sudo apt-get install python-opengl
   - sudo apt update && sudo apt install -y python3-dev python3-pip libjpeg-dev zlib1g-dev python-gst-1.0
   - pip install -r requirements.txt
   - pip install -r requirements_dev.txt

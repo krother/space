@@ -8,6 +8,10 @@ This is a small space traveling adventure. Warp between planets, trade goods, so
 
 ![screenshot](screenshot.png)
 
+## Installation
+
+- Install the [arcade](http://arcade.academy/) library
+
 ## Usage
 
     python space.py

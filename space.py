@@ -11,7 +11,7 @@ import arcade
 from arcade import key as akeys
 from arcade.key import ESCAPE
 
-from lang import EN as TEXT
+from lang import DE as TEXT
 from planets import create_galaxy
 from ships import Spaceship
 from views import outro, print_message, SLOW_MOTION
@@ -104,7 +104,7 @@ class SpaceGame(arcade.Window):
 
 
 if __name__ == '__main__':
-    galaxy = create_galaxy('galaxy.json')
+    galaxy = create_galaxy('galaxy_DE.json')
     sg = SpaceGame(galaxy[0])
     arcade.run()
     # print(sg._keylog)

@@ -32,7 +32,7 @@ class Spaceship:
             IMAGES[f"artifact{i}"].draw(730 + i * 140, 320, 96, 96)
 
     def move_to(self, location):
-        self.location = "dummy"
+        self.location = location
         #return fMOVE TO {location.name}'
 
     def load_cargo(self, resource):

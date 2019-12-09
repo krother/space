@@ -28,6 +28,9 @@ class Location:
         self.activate_gain_artifact = kwargs.get('activate_gain_artifact', False)
         self.active = True
 
+    def __repr__(self):
+        return f"<Location: {self.name}>"
+
     def draw(self):
         IMAGES[self.image].draw(150, 800, 200, 200)
         text = f'\n{self.name}: \n\n{self.description}'

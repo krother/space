@@ -71,7 +71,7 @@ class SpaceGame(arcade.Window):
     @property
     def solved(self):
         location = self.ship.location
-        return location.name == TEXT['Alien Space Station'] and not location.active
+        return location.name == 'Alien Space Station' and not location.active
 
     def draw_commands(self):
         commands = TEXT["Available commands"] + ":\n\n"

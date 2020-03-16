@@ -16,6 +16,8 @@ This is a small space traveling adventure. Warp between planets, trade goods, so
 
     python space.py
 
+Note: there is a German translation of the text but it needs to be activated (undocumented).
+
 ## License
 
 (c) 2016 Kristian Rother.

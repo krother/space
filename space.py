@@ -104,7 +104,7 @@ class SpaceGame(arcade.Window):
 
 
 if __name__ == '__main__':
-    galaxy = create_galaxy('galaxy_DE.json')
+    galaxy = create_galaxy('galaxy.json')
     sg = SpaceGame(galaxy[0])
     arcade.run()
     # print(sg._keylog)

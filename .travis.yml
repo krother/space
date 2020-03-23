@@ -12,5 +12,8 @@ install:
   - pip install -r requirements_dev.txt
 # command to run tests
 script:
-- pylint *.py
-- xvfb-run -s "-screen 0 1400x900x24" pytest test_space.py
+  - pylint *.py
+  - xvfb-run -s "-screen 0 1400x900x24" pytest --cov=./ test_space.py
+
+after_success:
+  - codecov

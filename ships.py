@@ -3,7 +3,7 @@ from functools import partial
 from collections import namedtuple
 import arcade
 from views import IMAGES
-from lang import EN as TEXT
+from lang import DE as TEXT
 
 Command = namedtuple('Command', ('description', 'action'))
 
@@ -24,7 +24,7 @@ class Spaceship:
         self.cargo = ''
 
     def draw(self):
-        report = "{TEXT['cargo bay']}:\n\n\n\n\n\n\n\n\n{TEXT['artifacts']}:"
+        report = f"{TEXT['cargo bay']}:\n\n\n\n\n\n\n\n\n{TEXT['artifacts']}:"
         arcade.draw_text(report, 800, 600, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
         if self.cargo:
             IMAGES[self.cargo].draw(870, 500, 128, 128)

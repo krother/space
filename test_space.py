@@ -50,6 +50,4 @@ class TestSpace:
     def test_finish_game(self, space):
         solution = [int(x) for x in COMPLETE_SOLUTION]
         travel(space, solution)
-        print(space.ship.artifacts)
-        print(space.ship.location.name)
         assert space.solved

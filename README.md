@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/krother/space.svg?branch=master)](https://travis-ci.org/krother/space)
 
+[![codecov](https://codecov.io/gh/krother/space/branch/master/graph/badge.svg)](https://codecov.io/gh/krother/space)
+
 contact: krother@academis.eu
 
 This is a small space traveling adventure. Warp between planets, trade goods, solve puzzles.

@@ -22,7 +22,7 @@ class TestSpace:
     # pylint: disable=no-self-use, redefined-outer-name
 
     def test_pickup(self, space):
-        space.move(2)
+        space.move(3)
         assert space.ship.cargo == 'food'
 
     def test_warp(self, space):

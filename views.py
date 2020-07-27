@@ -12,16 +12,6 @@ def load_images(path, image_dict):
             image_dict[name] = load_texture(fn, 0, 0)
 
 
-IMAGES = {}
-load_images('images/planets', IMAGES)
-load_images('images/exterior', IMAGES)
-load_images('images/goods', IMAGES)
-load_images('images/artifacts', IMAGES)
-
-SKIP_INPUT = False
-SLOW_MOTION = False
-
-
 def print_message(msg):
     arcade.draw_text(msg, 300, 200, arcade.color.ALIZARIN_CRIMSON, 20, font_name='GARA')
 
@@ -30,3 +20,13 @@ def outro():
     print('''
 You collected all artifact pieces that open the hidden vault of the Olympus system. Finally your quest has reached its end.
 ''')
+
+# read image files
+IMAGES = {}
+load_images('images/planets', IMAGES)
+load_images('images/exterior', IMAGES)
+load_images('images/goods', IMAGES)
+load_images('images/artifacts', IMAGES)
+
+SKIP_INPUT = False
+SLOW_MOTION = False

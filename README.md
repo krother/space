@@ -10,7 +10,11 @@ This is a small space traveling adventure. Warp between planets, trade goods, so
 
 ## Installation
 
-- Install the [arcade](http://arcade.academy/) library
+    pip install -r requirements.txt
+
+For development also do:
+
+    pip install -r requirements_dev.txt
 
 ## Usage
 

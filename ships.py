@@ -3,7 +3,7 @@ from functools import partial
 from collections import namedtuple
 import arcade
 from views import IMAGES
-from lang import DE as TEXT
+from lang import TEXT
 
 Command = namedtuple('Command', ('description', 'action'))
 

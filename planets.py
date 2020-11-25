@@ -58,7 +58,7 @@ class Location:
 
 def create_galaxy(fn=DEFAULT_GALAXY):
     """Loads entire playing environment from a JSON file"""
-    j = json.load(open(fn), encoding='isolatin-1')
+    j = json.load(open(fn, encoding='utf-8'))
     galaxy = [Location(**loc) for loc in j]
 
     # builds connection graph

@@ -3,7 +3,7 @@ import json
 import arcade
 from views import IMAGES
 
-DEFAULT_GALAXY = 'galaxy.json'
+DEFAULT_GALAXY = 'galaxy_EN.json'
 
 
 class Location:

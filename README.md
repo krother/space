@@ -21,7 +21,10 @@ For development also do:
 
     python space.py
 
-Note: there is a German translation of the text but it needs to be activated (undocumented).
+To activate the German translation:
+
+    export LANG=DE
+    python space.py
 
 ## License
 

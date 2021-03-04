@@ -1,5 +1,11 @@
 
-TEXT = {
+import os
+
+LANG = 'EN'
+if os.getenv('LANG').upper().startswith('DE'):
+    LANG = 'DE'
+
+DE = {
     'cargo bay': "Frachtraum",
     'artifacts': "Artefakte",
     'collect': "kaufe",
@@ -19,5 +25,6 @@ TEXT = {
     "Available commands": "Befehle"
 }
 
-DE = TEXT
-EN = {k:k for k in TEXT}
+EN = {k:k for k in DE}
+
+TEXT = EN if LANG == 'EN' else DE

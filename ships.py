@@ -3,7 +3,7 @@ from functools import partial
 from collections import namedtuple
 import arcade
 from views import IMAGES
-from lang import DE as TEXT
+from lang import TEXT
 
 Command = namedtuple('Command', ('description', 'action'))
 
@@ -33,7 +33,6 @@ class Spaceship:
 
     def move_to(self, location):
         self.location = location
-        #return fMOVE TO {location.name}'
 
     def load_cargo(self, resource):
         self.cargo = resource

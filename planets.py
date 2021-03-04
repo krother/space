@@ -3,7 +3,7 @@ import json
 import arcade
 from views import IMAGES
 
-DEFAULT_GALAXY = 'galaxy.json'
+DEFAULT_GALAXY = 'galaxy_EN.json'
 
 
 class Location:
@@ -58,7 +58,7 @@ class Location:
 
 def create_galaxy(fn=DEFAULT_GALAXY):
     """Loads entire playing environment from a JSON file"""
-    j = json.load(open(fn))
+    j = json.load(open(fn, encoding='utf-8'))
     galaxy = [Location(**loc) for loc in j]
 
     # builds connection graph

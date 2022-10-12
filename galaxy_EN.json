@@ -5,6 +5,12 @@
  "goods": ["food", "medical"],
  "connections": ["Centauri", "Sirius"]
 },
+ {"name": "Alderaan",
+  "description": "peaceful world.",
+  "image": "P05",
+  "goods": [],
+  "connections": []
+ },
 {"name": "Rorke",
  "description": "A hot white star surrounded by a vast asteroid belt.",
  "image": "orange01",

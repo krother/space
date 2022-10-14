@@ -1,6 +1,6 @@
-'''
+"""
 Space Traveller - main app
-'''
+"""
 
 __author__ = "Kristian Rother"
 
@@ -41,7 +41,6 @@ MOVES = {
 
 
 class SpaceGame(arcade.Window):
-
     def __init__(self, start_location, no_window=False):
         if not no_window:
             super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)
@@ -49,8 +48,8 @@ class SpaceGame(arcade.Window):
         self.ship = Spaceship()
         self.ship.location = start_location
         self.commands = self.ship.get_commands()
-        self.message = ''
-        self._keylog = ''
+        self.message = ""
+        self._keylog = ""
 
     def on_draw(self):
         arcade.start_render()
@@ -71,19 +70,21 @@ class SpaceGame(arcade.Window):
     @property
     def solved(self):
         location = self.ship.location
-        return location.name == 'Alien Space Station' and not location.active
+        return location.name == "Alien Space Station" and not location.active
 
     def draw_commands(self):
         commands = TEXT["Available commands"] + ":\n\n"
         for i, cmd in enumerate(self.commands, 1):
             commands += f"[{i}] {cmd.description}\n"
         commands += "\n[Esc] Exit"
-        arcade.draw_text(commands, 300, 600, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
+        arcade.draw_text(
+            commands, 300, 600, arcade.color.GREEN, 20, font_name="GARA", anchor_y="top"
+        )
 
     def move(self, key):
         """Processes a key pressed"""
         if self.message:
-            self.message = ''  # delete displayed message
+            self.message = ""  # delete displayed message
             return
 
         for i, cmd in enumerate(self.commands, 1):
@@ -96,15 +97,15 @@ class SpaceGame(arcade.Window):
     def on_key_press(self, symbol, modifiers):
         """Handle player movement"""
         # pylint: disable=unused-argument
-        key = MOVES.get(symbol, ' ')
+        key = MOVES.get(symbol, " ")
         self._keylog += str(key)
         self.move(key)
         if symbol == ESCAPE:
             arcade.window_commands.close_window()
 
 
-if __name__ == '__main__':
-    galaxy = create_galaxy(f'galaxy_{LANG}.json')
+if __name__ == "__main__":
+    galaxy = create_galaxy(f"galaxy_{LANG}.json")
     sg = SpaceGame(galaxy[0])
     arcade.run()
     # print(sg._keylog)

@@ -1,40 +1,59 @@
-
 import json
 import arcade
 from views import IMAGES
 
-DEFAULT_GALAXY = 'galaxy_EN.json'
+DEFAULT_GALAXY = "galaxy_EN.json"
 
 
 class Location:
     # pylint: disable=too-many-instance-attributes
 
     def __init__(self, **kwargs):
-        self.name = kwargs['name']
-        self.description = kwargs['description']
-        self.image = kwargs['image']
-        self.type = kwargs.get('type', 'planet')
-        self.connection_names = kwargs['connections']
+        self.name = kwargs["name"]
+        self.description = kwargs["description"]
+        self.image = kwargs["image"]
+        self.type = kwargs.get("type", "planet")
+        self.connection_names = kwargs["connections"]
         self.connections = []
-        self.resources = kwargs.get('goods', [])
+        self.resources = kwargs.get("goods", [])
 
         # Action Triggers
-        self.action_name = kwargs.get('action_name')
-        self.require_good = kwargs.get('require_good')
-        self.require_artifacts = kwargs.get('require_artifacts', -1)
-        self.activated_message = kwargs.get('activated_message')
-        self.not_activated_message = kwargs.get('not_activated_message')
-        self.activate_clear_cargo = kwargs.get('activate_clear_cargo', False)
-        self.activate_gain_artifact = kwargs.get('activate_gain_artifact', False)
+        self.action_name = kwargs.get("action_name")
+        self.require_good = kwargs.get("require_good")
+        self.require_artifacts = kwargs.get("require_artifacts", -1)
+        self.activated_message = kwargs.get("activated_message")
+        self.not_activated_message = kwargs.get("not_activated_message")
+        self.activate_clear_cargo = kwargs.get("activate_clear_cargo", False)
+        self.activate_gain_artifact = kwargs.get("activate_gain_artifact", False)
         self.active = True
 
     def __repr__(self):
         return f"<Location: {self.name}>"
 
     def draw(self):
-        IMAGES[self.image].draw(150, 800, 200, 200)
-        text = f'\n{self.name}: \n\n{self.description}'
-        arcade.draw_text(text, 300, 900, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
+        IMAGES[self.image].draw_sized(150, 850, 200, 200)
+        arcade.draw_text(
+            text=self.name,
+            start_x=300,
+            start_y=950,
+            bold=True,
+            color=arcade.color.GREEN,
+            font_size=20,
+            font_name="GARA",
+            anchor_y="top",
+        )
+
+        arcade.draw_text(
+            text=self.description,
+            start_x=300,
+            start_y=900,
+            color=arcade.color.GREEN,
+            font_size=20,
+            font_name="GARA",
+            anchor_y="top",
+            multiline=True,
+            width=600,
+        )
 
     def add_connection(self, location):
         self.connections.append(location)
@@ -42,23 +61,24 @@ class Location:
     def activate(self, ship):
         self.active = False
         if self.activate_clear_cargo:
-            ship.cargo = ''
+            ship.cargo = ""
         if self.activate_gain_artifact:
             ship.artifacts += 1
 
     def contact(self, ship):
         if self.active:
-            if (self.require_good and ship.cargo == self.require_good) or \
-               (self.require_artifacts >= 0 and ship.artifacts >= self.require_artifacts):
+            if (self.require_good and ship.cargo == self.require_good) or (
+                self.require_artifacts >= 0 and ship.artifacts >= self.require_artifacts
+            ):
                 self.activate(ship)
                 return self.activated_message
             return self.not_activated_message
-        return ''
+        return ""
 
 
 def create_galaxy(fn=DEFAULT_GALAXY):
     """Loads entire playing environment from a JSON file"""
-    j = json.load(open(fn, encoding='utf-8'))
+    j = json.load(open(fn, encoding="utf-8"))
     galaxy = [Location(**loc) for loc in j]
 
     # builds connection graph

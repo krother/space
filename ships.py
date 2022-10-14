@@ -27,9 +27,9 @@ class Spaceship:
         report = f"{TEXT['cargo bay']}:\n\n\n\n\n\n\n\n\n{TEXT['artifacts']}:"
         arcade.draw_text(report, 800, 600, arcade.color.GREEN, 20, font_name='GARA', anchor_y="top")
         if self.cargo:
-            IMAGES[self.cargo].draw(870, 500, 128, 128)
+            IMAGES[self.cargo].draw_sized(870, 500, 128, 128)
         for i in range(1, self.artifacts+1):
-            IMAGES[f"artifact{i}"].draw(730 + i * 140, 320, 96, 96)
+            IMAGES[f"artifact{i}"].draw_sized(730 + i * 140, 320, 96, 96)
 
     def move_to(self, location):
         self.location = location

@@ -1,7 +1,7 @@
 from functools import partial
 from collections import namedtuple
 import arcade
-from views import IMAGES
+from views import IMAGES, FONT_SETTINGS
 from lang import TEXT
 
 Command = namedtuple("Command", ("description", "action"))
@@ -22,10 +22,19 @@ class Spaceship:
         self.cargo = ""
 
     def draw(self):
-        report = f"{TEXT['cargo bay']}:\n\n\n\n\n\n\n\n\n{TEXT['artifacts']}:"
         arcade.draw_text(
-            report, 800, 600, arcade.color.GREEN, 20, font_name="GARA", anchor_y="top"
+            text=TEXT['cargo bay'],
+            start_x=800,
+            start_y=600,
+            **FONT_SETTINGS
         )
+        arcade.draw_text(
+            text=TEXT['artifacts'],
+            start_x=800,
+            start_y=400,
+            **FONT_SETTINGS
+        )
+
         if self.cargo:
             IMAGES[self.cargo].draw_sized(870, 500, 128, 128)
         for i in range(1, self.artifacts + 1):

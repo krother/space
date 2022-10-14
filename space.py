@@ -14,7 +14,7 @@ from arcade.key import ESCAPE
 from lang import LANG, TEXT
 from planets import create_galaxy
 from ships import Spaceship
-from views import outro, print_message, SLOW_MOTION
+from views import outro, print_message, SLOW_MOTION, FONT_SETTINGS
 
 SIZEX, SIZEY = (1500, 1000)
 
@@ -58,9 +58,10 @@ class SpaceGame(arcade.Window):
         self.draw_commands()
         if self.message:
             print_message(self.message)
-            arcade.finish_render()
+        arcade.finish_render()
+        if self.message:
             arcade.pause(0.5)
-
+        
     def update(self, delta_time):
         # pylint: disable=unused-argument
         if self.solved:
@@ -78,7 +79,12 @@ class SpaceGame(arcade.Window):
             commands += f"[{i}] {cmd.description}\n"
         commands += "\n[Esc] Exit"
         arcade.draw_text(
-            commands, 300, 600, arcade.color.GREEN, 20, font_name="GARA", anchor_y="top"
+            text=commands,
+            start_x=300,
+            start_y=600,
+            width=600,
+            multiline=True,
+            **FONT_SETTINGS
         )
 
     def move(self, key):

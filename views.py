@@ -3,6 +3,14 @@ import arcade
 from arcade import load_texture
 
 
+FONT_SETTINGS = {
+    'color': arcade.color.GREEN,
+    'font_size': 20,
+    'font_name': "GARA",
+    'anchor_y': "top",
+}
+
+
 def load_images(path, image_dict):
     # name,file,x,y,w,h
     for fn in os.listdir(path):
@@ -13,7 +21,16 @@ def load_images(path, image_dict):
 
 
 def print_message(msg):
-    arcade.draw_text(msg, 300, 200, arcade.color.ALIZARIN_CRIMSON, 20, font_name="GARA")
+    arcade.draw_text(
+        text=msg,
+        start_x=300,
+        start_y=220,
+        width=800,
+        multiline=True,
+        color=arcade.color.LIGHT_CRIMSON, # ALIZARIN_CRIMSON,
+        font_size=20,
+        font_name="GARA"
+    )
 
 
 def outro():

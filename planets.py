@@ -1,6 +1,6 @@
 import json
 import arcade
-from views import IMAGES
+from views import IMAGES, FONT_SETTINGS
 
 DEFAULT_GALAXY = "galaxy_EN.json"
 
@@ -37,22 +37,16 @@ class Location:
             start_x=300,
             start_y=950,
             bold=True,
-            color=arcade.color.GREEN,
-            font_size=20,
-            font_name="GARA",
-            anchor_y="top",
+            **FONT_SETTINGS
         )
 
         arcade.draw_text(
             text=self.description,
             start_x=300,
             start_y=900,
-            color=arcade.color.GREEN,
-            font_size=20,
-            font_name="GARA",
-            anchor_y="top",
             multiline=True,
             width=600,
+            **FONT_SETTINGS
         )
 
     def add_connection(self, location):

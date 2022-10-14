@@ -83,7 +83,7 @@
     "activated_message": "You discover an ancient shipwreck. Using a cache of gluons you clear up the radiation and enter. Inside you find an ancient artifact!",
     "activate_clear_cargo": "True",
     "activate_gain_artifact": "True",
-    "not_activated_message": "You discover an abandoned shipwreck emitting the pulse.\n However, there is lots of nuclear debris. You will need a stron neutron source to clean it up before you can enter."
+    "not_activated_message": "You discover an abandoned shipwreck emitting the pulse.\n However, there is lots of nuclear debris. You will need a strong neutron source to clean it up before you can enter."
 },
 {"name": "Octygon",
   "description": "A dead rocky planet with mysterious underground caves.",

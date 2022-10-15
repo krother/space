@@ -61,7 +61,7 @@ class SpaceGame(arcade.Window):
         arcade.finish_render()
         if self.message:
             arcade.pause(0.5)
-        
+
     def update(self, delta_time):
         # pylint: disable=unused-argument
         if self.solved:
@@ -84,7 +84,7 @@ class SpaceGame(arcade.Window):
             start_y=600,
             width=600,
             multiline=True,
-            **FONT_SETTINGS
+            **FONT_SETTINGS,
         )
 
     def move(self, key):

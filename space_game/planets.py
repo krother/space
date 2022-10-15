@@ -1,8 +1,11 @@
+import os
 import json
-import arcade
-from views import IMAGES, FONT_SETTINGS
 
-DEFAULT_GALAXY = "galaxy_EN.json"
+import arcade
+
+from space_game.views import IMAGES, FONT_SETTINGS, BASE_PATH
+
+DEFAULT_GALAXY = os.path.join(BASE_PATH, "galaxy_EN.json")
 
 
 class Location:

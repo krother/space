@@ -1,7 +1,7 @@
 import pytest
 
-import views
-from space import SpaceGame, create_galaxy
+from space_game import views
+from space_game.space import SpaceGame, create_galaxy
 
 COMPLETE_SOLUTION = open("solution.txt", encoding="utf-8").read().strip()
 

@@ -1,8 +1,9 @@
 from functools import partial
 from collections import namedtuple
 import arcade
-from views import IMAGES, FONT_SETTINGS
-from lang import TEXT
+
+from space_game.views import IMAGES, FONT_SETTINGS
+from space_game.lang import TEXT
 
 Command = namedtuple("Command", ("description", "action"))
 

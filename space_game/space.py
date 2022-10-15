@@ -6,15 +6,16 @@ __author__ = "Kristian Rother"
 
 
 import time
+import os
 
 import arcade
 from arcade import key as akeys
 from arcade.key import ESCAPE
 
-from lang import LANG, TEXT
-from planets import create_galaxy
-from ships import Spaceship
-from views import outro, print_message, SLOW_MOTION, FONT_SETTINGS
+from space_game.lang import LANG, TEXT
+from space_game.planets import create_galaxy
+from space_game.ships import Spaceship
+from space_game.views import outro, print_message, SLOW_MOTION, FONT_SETTINGS, BASE_PATH
 
 SIZEX, SIZEY = (1500, 1000)
 
@@ -110,8 +111,12 @@ class SpaceGame(arcade.Window):
             arcade.window_commands.close_window()
 
 
-if __name__ == "__main__":
-    galaxy = create_galaxy(f"galaxy_{LANG}.json")
+def main():
+    galaxy = create_galaxy(os.path.join(BASE_PATH, f"galaxy_{LANG}.json"))
     sg = SpaceGame(galaxy[0])
     arcade.run()
     # print(sg._keylog)
+
+if __name__ == "__main__":
+    main()
+    

@@ -2,6 +2,7 @@ import os
 import arcade
 from arcade import load_texture
 
+BASE_PATH = os.path.split(__file__)[0]
 
 FONT_SETTINGS = {
     'color': arcade.color.GREEN,
@@ -43,10 +44,10 @@ You collected all artifact pieces that open the hidden vault of the Olympus syst
 
 # read image files
 IMAGES = {}
-load_images("images/planets", IMAGES)
-load_images("images/exterior", IMAGES)
-load_images("images/goods", IMAGES)
-load_images("images/artifacts", IMAGES)
+load_images(os.path.join(BASE_PATH, "images/planets"), IMAGES)
+load_images(os.path.join(BASE_PATH, "images/exterior"), IMAGES)
+load_images(os.path.join(BASE_PATH, "images/goods"), IMAGES)
+load_images(os.path.join(BASE_PATH, "images/artifacts"), IMAGES)
 
 SKIP_INPUT = False
 SLOW_MOTION = False

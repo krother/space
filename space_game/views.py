@@ -1,6 +1,8 @@
 import os
+
 import arcade
 from arcade import load_texture
+
 
 BASE_PATH = os.path.split(__file__)[0]
 
@@ -28,9 +30,9 @@ def print_message(msg):
         start_y=220,
         width=800,
         multiline=True,
-        color=arcade.color.LIGHT_CRIMSON, # ALIZARIN_CRIMSON,
+        color=arcade.color.LIGHT_CRIMSON,  # ALIZARIN_CRIMSON,
         font_size=20,
-        font_name="GARA"
+        font_name="GARA",
     )
 
 

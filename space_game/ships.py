@@ -1,9 +1,11 @@
-from functools import partial
 from collections import namedtuple
+from functools import partial
+
 import arcade
 
-from space_game.views import IMAGES, FONT_SETTINGS
 from space_game.lang import TEXT
+from space_game.views import FONT_SETTINGS, IMAGES
+
 
 Command = namedtuple("Command", ("description", "action"))
 
@@ -23,18 +25,8 @@ class Spaceship:
         self.cargo = ""
 
     def draw(self):
-        arcade.draw_text(
-            text=TEXT['cargo bay'],
-            start_x=800,
-            start_y=600,
-            **FONT_SETTINGS
-        )
-        arcade.draw_text(
-            text=TEXT['artifacts'],
-            start_x=800,
-            start_y=400,
-            **FONT_SETTINGS
-        )
+        arcade.draw_text(text=TEXT['cargo bay'], start_x=800, start_y=600, **FONT_SETTINGS)
+        arcade.draw_text(text=TEXT['artifacts'], start_x=800, start_y=400, **FONT_SETTINGS)
 
         if self.cargo:
             IMAGES[self.cargo].draw_sized(870, 500, 128, 128)
@@ -68,9 +60,7 @@ class Spaceship:
             commands.append(load)
         # talk to people
         if self.location.active and self.location.action_name:
-            contact = Command(
-                self.location.action_name, partial(self.location.contact, self)
-            )
+            contact = Command(self.location.action_name, partial(self.location.contact, self))
             commands.append(contact)
 
         return commands

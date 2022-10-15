@@ -1,5 +1,6 @@
 import os
 
+
 LANG = "EN"
 if os.getenv("LANG").upper().startswith("DE"):
     LANG = "DE"

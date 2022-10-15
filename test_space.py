@@ -21,7 +21,7 @@ def travel(galaxy, keys):
 
 
 class TestSpace:
-    # pylint: disable=no-self-use, redefined-outer-name
+    # pylint: disable=redefined-outer-name
 
     def test_pickup(self, space):
         space.move(3)

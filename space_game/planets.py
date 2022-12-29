@@ -37,7 +37,6 @@ class Location:
     def draw(self):
         IMAGES[self.image].draw_sized(150, 850, 200, 200)
         arcade.draw_text(text=self.name, start_x=300, start_y=950, bold=True, **FONT_SETTINGS)
-
         arcade.draw_text(text=self.description, start_x=300, start_y=900, multiline=True, width=600, **FONT_SETTINGS)
 
     def add_connection(self, location):

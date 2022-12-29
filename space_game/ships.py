@@ -19,6 +19,7 @@ TRANSITIONS = {
 
 
 class Spaceship:
+
     def __init__(self):
         self.location = None
         self.artifacts = 0
@@ -38,7 +39,6 @@ class Spaceship:
 
     def load_cargo(self, resource):
         self.cargo = resource
-        # return f'PICKED UP {resource}'
 
     def __repr__(self):
         return f"<spaceship at: {self.location.name}>"

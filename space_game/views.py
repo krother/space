@@ -13,9 +13,9 @@ FONT_SETTINGS = {
     'anchor_y': "top",
 }
 
-
+ 
 def load_images(path, image_dict):
-    # name,file,x,y,w,h
+    """adds the png file in <path> to <image_dict>"""
     for fn in os.listdir(path):
         if fn.endswith(".png"):
             name = fn[:-4]

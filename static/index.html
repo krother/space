@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark" />
-  <link rel="stylesheet" href="css/pico.min.css" />
+  <script src="htmx.min.js"></script>
+<link rel="stylesheet" href="css/pico.min.css" />
   <link rel="stylesheet" href="css/pico.colors.min.css" />
 </head>
 <body>
@@ -18,39 +19,19 @@
       </div>
     </div>
   </header>
-  <main class="container container-fluid">
+  <main class="container" id="game-main">
 
-    <div class="grid">
-
-      <div>
-        <article class="component">
-          <button style="width:80%;margin:10px">travel to Vega</button>
-          <button style="width:80%;margin:10px">travel to Terra</button>
-          <button style="width:80%;margin:10px">travel to Octygon</button>
-          <button style="width:80%;margin:10px">land on planet</button>
-        </article>
-      </div>
-  
-      <div>
-        <h3>Magminus</h3>
-        <img src="A04.png" width="400px">
-      </div>
-
-      <div >
-        <article class="component">
-          <h3>Cargo Bay</h3>
-          <img src="food.png">
-        </article>
-
-        <article class="component">
-          <h3>Artifacts</h3>
-          <img src="artifact1.png">
-        </article>
-      </div>
-      
+    <div style="width:100%;align-items: center;">
+      <img src="images/planets/A04.png" style="align-items: center;">
     </div>
 
-    <article>An unpleasant volcanic rock</article>
+    <div style="width:100%">
+      <button style="width:100%"
+              class='btn'
+              hx-get="/new_game"
+              hx-target="#game-main"
+      >Start New Game</button>
+    </div>
 
   </main>
 

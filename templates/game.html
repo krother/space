@@ -1,0 +1,36 @@
+<div class="grid">
+
+  <div>
+    <article class="component">
+      {% for action in data.actions %}
+        <button style="width:80%;margin:10px"
+          class='btn'
+          hx-get="/action/{{ data.game_id }}/{{ action }}"
+          hx-target="#game-main"
+        >{{ action }}</button>
+      {% endfor %}
+    </article>
+  </div>
+
+  <div>
+    <h3>Magminus</h3>
+    <img src="images/planets/{{ data.planet.image }}" width="400px">
+  </div>
+
+  <div >
+    <article class="component">
+      <h3>Cargo Bay</h3>
+      {% if data.cargo %}
+      <img src="images/goods/{{ data.cargo }}.png">
+      {% endif %}
+    </article>
+
+    <article class="component">
+      <h3>Artifacts</h3>
+      <img src="images/artifacts/artifact1.png">
+    </article>
+  </div>
+  
+</div>
+
+<article>{{ data.planet.description }}</article>

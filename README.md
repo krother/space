@@ -26,9 +26,17 @@ To activate the German translation:
     export LANG=DE
     python space.py
 
+## Web Front-End
+
+There is a prototype web front-end:
+
+    uvicorn --reload space_game.app:app
+
 ## License
 
-(c) 2016 Kristian Rother.
+(c) 2024 Kristian Rother.
+
+Tim Weber, Veit Schiele and Frank Hofmann contributed to the front-end code.
 
 Distributed under the conditions of the MIT License. See LICENSE file.
 

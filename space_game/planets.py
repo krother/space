@@ -24,11 +24,11 @@ class Location:
         # Action Triggers
         self.action_name = kwargs.get("action_name")
         self.require_good = kwargs.get("require_good")
-        self.require_artifacts = kwargs.get("require_artifacts", -1)
+        self.require_crew_member = kwargs.get("require_crew_member")
         self.activated_message = kwargs.get("activated_message")
         self.not_activated_message = kwargs.get("not_activated_message")
         self.activate_clear_cargo = kwargs.get("activate_clear_cargo", False)
-        self.activate_gain_artifact = kwargs.get("activate_gain_artifact", False)
+        self.activate_gain_crew_member = kwargs.get("activate_gain_crew_member")
         self.active = True
 
     def __repr__(self):
@@ -46,13 +46,14 @@ class Location:
         self.active = False
         if self.activate_clear_cargo:
             ship.cargo = ""
-        if self.activate_gain_artifact:
-            ship.artifacts += 1
+        if self.activate_gain_crew_member:
+            ship.crew.append(self.activate_gain_crew_member)
 
     def contact(self, ship):
         if self.active:
-            if (self.require_good and ship.cargo == self.require_good) or (
-                self.require_artifacts >= 0 and ship.artifacts >= self.require_artifacts
+            if (
+                (self.require_good is None or (ship.cargo == self.require_good)) and 
+                (self.require_crew_member is None or (self.require_crew_member in ship.crew))
             ):
                 self.activate(ship)
                 return self.activated_message

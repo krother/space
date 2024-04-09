@@ -50,7 +50,7 @@ IMAGES = {}
 load_images(os.path.join(IMAGE_PATH, "planets"), IMAGES)
 load_images(os.path.join(IMAGE_PATH, "exterior"), IMAGES)
 load_images(os.path.join(IMAGE_PATH, "goods"), IMAGES)
-load_images(os.path.join(IMAGE_PATH, "artifacts"), IMAGES)
+load_images(os.path.join(IMAGE_PATH, "characters"), IMAGES)
 
 SKIP_INPUT = False
 SLOW_MOTION = False

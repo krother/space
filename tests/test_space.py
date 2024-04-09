@@ -36,18 +36,18 @@ class TestSpace:
         travel(space, [1, 1, 1])
         assert space.ship.location.name == "New Haven"
 
-    def test_pickup_artifact(self, space):
+    def test_pickup_elephant(self, space):
         travel(space, [1, 5, 3, 1, 4, 4, 2])
-        assert space.ship.artifacts == 1
+        assert "slon1" in space.ship.crew
 
     def test_aquacity_puzzle(self, space):
         travel(space, [4, 2, 3, 4])
-        assert space.ship.artifacts == 0
+        assert "pingu" not in space.ship.crew
         assert space.ship.cargo == "medical"
         assert space.ship.location.active
         travel(space, [3, 9])
         assert space.ship.cargo == ""
-        assert space.ship.artifacts == 1
+        assert "pingu" in space.ship.crew
         assert not space.ship.location.active
 
     def test_finish_game(self, space):

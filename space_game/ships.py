@@ -22,17 +22,17 @@ class Spaceship:
 
     def __init__(self):
         self.location = None
-        self.artifacts = 0
         self.cargo = ""
+        self.crew = ["panda"]
 
     def draw(self):
         arcade.draw_text(text=TEXT['cargo bay'], start_x=800, start_y=600, **FONT_SETTINGS)
-        arcade.draw_text(text=TEXT['artifacts'], start_x=800, start_y=400, **FONT_SETTINGS)
+        arcade.draw_text(text=TEXT['crew'], start_x=800, start_y=400, **FONT_SETTINGS)
 
         if self.cargo:
             IMAGES[self.cargo].draw_sized(870, 500, 128, 128)
-        for i in range(1, self.artifacts + 1):
-            IMAGES[f"artifact{i}"].draw_sized(730 + i * 140, 320, 96, 96)
+        for i, c in enumerate(self.crew):
+            IMAGES[c].draw_sized(870 + i * 140, 320, 96, 96)
 
     def move_to(self, location):
         self.location = location

@@ -22,7 +22,7 @@
     "require_good": "gas",
     "activated_message": "In exchange for your supplies we will give you this priceless artifact.",
     "activate_clear_cargo": "True",
-    "activate_gain_artifact": "True"
+    "activate_gain_crew_member": "unicorn"
 },
 {"name": "Magminus",
   "description": "A volcanic planet inhabited by a silicon-based species.",
@@ -39,7 +39,7 @@
     "action_name": "explore the valley",
     "require_artifacts": 0,
     "activated_message": "In the valley you find an uninhabited cave with an artifact!",
-    "activate_gain_artifact": "True"
+    "activate_gain_crew_member": "python"
 },
 {"name": "Vega",
   "description": "A fertile world with rich aquatic life forms.",
@@ -57,7 +57,7 @@
     "require_good": "medical",
     "activated_message": "After a long bargain you trade a container of medical goods for a strange artifact. You wonder who made the better deal.",
     "activate_clear_cargo": "True",
-    "activate_gain_artifact": "True",
+    "activate_gain_crew_member": "pingu",
     "not_activated_message": "The aliens are friendly and seem to enjoy trading. They seem to have problems with aggressive bacteria though."
 },
 {"name": "X2475",
@@ -82,7 +82,7 @@
     "require_good": "nucleons",
     "activated_message": "You discover an ancient shipwreck. Using a cache of gluons you clear up the radiation and enter. Inside you find an ancient artifact!",
     "activate_clear_cargo": "True",
-    "activate_gain_artifact": "True",
+    "activate_gain_crew_member": "slon1",
     "not_activated_message": "You discover an abandoned shipwreck emitting the pulse.\n However, there is lots of nuclear debris. You will need a strong neutron source to clean it up before you can enter."
 },
 {"name": "Octygon",
@@ -99,10 +99,11 @@
     "connections": ["Octygon"],
     "action_name": "explore caves",
     "require_good": "food",
-    "activated_message": "After two weeks of search, you discover a strange artifact at the bottom of the caves.",
+    "require_crew_member": "pingu",
+    "activated_message": "After two weeks of search, pingu discovers a hermit hamster living at the bottom of the cave. Upon hearing about your mission, they join you.",
     "not_activated_message": "You abandon the search after a week. You need more food supplies to explore the caves deeper.",
     "activate_clear_cargo": "True",
-    "activate_gain_artifact": "True"
+    "activate_gain_crew_member": "hamster"
 },
 {"name": "Kucharsky",
   "description": "A huge light blue gas planet.",
@@ -139,13 +140,13 @@
 },
 {
     "name": "Alien Space Station",
-    "description": "A huge monument made by an unknown civilization. It has five openings that fit small objects.",
+    "description": "A huge monument made by an unknown civilization. A strange aura is present here.",
     "image": "000",
     "type": "ship",
     "connections": ["Olympus"],
     "action_name": "examine Ancient Vault",
-    "require_artifacts": 5,
-    "not_activated_message": "The openings seem to be made for some kind of alien artifacts.",
-    "activated_message": "You insert five artifacts into the hole. The monolith opens!!!."
+    "require_crew_member": "hamster",
+    "not_activated_message": "You do not seem to have the psychic energy to contact the aura.",
+    "activated_message": "The hamster meditates for a long time. Finally the monolith opens!!!."
 }
 ]

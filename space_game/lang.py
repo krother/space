@@ -8,6 +8,7 @@ if os.getenv("LANG").upper().startswith("DE"):
 DE = {
     "cargo bay": "Frachtraum",
     "artifacts": "Artefakte",
+    "crew": "Crew",
     "collect": "kaufe",
     "warp to": "Sprung nach",
     "board": "fliege zu",

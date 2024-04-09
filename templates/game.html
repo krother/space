@@ -14,21 +14,25 @@
 
   <div>
     <h3>Magminus</h3>
-    <img src="images/planets/{{ data.planet.image }}" width="400px">
+    <img src="images/planets/{{ data.planet.image }}.png" width="400px">
   </div>
 
-  <div >
+  <div>
+
     <article class="component">
-      <h3>Cargo Bay</h3>
-      {% if data.cargo %}
-      <img src="images/goods/{{ data.cargo }}.png">
-      {% endif %}
+      <h3>Crew</h3>
+      {% for char in data.crew %}
+      <img src="images/characters/{{ char }}.png" width="128px">
+      {% endfor %}
     </article>
 
     <article class="component">
-      <h3>Artifacts</h3>
-      <img src="images/artifacts/artifact1.png">
-    </article>
+        <h3>Cargo Bay</h3>
+        {% if data.cargo %}
+        <img src="images/goods/{{ data.cargo }}.png">
+        {% endif %}
+      </article>
+  
   </div>
   
 </div>

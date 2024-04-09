@@ -83,7 +83,7 @@ class Game(BaseModel):
     game_id: str
     planet: Planet = Planet(name="Pandalor", image="green01.png", description="a thick bamboo forest")
     cargo: Optional[str] = None
-    artifacts: int = 0
+    crew: list[str] = ["panda"]
     actions: Actions
 
 
@@ -103,6 +103,7 @@ def action(game_id: str, action: str) -> Game:
             description="done: " + action + ". " + f.sentence(),
         ),
         cargo = random.choice(["medical", "food", "gas", "minerals", "nucleons"]),
+        crew = ["panda"] + [random.choice(["slon1", "hamster1", "python", "pingu", "unicorn", "slon1"]) for _ in range(5)],
         actions=[f.word() for _ in range(4)],
     )
 

@@ -1,4 +1,5 @@
 import os
+import time
 
 import arcade
 from arcade import load_texture
@@ -34,14 +35,6 @@ def print_message(msg):
         color=arcade.color.LIGHT_CRIMSON,  # ALIZARIN_CRIMSON,
         font_size=20,
         font_name="GARA",
-    )
-
-
-def outro():
-    print(
-        """
-You collected all artifact pieces that open the hidden vault of the Olympus system. Finally your quest has reached its end.
-"""
     )
 
 

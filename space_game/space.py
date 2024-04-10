@@ -7,6 +7,7 @@ __author__ = "Kristian Rother"
 
 import os
 import time
+import uuid
 
 import arcade
 from arcade import key as akeys
@@ -14,8 +15,8 @@ from arcade.key import ESCAPE
 
 from space_game.lang import LANG, TEXT
 from space_game.location import create_galaxy
-from space_game.ships import Spaceship
-from space_game.views import BASE_PATH, FONT_SETTINGS, SLOW_MOTION, outro, print_message
+from space_game.game import SpaceGame
+from space_game.views import BASE_PATH, FONT_SETTINGS, SLOW_MOTION, print_message
 
 
 SIZEX, SIZEY = (1500, 1000)
@@ -42,13 +43,23 @@ MOVES = {
 }
 
 
-class SpaceGame(arcade.Window):
-    def __init__(self, start_location, no_window=False):
+
+def start_new_game():
+    galaxy = create_galaxy(os.path.join(BASE_PATH, f"galaxy_{LANG}.json"))
+    ship = SpaceGame(
+        game_id = str(uuid.uuid1()),
+        location = galaxy[0]
+    )
+    return ship
+
+
+class SpaceGameWindow(arcade.Window):
+
+    def __init__(self, no_window=False):
         if not no_window:
             super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)
             arcade.set_background_color(arcade.color.BLACK)
-        self.ship = Spaceship()
-        self.ship.location = start_location
+        self.ship = start_new_game()
         self.commands = self.ship.get_commands()
         self.message = ""
         self._keylog = ""
@@ -67,7 +78,7 @@ class SpaceGame(arcade.Window):
     def update(self, delta_time):
         # pylint: disable=unused-argument
         if self.solved:
-            outro()
+            arcade.pause(5.0)
             arcade.window_commands.close_window()
 
     @property
@@ -113,8 +124,7 @@ class SpaceGame(arcade.Window):
 
 
 def main():
-    galaxy = create_galaxy(os.path.join(BASE_PATH, f"galaxy_{LANG}.json"))
-    sg = SpaceGame(galaxy[0])
+    sg = SpaceGameWindow()
     arcade.run()
     # print(sg._keylog)
 

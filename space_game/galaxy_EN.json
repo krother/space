@@ -2,15 +2,15 @@
 {"name": "Terra",
  "description": "The cradle of mankind.\nA blue jewel floating in space.",
  "image": "P05",
- "goods": ["food", "medical"],
- "connections": ["Centauri", "Sirius"],
+ "resources": ["food", "medical"],
+ "connected_names": ["Centauri", "Sirius"],
  "trigger": {}
 },
 {"name": "Rorke",
  "description": "A hot white star surrounded by a vast asteroid belt.",
  "image": "orange01",
- "goods": ["ore"],
- "connections": ["X2475", "New Haven", "Octygon", "Smuggler Ship"],
+ "resources": ["ore"],
+ "connected_names": ["X2475", "New Haven", "Octygon", "Smuggler Ship"],
  "trigger": {}
 },
 {
@@ -18,7 +18,7 @@
     "description": "A small vessel hidden in an asteroid belt. You had almost overlooked them if they hadn't contacted you.",
     "image": "phalanx_comm",
     "type": "ship",
-    "connections": ["Rorke"],
+    "connected_names": ["Rorke"],
     "trigger": {
       "action_name": "board the ship",
       "not_activated_message": "We are in dire need of repairs and ran out of gas.",
@@ -31,8 +31,8 @@
 {"name": "Magminus",
   "description": "A volcanic planet inhabited by a silicon-based species.",
   "image": "redgiant02",
-  "goods": ["minerals"],
-  "connections": ["Octygon", "Kucharsky", "Silicon Valley"],
+  "resources": ["minerals"],
+  "connected_names": ["Octygon", "Kucharsky", "Silicon Valley"],
   "trigger": {}
 },
 {
@@ -40,7 +40,7 @@
     "description": "A valley near a volcanic geyser seems to be where the strange organisms gather.",
     "image": "lava",
     "type": "surface",
-    "connections": ["Magminus"],
+    "connected_names": ["Magminus"],
     "trigger": {
       "action_name": "explore the valley",
       "require_artifacts": 0,
@@ -51,7 +51,7 @@
 {"name": "Vega",
   "description": "A fertile world with rich aquatic life forms.",
   "image": "O05",
-  "connections": ["Sirius", "Centauri", "Octygon", "Aquatic City"],
+  "connected_names": ["Sirius", "Centauri", "Octygon", "Aquatic City"],
   "trigger": {}
 },
 {
@@ -59,8 +59,8 @@
     "type": "surface",
     "description": "a huge coral reef hosts a submarine sentient species",
     "image": "aquatic3",
-    "connections": ["Vega"],
-    "goods": ["spices"],
+    "connected_names": ["Vega"],
+    "resources": ["spices"],
     "trigger": {
       "action_name": "contact aliens",
       "require_good": "medical",
@@ -73,15 +73,15 @@
 {"name": "X2475",
   "description": "Neutron star with really nothing going on.",
   "image": "green01",
-  "goods": ["nucleons"],
-  "connections": ["Rorke", "Olympus"],
+  "resources": ["nucleons"],
+  "connected_names": ["Rorke", "Olympus"],
   "trigger": {}
 },
 {"name": "Sirius",
   "description": "A sandy desert with seven beautiful orange moons.\n\nA regular radar pulse emanates from the desert surface.",
   "image": "H04",
-  "goods": ["ore"],
-  "connections": ["Terra", "Centauri", "Vega", "Sirian Desert"],
+  "resources": ["ore"],
+  "connected_names": ["Terra", "Centauri", "Vega", "Sirian Desert"],
   "trigger": {}
 },
 {
@@ -89,7 +89,7 @@
     "description": "Lots of nothing. The radar pulse is stronger here. It might come from a settlement or a ship.\nHowever, the radiation level is rising in that direction as well.",
     "image": "desertic",
     "type": "surface",
-    "connections": ["Sirius"],
+    "connected_names": ["Sirius"],
     "trigger": {
       "action_name": "explore",
       "require_good": "nucleons",
@@ -102,8 +102,8 @@
 {"name": "Octygon",
   "description": "A dead rocky planet with mysterious underground caves.",
   "image": "D01",
-  "goods": ["ore"],
-  "connections": ["Rorke", "Magminus", "New Haven", "Vega", "Underground Caves"],
+  "resources": ["ore"],
+  "connected_names": ["Rorke", "Magminus", "New Haven", "Vega", "Underground Caves"],
   "trigger": {}
 },
 {
@@ -111,7 +111,7 @@
     "description": "The caves are many miles deep and stretch over half of the planets surface.",
     "image": "uninhabited-rocky-airless-00",
     "type": "surface",
-    "connections": ["Octygon"],
+    "connected_names": ["Octygon"],
     "trigger": {
       "action_name": "explore caves",
       "require_good": "food",
@@ -125,22 +125,22 @@
 {"name": "Kucharsky",
   "description": "A huge light blue gas planet.",
   "image": "white01",
-  "goods": ["gas"],
-  "connections": ["New Haven", "Centauri", "Magminus"],
+  "resources": ["gas"],
+  "connected_names": ["New Haven", "Centauri", "Magminus"],
   "trigger": {}
 },
 {"name": "Centauri",
   "description": "Civilizations outpost in space.",
   "image": "J00",
-  "connections": ["Kucharsky", "Terra", "Vega", "Sirius", "Centauri Station"],
+  "connected_names": ["Kucharsky", "Terra", "Vega", "Sirius", "Centauri Station"],
   "trigger": {}
 },
 {"name": "Centauri Station",
   "description": "A small space station marks the border of the Terran Federation.",
   "image": "wrath",
   "type": "ship",
-  "goods": ["minerals", "nucleons"],
-  "connections": ["Centauri"],
+  "resources": ["minerals", "nucleons"],
+  "connected_names": ["Centauri"],
   "location": "SpaceStation",
   "trigger": {
     "action_name": "contact outpost",
@@ -150,14 +150,14 @@
 {"name": "New Haven",
   "description": "A earth-like yet uninhabited world.",
   "image": "M10",
-  "goods": ["food", "spices"],
-  "connections": ["Rorke", "Octygon", "Kucharsky"],
+  "resources": ["food", "spices"],
+  "connected_names": ["Rorke", "Octygon", "Kucharsky"],
   "trigger": {}
 },
 {"name": "Olympus",
   "description": "The home world of the Firstborn.",
   "image": "station-agriculture",
-  "connections": ["X2475", "Alien Space Station"],
+  "connected_names": ["X2475", "Alien Space Station"],
   "location": "AncientVault",
   "trigger": {}
 },
@@ -166,12 +166,12 @@
     "description": "A huge monument made by an unknown civilization. A strange aura is present here.",
     "image": "000",
     "type": "ship",
-    "connections": ["Olympus"],
+    "connected_names": ["Olympus"],
     "trigger": {
       "action_name": "examine Ancient Vault",
       "require_crew_member": "hamster",
       "not_activated_message": "You do not seem to have the psychic energy to contact the aura.",
-      "activated_message": "The hamster meditates for a long time. Finally the monolith opens!!!."
+      "activated_message": "The hamster meditates for a long time. Finally the monolith opens! A portal is created and takes you far into the galaxy. More adventures await you."
     }
 }
 ]

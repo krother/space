@@ -12,8 +12,9 @@ DEFAULT_GALAXY = os.path.join(BASE_PATH, "galaxy_EN.json")
 
 
 class ActionTrigger(BaseModel):
-    """Conditions and effects of puzzles at a location"""
-
+    """
+    Conditions and effects of puzzles at a location
+    """
     action_name: Optional[str] = None
     require_good: Optional[str] = None
     require_crew_member: Optional[str] = None
@@ -23,20 +24,22 @@ class ActionTrigger(BaseModel):
     activate_gain_crew_member: Optional[str] = None
 
 
-class Location:
-    def __init__(self, **kwargs):
-        self.name = kwargs["name"]
-        self.description = kwargs["description"]
-        self.image = kwargs["image"]
-        self.type = kwargs.get("type", "planet")
-        self.connection_names = kwargs["connections"]
-        self.connections = []
-        self.resources = kwargs.get("goods", [])
-        self.active = True
-        self.trigger = ActionTrigger(**kwargs["trigger"])
+class Location(BaseModel):
+    """
+    Planets, spaceships and special places on the ground
+    """
+    name: str
+    description: str
+    image: str
+    type: str = "planet"
+    connected_names: list[str]
+    connected_locs: list["Location"] = []
+    resources: list[str] = []
+    active: bool = True
+    trigger: ActionTrigger
 
     def __repr__(self):
-        return f"<Location: {self.name}>"
+        return f"<{self.name}: {self.type}; provides {self.resources}; {self.active}>"
 
     def draw(self):
         IMAGES[self.image].draw_sized(150, 850, 200, 200)
@@ -44,7 +47,7 @@ class Location:
         arcade.draw_text(text=self.description, start_x=300, start_y=900, multiline=True, width=600, **FONT_SETTINGS)
 
     def add_connection(self, location):
-        self.connections.append(location)
+        self.connected_locs.append(location)
 
     def activate(self, ship):
         self.active = False
@@ -71,7 +74,8 @@ def create_galaxy(fn=DEFAULT_GALAXY):
 
     # builds connection graph
     for location in galaxy:
-        for targetname in location.connection_names:
+        location.connected_locs = []
+        for targetname in location.connected_names:
             target = None
             for p in galaxy:
                 if p.name == targetname:

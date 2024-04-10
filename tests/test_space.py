@@ -1,7 +1,7 @@
 import pytest
 
 from space_game import views
-from space_game.space import SpaceGame, create_galaxy
+from space_game.space import SpaceGameWindow
 
 
 COMPLETE_SOLUTION = open("solution.txt", encoding="utf-8").read().strip()
@@ -11,8 +11,7 @@ views.SKIP_INPUT = True
 
 @pytest.fixture
 def space():
-    galaxy = create_galaxy()
-    return SpaceGame(galaxy[0], no_window=True)
+    return SpaceGameWindow(no_window=True)
 
 
 def travel(galaxy, keys):

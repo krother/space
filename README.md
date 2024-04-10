@@ -19,12 +19,12 @@ For development also do:
 
 ## Usage
 
-    python space.py
+    python space_game
 
 To activate the German translation:
 
     export LANG=DE
-    python space.py
+    python space_game
 
 ## Web Front-End
 

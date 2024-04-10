@@ -13,17 +13,17 @@ DEFAULT_GALAXY = os.path.join(BASE_PATH, "galaxy_EN.json")
 
 class ActionTrigger(BaseModel):
     """Conditions and effects of puzzles at a location"""
-    action_name : Optional[str] = None
-    require_good : Optional[str] = None
-    require_crew_member : Optional[str] = None
-    activated_message : Optional[str] = None
-    not_activated_message : Optional[str] = None
-    activate_clear_cargo : Optional[str] = None
-    activate_gain_crew_member : Optional[str] = None
+
+    action_name: Optional[str] = None
+    require_good: Optional[str] = None
+    require_crew_member: Optional[str] = None
+    activated_message: Optional[str] = None
+    not_activated_message: Optional[str] = None
+    activate_clear_cargo: Optional[str] = None
+    activate_gain_crew_member: Optional[str] = None
 
 
 class Location:
-
     def __init__(self, **kwargs):
         self.name = kwargs["name"]
         self.description = kwargs["description"]
@@ -55,9 +55,8 @@ class Location:
 
     def contact(self, ship):
         if self.active:
-            if (
-                (self.trigger.require_good is None or (ship.cargo == self.trigger.require_good)) and 
-                (self.trigger.require_crew_member is None or (self.trigger.require_crew_member in ship.crew))
+            if (self.trigger.require_good is None or (ship.cargo == self.trigger.require_good)) and (
+                self.trigger.require_crew_member is None or (self.trigger.require_crew_member in ship.crew)
             ):
                 self.activate(ship)
                 return self.trigger.activated_message

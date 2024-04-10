@@ -1,6 +1,7 @@
 from fastapi.responses import JSONResponse
 
 from typing import Any
+
 # By default, FastAPI's JSONResponse will render the response and then forget
 # the original data that has been passed in. We subclass the default behavior to
 # keep the original Python object, so that we can later pass it into Jinja.
@@ -24,4 +25,3 @@ class PreserveJSONResponse(JSONResponse):
         # a really good candidate ;)
         scope["preserved_json_data"] = self.original_data
         return super().__call__(scope, receive, send)
-

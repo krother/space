@@ -13,10 +13,9 @@ from arcade import key as akeys
 from arcade.key import ESCAPE
 
 from space_game.lang import LANG, TEXT
-from space_game.planets import create_galaxy
+from space_game.location import create_galaxy
 from space_game.ships import Spaceship
-from space_game.views import (BASE_PATH, FONT_SETTINGS, SLOW_MOTION, outro,
-                              print_message)
+from space_game.views import BASE_PATH, FONT_SETTINGS, SLOW_MOTION, outro, print_message
 
 
 SIZEX, SIZEY = (1500, 1000)

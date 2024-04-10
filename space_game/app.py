@@ -71,17 +71,18 @@ async def json_to_html(request: Request, call_next):
     return response
 
 
-class Planet(BaseModel):
+class Location(BaseModel):
     name: str
     image: str
     description: str
+
 
 Actions = list[str]
 
 
 class Game(BaseModel):
     game_id: str
-    planet: Planet = Planet(name="Pandalor", image="green01", description="a thick bamboo forest")
+    location: Location = Location(name="Pandalor", image="green01", description="a thick bamboo forest")
     cargo: Optional[str] = None
     crew: list[str] = ["panda"]
     actions: Actions
@@ -98,15 +99,15 @@ def action(game_id: str, action: str) -> Game:
     f = Faker()
     return Game(
         game_id=game_id,
-        planet=Planet(
+        location=Location(
             name=f.city(),
             image=random.choice(["green02", "yellow01", "H00", "G02"]),
             description="done: " + action + ". " + f.sentence(),
         ),
-        cargo = random.choice(["medical", "food", "gas", "minerals", "nucleons"]),
-        crew = ["panda"] + [random.choice(["slon1", "hamster", "python", "pingu", "unicorn", "slon1"]) for _ in range(5)],
-        actions = [f.word() for _ in range(4)],
-        message = f.sentence()
+        cargo=random.choice(["medical", "food", "gas", "minerals", "nucleons"]),
+        crew=["panda"] + [random.choice(["slon1", "hamster", "python", "pingu", "unicorn", "slon1"]) for _ in range(5)],
+        actions=[f.word() for _ in range(4)],
+        message=f.sentence(),
     )
 
 

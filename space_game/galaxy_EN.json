@@ -3,13 +3,15 @@
  "description": "The cradle of mankind.\nA blue jewel floating in space.",
  "image": "P05",
  "goods": ["food", "medical"],
- "connections": ["Centauri", "Sirius"]
+ "connections": ["Centauri", "Sirius"],
+ "trigger": {}
 },
 {"name": "Rorke",
  "description": "A hot white star surrounded by a vast asteroid belt.",
  "image": "orange01",
  "goods": ["ore"],
- "connections": ["X2475", "New Haven", "Octygon", "Smuggler Ship"]
+ "connections": ["X2475", "New Haven", "Octygon", "Smuggler Ship"],
+ "trigger": {}
 },
 {
     "name": "Smuggler Ship",
@@ -17,18 +19,21 @@
     "image": "phalanx_comm",
     "type": "ship",
     "connections": ["Rorke"],
-    "action_name": "board the ship",
-    "not_activated_message": "We are in dire need of repairs and ran out of gas.",
-    "require_good": "gas",
-    "activated_message": "In exchange for your supplies we will give you this priceless artifact.",
-    "activate_clear_cargo": "True",
-    "activate_gain_crew_member": "unicorn"
+    "trigger": {
+      "action_name": "board the ship",
+      "not_activated_message": "We are in dire need of repairs and ran out of gas.",
+      "require_good": "gas",
+      "activated_message": "In exchange for your supplies we will give you this priceless artifact.",
+      "activate_clear_cargo": "True",
+      "activate_gain_crew_member": "unicorn"
+    }
 },
 {"name": "Magminus",
   "description": "A volcanic planet inhabited by a silicon-based species.",
   "image": "redgiant02",
   "goods": ["minerals"],
-  "connections": ["Octygon", "Kucharsky", "Silicon Valley"]
+  "connections": ["Octygon", "Kucharsky", "Silicon Valley"],
+  "trigger": {}
 },
 {
     "name": "Silicon Valley",
@@ -36,15 +41,18 @@
     "image": "lava",
     "type": "surface",
     "connections": ["Magminus"],
-    "action_name": "explore the valley",
-    "require_artifacts": 0,
-    "activated_message": "In the valley you find an uninhabited cave with an artifact!",
-    "activate_gain_crew_member": "python"
+    "trigger": {
+      "action_name": "explore the valley",
+      "require_artifacts": 0,
+      "activated_message": "In the valley you find an uninhabited cave with an artifact!",
+      "activate_gain_crew_member": "python"
+    }
 },
 {"name": "Vega",
   "description": "A fertile world with rich aquatic life forms.",
   "image": "O05",
-  "connections": ["Sirius", "Centauri", "Octygon", "Aquatic City"]
+  "connections": ["Sirius", "Centauri", "Octygon", "Aquatic City"],
+  "trigger": {}
 },
 {
     "name": "Aquatic City",
@@ -53,24 +61,28 @@
     "image": "aquatic3",
     "connections": ["Vega"],
     "goods": ["spices"],
-    "action_name": "contact aliens",
-    "require_good": "medical",
-    "activated_message": "After a long bargain you trade a container of medical goods for a strange artifact. You wonder who made the better deal.",
-    "activate_clear_cargo": "True",
-    "activate_gain_crew_member": "pingu",
-    "not_activated_message": "The aliens are friendly and seem to enjoy trading. They seem to have problems with aggressive bacteria though."
+    "trigger": {
+      "action_name": "contact aliens",
+      "require_good": "medical",
+      "activated_message": "After a long bargain you trade a container of medical goods for a strange artifact. You wonder who made the better deal.",
+      "activate_clear_cargo": "True",
+      "activate_gain_crew_member": "pingu",
+      "not_activated_message": "The aliens are friendly and seem to enjoy trading. They seem to have problems with aggressive bacteria though."
+    }
 },
 {"name": "X2475",
   "description": "Neutron star with really nothing going on.",
   "image": "green01",
   "goods": ["nucleons"],
-  "connections": ["Rorke", "Olympus"]
+  "connections": ["Rorke", "Olympus"],
+  "trigger": {}
 },
 {"name": "Sirius",
   "description": "A sandy desert with seven beautiful orange moons.\n\nA regular radar pulse emanates from the desert surface.",
   "image": "H04",
   "goods": ["ore"],
-  "connections": ["Terra", "Centauri", "Vega", "Sirian Desert"]
+  "connections": ["Terra", "Centauri", "Vega", "Sirian Desert"],
+  "trigger": {}
 },
 {
     "name": "Sirian Desert",
@@ -78,18 +90,21 @@
     "image": "desertic",
     "type": "surface",
     "connections": ["Sirius"],
-    "action_name": "explore",
-    "require_good": "nucleons",
-    "activated_message": "You discover an ancient shipwreck. Using a cache of gluons you clear up the radiation and enter. Inside you find an ancient artifact!",
-    "activate_clear_cargo": "True",
-    "activate_gain_crew_member": "slon1",
-    "not_activated_message": "You discover an abandoned shipwreck emitting the pulse.\n However, there is lots of nuclear debris. You will need a strong neutron source to clean it up before you can enter."
+    "trigger": {
+      "action_name": "explore",
+      "require_good": "nucleons",
+      "activated_message": "You discover an ancient shipwreck. Using a cache of gluons you clear up the radiation and enter. Inside you find an ancient artifact!",
+      "activate_clear_cargo": "True",
+      "activate_gain_crew_member": "slon1",
+      "not_activated_message": "You discover an abandoned shipwreck emitting the pulse.\n However, there is lots of nuclear debris. You will need a strong neutron source to clean it up before you can enter."
+    }
 },
 {"name": "Octygon",
   "description": "A dead rocky planet with mysterious underground caves.",
   "image": "D01",
   "goods": ["ore"],
-  "connections": ["Rorke", "Magminus", "New Haven", "Vega", "Underground Caves"]
+  "connections": ["Rorke", "Magminus", "New Haven", "Vega", "Underground Caves"],
+  "trigger": {}
 },
 {
     "name": "Underground Caves",
@@ -97,24 +112,28 @@
     "image": "uninhabited-rocky-airless-00",
     "type": "surface",
     "connections": ["Octygon"],
-    "action_name": "explore caves",
-    "require_good": "food",
-    "require_crew_member": "pingu",
-    "activated_message": "After two weeks of search, pingu discovers a hermit hamster living at the bottom of the cave. Upon hearing about your mission, they join you.",
-    "not_activated_message": "You abandon the search after a week. You need more food supplies to explore the caves deeper.",
-    "activate_clear_cargo": "True",
-    "activate_gain_crew_member": "hamster"
+    "trigger": {
+      "action_name": "explore caves",
+      "require_good": "food",
+      "require_crew_member": "pingu",
+      "activated_message": "After two weeks of search, pingu discovers a hermit hamster living at the bottom of the cave. Upon hearing about your mission, they join you.",
+      "not_activated_message": "You abandon the search after a week. You need more food supplies to explore the caves deeper.",
+      "activate_clear_cargo": "True",
+      "activate_gain_crew_member": "hamster"
+    }
 },
 {"name": "Kucharsky",
   "description": "A huge light blue gas planet.",
   "image": "white01",
   "goods": ["gas"],
-  "connections": ["New Haven", "Centauri", "Magminus"]
+  "connections": ["New Haven", "Centauri", "Magminus"],
+  "trigger": {}
 },
 {"name": "Centauri",
   "description": "Civilizations outpost in space.",
   "image": "J00",
-  "connections": ["Kucharsky", "Terra", "Vega", "Sirius", "Centauri Station"]
+  "connections": ["Kucharsky", "Terra", "Vega", "Sirius", "Centauri Station"],
+  "trigger": {}
 },
 {"name": "Centauri Station",
   "description": "A small space station marks the border of the Terran Federation.",
@@ -123,20 +142,24 @@
   "goods": ["minerals", "nucleons"],
   "connections": ["Centauri"],
   "location": "SpaceStation",
-  "action_name": "contact outpost",
-  "not_activated_message": "Good luck on your mission!"
+  "trigger": {
+    "action_name": "contact outpost",
+    "not_activated_message": "Good luck on your mission!"
+  }
 },
 {"name": "New Haven",
   "description": "A earth-like yet uninhabited world.",
   "image": "M10",
   "goods": ["food", "spices"],
-  "connections": ["Rorke", "Octygon", "Kucharsky"]
+  "connections": ["Rorke", "Octygon", "Kucharsky"],
+  "trigger": {}
 },
 {"name": "Olympus",
   "description": "The home world of the Firstborn.",
   "image": "station-agriculture",
   "connections": ["X2475", "Alien Space Station"],
-  "location": "AncientVault"
+  "location": "AncientVault",
+  "trigger": {}
 },
 {
     "name": "Alien Space Station",
@@ -144,9 +167,11 @@
     "image": "000",
     "type": "ship",
     "connections": ["Olympus"],
-    "action_name": "examine Ancient Vault",
-    "require_crew_member": "hamster",
-    "not_activated_message": "You do not seem to have the psychic energy to contact the aura.",
-    "activated_message": "The hamster meditates for a long time. Finally the monolith opens!!!."
+    "trigger": {
+      "action_name": "examine Ancient Vault",
+      "require_crew_member": "hamster",
+      "not_activated_message": "You do not seem to have the psychic energy to contact the aura.",
+      "activated_message": "The hamster meditates for a long time. Finally the monolith opens!!!."
+    }
 }
 ]

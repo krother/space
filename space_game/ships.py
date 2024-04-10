@@ -59,8 +59,8 @@ class Spaceship:
             )
             commands.append(load)
         # talk to people
-        if self.location.active and self.location.action_name:
-            contact = Command(self.location.action_name, partial(self.location.contact, self))
+        if self.location.active and self.location.trigger.action_name:
+            contact = Command(self.location.trigger.action_name, partial(self.location.contact, self))
             commands.append(contact)
 
         return commands

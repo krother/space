@@ -1,7 +1,9 @@
 import json
 import os
+from typing import Optional
 
 import arcade
+from pydantic import BaseModel
 
 from space_game.views import BASE_PATH, FONT_SETTINGS, IMAGES
 
@@ -9,8 +11,18 @@ from space_game.views import BASE_PATH, FONT_SETTINGS, IMAGES
 DEFAULT_GALAXY = os.path.join(BASE_PATH, "galaxy_EN.json")
 
 
+class ActionTrigger(BaseModel):
+    """Conditions and effects of puzzles at a location"""
+    action_name : Optional[str] = None
+    require_good : Optional[str] = None
+    require_crew_member : Optional[str] = None
+    activated_message : Optional[str] = None
+    not_activated_message : Optional[str] = None
+    activate_clear_cargo : Optional[str] = None
+    activate_gain_crew_member : Optional[str] = None
+
+
 class Location:
-    # pylint: disable=too-many-instance-attributes
 
     def __init__(self, **kwargs):
         self.name = kwargs["name"]
@@ -20,16 +32,8 @@ class Location:
         self.connection_names = kwargs["connections"]
         self.connections = []
         self.resources = kwargs.get("goods", [])
-
-        # Action Triggers
-        self.action_name = kwargs.get("action_name")
-        self.require_good = kwargs.get("require_good")
-        self.require_crew_member = kwargs.get("require_crew_member")
-        self.activated_message = kwargs.get("activated_message")
-        self.not_activated_message = kwargs.get("not_activated_message")
-        self.activate_clear_cargo = kwargs.get("activate_clear_cargo", False)
-        self.activate_gain_crew_member = kwargs.get("activate_gain_crew_member")
         self.active = True
+        self.trigger = ActionTrigger(**kwargs["trigger"])
 
     def __repr__(self):
         return f"<Location: {self.name}>"
@@ -44,20 +48,20 @@ class Location:
 
     def activate(self, ship):
         self.active = False
-        if self.activate_clear_cargo:
+        if self.trigger.activate_clear_cargo:
             ship.cargo = ""
-        if self.activate_gain_crew_member:
-            ship.crew.append(self.activate_gain_crew_member)
+        if self.trigger.activate_gain_crew_member:
+            ship.crew.append(self.trigger.activate_gain_crew_member)
 
     def contact(self, ship):
         if self.active:
             if (
-                (self.require_good is None or (ship.cargo == self.require_good)) and 
-                (self.require_crew_member is None or (self.require_crew_member in ship.crew))
+                (self.trigger.require_good is None or (ship.cargo == self.trigger.require_good)) and 
+                (self.trigger.require_crew_member is None or (self.trigger.require_crew_member in ship.crew))
             ):
                 self.activate(ship)
-                return self.activated_message
-            return self.not_activated_message
+                return self.trigger.activated_message
+            return self.trigger.not_activated_message
         return ""
 
 

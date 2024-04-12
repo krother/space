@@ -77,15 +77,13 @@ class Location(BaseModel):
     description: str
 
 
-Actions = list[str]
-
-
 class Game(BaseModel):
+
     game_id: str
     location: Location = Location(name="Pandalor", image="green01", description="a thick bamboo forest")
     cargo: Optional[str] = None
     crew: list[str] = ["panda"]
-    actions: Actions
+    actions: list[str]
     message: Optional[str] = None
 
 

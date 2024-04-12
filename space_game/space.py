@@ -43,18 +43,13 @@ MOVES = {
 }
 
 
-
 def start_new_game():
     galaxy = create_galaxy(os.path.join(BASE_PATH, f"galaxy_{LANG}.json"))
-    ship = SpaceGame(
-        game_id = str(uuid.uuid1()),
-        location = galaxy[0]
-    )
+    ship = SpaceGame(game_id=str(uuid.uuid1()), location=galaxy[0])
     return ship
 
 
 class SpaceGameWindow(arcade.Window):
-
     def __init__(self, no_window=False):
         if not no_window:
             super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)

@@ -2,8 +2,6 @@
 Space Traveller - main app
 """
 
-__author__ = "Kristian Rother"
-
 
 import os
 import time
@@ -45,8 +43,8 @@ MOVES = {
 
 def start_new_game():
     galaxy = create_galaxy(os.path.join(BASE_PATH, f"galaxy_{LANG}.json"))
-    ship = SpaceGame(game_id=str(uuid.uuid1()), location=galaxy[0])
-    return ship
+    game = SpaceGame(game_id=str(uuid.uuid1()), location=galaxy[0])
+    return game
 
 
 class SpaceGameWindow(arcade.Window):
@@ -54,15 +52,15 @@ class SpaceGameWindow(arcade.Window):
         if not no_window:
             super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)
             arcade.set_background_color(arcade.color.BLACK)
-        self.ship = start_new_game()
-        self.commands = self.ship.get_commands()
+        self.game = start_new_game()
+        self.commands = self.game.get_commands()
         self.message = ""
         self._keylog = ""
 
     def on_draw(self):
         arcade.start_render()
-        self.ship.location.draw()
-        self.ship.draw()
+        self.game.location.draw()
+        self.game.draw()
         self.draw_commands()
         if self.message:
             print_message(self.message)
@@ -72,14 +70,9 @@ class SpaceGameWindow(arcade.Window):
 
     def update(self, delta_time):
         # pylint: disable=unused-argument
-        if self.solved:
+        if self.game.solved:
             arcade.pause(5.0)
             arcade.window_commands.close_window()
-
-    @property
-    def solved(self):
-        location = self.ship.location
-        return location.name == "Alien Space Station" and not location.active
 
     def draw_commands(self):
         commands = TEXT["Available commands"] + ":\n\n"
@@ -106,7 +99,7 @@ class SpaceGameWindow(arcade.Window):
                 if SLOW_MOTION:
                     time.sleep(3)
                 self.message = cmd.action()
-                self.commands = self.ship.get_commands()
+                self.commands = self.game.get_commands()
 
     def on_key_press(self, symbol, modifiers):
         """Handle player movement"""

@@ -1,14 +1,14 @@
 [
-{"name": "Terra",
+{"name": "Pandalor",
  "description": "The cradle of mankind.\nA blue jewel floating in space.",
- "image": "P05",
+ "image": "pandalor",
  "resources": ["food", "medical"],
  "connected_names": ["Centauri", "Sirius"],
  "trigger": {}
 },
 {"name": "Rorke",
  "description": "A hot white star surrounded by a vast asteroid belt.",
- "image": "orange01",
+ "image": "rorke",
  "resources": ["ore"],
  "connected_names": ["X2475", "New Haven", "Octygon", "Smuggler Ship"],
  "trigger": {}
@@ -16,7 +16,7 @@
 {
     "name": "Smuggler Ship",
     "description": "A small vessel hidden in an asteroid belt. You had almost overlooked them if they hadn't contacted you.",
-    "image": "phalanx_comm",
+    "image": "smugglers",
     "type": "ship",
     "connected_names": ["Rorke"],
     "trigger": {
@@ -30,7 +30,7 @@
 },
 {"name": "Magminus",
   "description": "A volcanic planet inhabited by a silicon-based species.",
-  "image": "redgiant02",
+  "image": "magminus",
   "resources": ["minerals"],
   "connected_names": ["Octygon", "Kucharsky", "Silicon Valley"],
   "trigger": {}
@@ -50,7 +50,7 @@
 },
 {"name": "Vega",
   "description": "A fertile world with rich aquatic life forms.",
-  "image": "O05",
+  "image": "vega",
   "connected_names": ["Sirius", "Centauri", "Octygon", "Aquatic City"],
   "trigger": {}
 },
@@ -58,7 +58,7 @@
     "name": "Aquatic City",
     "type": "surface",
     "description": "a huge coral reef hosts a submarine sentient species",
-    "image": "aquatic3",
+    "image": "aqua_city",
     "connected_names": ["Vega"],
     "resources": ["spices"],
     "trigger": {
@@ -72,16 +72,16 @@
 },
 {"name": "X2475",
   "description": "Neutron star with really nothing going on.",
-  "image": "green01",
+  "image": "x2475",
   "resources": ["nucleons"],
   "connected_names": ["Rorke", "Olympus"],
   "trigger": {}
 },
 {"name": "Sirius",
   "description": "A sandy desert with seven beautiful orange moons.\n\nA regular radar pulse emanates from the desert surface.",
-  "image": "H04",
+  "image": "sirius",
   "resources": ["ore"],
-  "connected_names": ["Terra", "Centauri", "Vega", "Sirian Desert"],
+  "connected_names": ["Pandalor", "Centauri", "Vega", "Sirian Desert"],
   "trigger": {}
 },
 {
@@ -101,7 +101,7 @@
 },
 {"name": "Octygon",
   "description": "A dead rocky planet with mysterious underground caves.",
-  "image": "D01",
+  "image": "octygon",
   "resources": ["ore"],
   "connected_names": ["Rorke", "Magminus", "New Haven", "Vega", "Underground Caves"],
   "trigger": {}
@@ -124,20 +124,20 @@
 },
 {"name": "Kucharsky",
   "description": "A huge light blue gas planet.",
-  "image": "white01",
+  "image": "kucharsky",
   "resources": ["gas"],
   "connected_names": ["New Haven", "Centauri", "Magminus"],
   "trigger": {}
 },
 {"name": "Centauri",
   "description": "Civilizations outpost in space.",
-  "image": "J00",
-  "connected_names": ["Kucharsky", "Terra", "Vega", "Sirius", "Centauri Station"],
+  "image": "centauri",
+  "connected_names": ["Kucharsky", "Pandalor", "Vega", "Sirius", "Centauri Station"],
   "trigger": {}
 },
 {"name": "Centauri Station",
-  "description": "A small space station marks the border of the Terran Federation.",
-  "image": "wrath",
+  "description": "A small space station marks the border of the Pandalorn Federation.",
+  "image": "centauri_station",
   "type": "ship",
   "resources": ["minerals", "nucleons"],
   "connected_names": ["Centauri"],
@@ -149,14 +149,14 @@
 },
 {"name": "New Haven",
   "description": "A earth-like yet uninhabited world.",
-  "image": "M10",
+  "image": "new_haven",
   "resources": ["food", "spices"],
   "connected_names": ["Rorke", "Octygon", "Kucharsky"],
   "trigger": {}
 },
 {"name": "Olympus",
   "description": "The home world of the Firstborn.",
-  "image": "station-agriculture",
+  "image": "olympus",
   "connected_names": ["X2475", "Alien Space Station"],
   "location": "AncientVault",
   "trigger": {}
@@ -164,7 +164,7 @@
 {
     "name": "Alien Space Station",
     "description": "A huge monument made by an unknown civilization. A strange aura is present here.",
-    "image": "000",
+    "image": "alien_station",
     "type": "ship",
     "connected_names": ["Olympus"],
     "trigger": {

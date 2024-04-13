@@ -83,28 +83,28 @@ class Game(BaseModel):
     location: Location = Location(name="Pandalor", image="green01", description="a thick bamboo forest")
     cargo: Optional[str] = None
     crew: list[str] = ["panda"]
-    actions: list[str]
+    commands: list[str]
     message: Optional[str] = None
 
 
 @app.get("/new_game", response_model=Game)
 def new_game() -> Game:
-    return Game(game_id="1234", cargo="medical", actions=["one", "two", "three"])
+    return Game(game_id="1234", cargo="medical", commands=["one", "two", "three"])
 
 
-@app.get("/action/{game_id}/{action}")
-def action(game_id: str, action: str) -> Game:
+@app.get("/action/{game_id}/{command}")
+def action(game_id: str, command: str) -> Game:
     f = Faker()
     return Game(
         game_id=game_id,
         location=Location(
             name=f.city(),
             image=random.choice(["green02", "yellow01", "H00", "G02"]),
-            description="done: " + action + ". " + f.sentence(),
+            description="done: " + commands + ". " + f.sentence(),
         ),
         cargo=random.choice(["medical", "food", "gas", "minerals", "nucleons"]),
         crew=["panda"] + [random.choice(["slon1", "hamster", "python", "pingu", "unicorn", "slon1"]) for _ in range(5)],
-        actions=[f.word() for _ in range(4)],
+        commands=[f.word() for _ in range(4)],
         message=f.sentence(),
     )
 

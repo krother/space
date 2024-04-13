@@ -1,3 +1,3 @@
-from space_game.space import main
+from space_game.gui import main
 
 main()

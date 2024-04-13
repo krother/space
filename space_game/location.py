@@ -82,7 +82,8 @@ def create_galaxy(fn=DEFAULT_GALAXY):
             for p in galaxy:
                 if p.name == targetname:
                     target = p
-            assert target is not None
+            if target is None:
+                raise ValueError(f"connection not found when building galaxy for '{targetname}'")
             location.add_connection(target)
 
     return galaxy

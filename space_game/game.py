@@ -30,6 +30,11 @@ class SpaceGame(BaseModel):
     cargo: str = ""
     crew: list[CrewMember] = ["panda"]
 
+    @property
+    def solved(self):
+        location = self.location
+        return location.name == "Alien Space Station" and not location.active
+
     def draw(self):
         arcade.draw_text(text=TEXT['cargo bay'], start_x=800, start_y=600, **FONT_SETTINGS)
         arcade.draw_text(text=TEXT['crew'], start_x=800, start_y=400, **FONT_SETTINGS)

@@ -7,7 +7,7 @@
 
   <div>
     <article class="component">
-      {% for action in data.actions %}
+      {% for action in data.commands %}
         <button style="width:80%;margin:10px"
           class='btn'
           hx-get="/action/{{ data.game_id }}/{{ action }}"

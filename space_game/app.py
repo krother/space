@@ -105,13 +105,13 @@ def action(game_id: str, command: str) -> GameData:
         location=LocationData(
             name=f.city(),
             image=random.choice(["pandalor", "rorke", "magminus", "vega"]),
-            description="done: " + command + ". " + f.sentence(),
+            description=f.sentence(),
         ),
         cargo=random.choice(["medical", "food", "gas", "minerals", "nucleons"]),
         crew=["panda"]
-        + [random.choice(["slon1", "hamster", "python", "pingu", "unicorn", "elephant"]) for _ in range(5)],
+        + [random.choice(["hamster", "python", "pingu", "unicorn", "elephant"]) for _ in range(5)],
         commands=[f.word() for _ in range(4)],
-        message=f.sentence(),
+        message="done: " + command,
     )
 
 

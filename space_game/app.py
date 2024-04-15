@@ -71,39 +71,41 @@ async def json_to_html(request: Request, call_next):
     return response
 
 
-class Location(BaseModel):
+class LocationData(BaseModel):
     name: str
     image: str
     description: str
 
 
-class Game(BaseModel):
+class GameData(BaseModel):
 
     game_id: str
-    location: Location = Location(name="Pandalor", image="green01", description="a thick bamboo forest")
+    location: LocationData
     cargo: Optional[str] = None
     crew: list[str] = ["panda"]
     commands: list[str]
     message: Optional[str] = None
 
 
-@app.get("/new_game", response_model=Game)
-def new_game() -> Game:
-    return Game(game_id="1234", cargo="medical", commands=["one", "two", "three"])
+@app.get("/new_game", response_model=GameData)
+def new_game() -> GameData:
+    return GameData(game_id="1234", 
+                location=LocationData(name="Pandalor", image="pandalor", description="a thick bamboo forest"),
+                cargo="medical", commands=["one", "two", "three"])
 
 
 @app.get("/action/{game_id}/{command}")
-def action(game_id: str, command: str) -> Game:
+def action(game_id: str, command: str) -> GameData:
     f = Faker()
-    return Game(
+    return GameData(
         game_id=game_id,
-        location=Location(
+        location=LocationData(
             name=f.city(),
-            image=random.choice(["green02", "yellow01", "H00", "G02"]),
-            description="done: " + commands + ". " + f.sentence(),
+            image=random.choice(["pandalor", "rorke", "magminus", "vega"]),
+            description="done: " + command + ". " + f.sentence(),
         ),
         cargo=random.choice(["medical", "food", "gas", "minerals", "nucleons"]),
-        crew=["panda"] + [random.choice(["slon1", "hamster", "python", "pingu", "unicorn", "slon1"]) for _ in range(5)],
+        crew=["panda"] + [random.choice(["slon1", "hamster", "python", "pingu", "unicorn", "elephant"]) for _ in range(5)],
         commands=[f.word() for _ in range(4)],
         message=f.sentence(),
     )

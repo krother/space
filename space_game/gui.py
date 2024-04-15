@@ -5,7 +5,6 @@ Space Traveller - main app
 
 import os
 import time
-import uuid
 
 import arcade
 from arcade import key as akeys
@@ -14,7 +13,8 @@ from arcade.key import ESCAPE
 from space_game.lang import LANG, TEXT
 from space_game.location import create_galaxy
 from space_game.game import SpaceGame
-from space_game.views import BASE_PATH, FONT_SETTINGS, SLOW_MOTION, print_message
+from space_game.config import BASE_PATH
+from space_game.views import IMAGES, FONT_SETTINGS, SLOW_MOTION, print_message
 
 
 SIZEX, SIZEY = (1500, 1000)
@@ -43,7 +43,7 @@ MOVES = {
 
 def start_new_game():
     galaxy = create_galaxy(os.path.join(BASE_PATH, f"galaxy_{LANG}.json"))
-    game = SpaceGame(game_id=str(uuid.uuid1()), location=galaxy[0])
+    game = SpaceGame(location=galaxy[0])
     return game
 
 
@@ -59,8 +59,8 @@ class SpaceGameWindow(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
-        self.game.location.draw()
         self.game.draw()
+        self.draw_location()
         self.draw_commands()
         if self.message:
             print_message(self.message)
@@ -77,7 +77,7 @@ class SpaceGameWindow(arcade.Window):
     def draw_commands(self):
         commands = TEXT["Available commands"] + ":\n\n"
         for i, cmd in enumerate(self.commands, 1):
-            commands += f"[{i}] {cmd.description}\n"
+            commands += f"[{i}] {cmd.name}\n"
         commands += "\n[Esc] Exit"
         arcade.draw_text(
             text=commands,
@@ -87,6 +87,12 @@ class SpaceGameWindow(arcade.Window):
             multiline=True,
             **FONT_SETTINGS,
         )
+
+    def draw_location(self) -> None:
+        IMAGES[self.game.location.image].draw_sized(150, 850, 200, 200)
+        arcade.draw_text(text=self.game.location.name, start_x=300, start_y=950, bold=True, **FONT_SETTINGS)
+        arcade.draw_text(text=self.game.location.description, start_x=300, start_y=900, multiline=True, width=600, **FONT_SETTINGS)
+
 
     def move(self, key):
         """Processes a key pressed"""
@@ -98,7 +104,7 @@ class SpaceGameWindow(arcade.Window):
             if key == i:
                 if SLOW_MOTION:
                     time.sleep(3)
-                self.message = cmd.action()
+                self.message = cmd.callback()
                 self.commands = self.game.get_commands()
 
     def on_key_press(self, symbol, modifiers):

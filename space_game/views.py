@@ -3,8 +3,9 @@ import os
 import arcade
 from arcade import load_texture
 
+from space_game.config import BASE_PATH
 
-BASE_PATH = os.path.split(__file__)[0]
+
 IMAGE_PATH = os.path.join(BASE_PATH, "../static/images")
 
 FONT_SETTINGS = {

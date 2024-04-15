@@ -15,7 +15,6 @@ class ActionTrigger(BaseModel):
     """
     Conditions and effects of puzzles at a location
     """
-
     action_name: Optional[str] = None
     require_good: Optional[str] = None
     require_crew_member: Optional[str] = None
@@ -29,7 +28,6 @@ class Location(BaseModel):
     """
     Planets, spaceships and special places on the ground
     """
-
     name: str
     description: str
     image: str
@@ -40,30 +38,25 @@ class Location(BaseModel):
     active: bool = True
     trigger: ActionTrigger
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"<{self.name}: {self.type}; provides {self.resources}; {self.active}>"
 
-    def draw(self):
-        IMAGES[self.image].draw_sized(150, 850, 200, 200)
-        arcade.draw_text(text=self.name, start_x=300, start_y=950, bold=True, **FONT_SETTINGS)
-        arcade.draw_text(text=self.description, start_x=300, start_y=900, multiline=True, width=600, **FONT_SETTINGS)
-
-    def add_connection(self, location):
+    def add_connection(self, location) -> None:
         self.connected_locs.append(location)
 
-    def activate(self, ship):
+    def activate(self, game):
         self.active = False
         if self.trigger.activate_clear_cargo:
-            ship.cargo = ""
+            game.cargo = ""
         if self.trigger.activate_gain_crew_member:
-            ship.crew.append(self.trigger.activate_gain_crew_member)
+            game.crew.append(self.trigger.activate_gain_crew_member)
 
-    def contact(self, ship):
+    def contact(self, game):
         if self.active:
-            if (self.trigger.require_good is None or (ship.cargo == self.trigger.require_good)) and (
-                self.trigger.require_crew_member is None or (self.trigger.require_crew_member in ship.crew)
+            if (self.trigger.require_good is None or (game.cargo == self.trigger.require_good)) and (
+                self.trigger.require_crew_member is None or (self.trigger.require_crew_member in game.crew)
             ):
-                self.activate(ship)
+                self.activate(game)
                 return self.trigger.activated_message
             return self.trigger.not_activated_message
         return ""

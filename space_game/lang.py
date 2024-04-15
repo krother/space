@@ -1,9 +1,4 @@
-import os
-
-
-LANG = "EN"
-if os.getenv("LANG").upper().startswith("DE"):
-    LANG = "DE"
+from space_game.config import LANG
 
 DE = {
     "cargo bay": "Frachtraum",

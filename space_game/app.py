@@ -89,9 +89,12 @@ class GameData(BaseModel):
 
 @app.get("/new_game", response_model=GameData)
 def new_game() -> GameData:
-    return GameData(game_id="1234", 
-                location=LocationData(name="Pandalor", image="pandalor", description="a thick bamboo forest"),
-                cargo="medical", commands=["one", "two", "three"])
+    return GameData(
+        game_id="1234",
+        location=LocationData(name="Pandalor", image="pandalor", description="a thick bamboo forest"),
+        cargo="medical",
+        commands=["one", "two", "three"],
+    )
 
 
 @app.get("/action/{game_id}/{command}")
@@ -105,7 +108,8 @@ def action(game_id: str, command: str) -> GameData:
             description="done: " + command + ". " + f.sentence(),
         ),
         cargo=random.choice(["medical", "food", "gas", "minerals", "nucleons"]),
-        crew=["panda"] + [random.choice(["slon1", "hamster", "python", "pingu", "unicorn", "elephant"]) for _ in range(5)],
+        crew=["panda"]
+        + [random.choice(["slon1", "hamster", "python", "pingu", "unicorn", "elephant"]) for _ in range(5)],
         commands=[f.word() for _ in range(4)],
         message=f.sentence(),
     )

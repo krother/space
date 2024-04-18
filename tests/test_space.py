@@ -25,29 +25,27 @@ class TestSpace:
 
     def test_pickup(self, space_gui):
         space_gui.move(3)
-        assert space_gui.game.cargo == "food"
+        assert space_gui.game.cargo == "bamboo"
 
     def test_warp(self, space_gui):
         space_gui.move(1)
-        assert space_gui.game.location.name == "Centauri"
+        assert space_gui.game.location.name == "B-Soup"
 
     def test_triple_warp(self, space_gui):
         travel(space_gui, [1, 1, 1])
-        assert space_gui.game.location.name == "New Haven"
+        assert space_gui.game.location.name == "Colabo"
 
-    def test_pickup_elephant(self, space_gui):
-        travel(space_gui, [1, 5, 3, 1, 4, 4, 2])
-        assert "slon1" in space_gui.game.crew
+    def test_pickup_python(self, space_gui):
+        travel(space_gui, [1, 1, 1, 4, 3, 2, 3, 4, 2])
+        assert "python" in space_gui.game.crew
 
     def test_aquacity_puzzle(self, space_gui):
-        travel(space_gui, [4, 2, 3, 4])
+        travel(space_gui, [3, 2, 3, 4])
         assert "pingu" not in space_gui.game.crew
-        assert space_gui.game.cargo == "medical"
+        assert space_gui.game.cargo == "bamboo"
         assert space_gui.game.location.active
-        travel(space_gui, [3, 9])
-        assert space_gui.game.cargo == ""
-        assert "pingu" in space_gui.game.crew
-        assert not space_gui.game.location.active
+        travel(space_gui, [3])
+        assert "dna" in space_gui.game.cargo
 
     def test_finish_game(self, space_gui):
         solution = [int(x) for x in COMPLETE_SOLUTION]

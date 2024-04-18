@@ -43,7 +43,7 @@ MOVES = {
 
 def start_new_game():
     galaxy = create_galaxy(os.path.join(BASE_PATH, f"galaxy_{LANG}.json"))
-    game = SpaceGame(location=galaxy[0])
+    game = SpaceGame(location=galaxy["Pandalor"])
     return game
 
 
@@ -62,11 +62,11 @@ class SpaceGameWindow(arcade.Window):
         self.game.draw()
         self.draw_location()
         self.draw_commands()
-        if self.message:
-            print_message(self.message)
+        if self.game.message:
+            print_message(self.game.message)
         arcade.finish_render()
-        if self.message:
-            arcade.pause(0.5)
+        if self.game.message:
+            arcade.pause(0.1)
 
     def update(self, delta_time):
         # pylint: disable=unused-argument
@@ -96,15 +96,11 @@ class SpaceGameWindow(arcade.Window):
 
     def move(self, key):
         """Processes a key pressed"""
-        if self.message:
-            self.message = ""  # delete displayed message
-            return
-
         for i, cmd in enumerate(self.commands, 1):
             if key == i:
                 if SLOW_MOTION:
                     time.sleep(3)
-                self.message = cmd.callback()
+                cmd.callback()
                 self.commands = self.game.get_commands()
 
     def on_key_press(self, symbol, modifiers):

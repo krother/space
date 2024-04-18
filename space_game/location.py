@@ -22,12 +22,16 @@ class ActionTrigger(BaseModel):
     not_activated_message: Optional[str] = None
     activate_clear_cargo: Optional[str] = None
     activate_gain_crew_member: Optional[str] = None
+    activate_gain_cargo: Optional[str] = None
+    activate_gain_connection: Optional[str] = None
+    deactivate: bool = True
 
 
 class Location(BaseModel):
     """
     Planets, spaceships and special places on the ground
     """
+    galaxy: dict
     name: str
     description: str
     image: str
@@ -45,11 +49,17 @@ class Location(BaseModel):
         self.connected_locs.append(location)
 
     def activate(self, game):
-        self.active = False
+        if self.trigger.deactivate:
+            self.active = False
         if self.trigger.activate_clear_cargo:
             game.cargo = ""
         if self.trigger.activate_gain_crew_member:
             game.crew.append(self.trigger.activate_gain_crew_member)
+        if self.trigger.activate_gain_cargo:
+            game.cargo = self.trigger.activate_gain_cargo
+        if self.trigger.activate_gain_connection:
+            self.connected_names.append(self.trigger.activate_gain_connection)
+            self.connected_locs.append(self.galaxy[self.trigger.activate_gain_connection])
 
     def contact(self, game):
         if self.active:
@@ -57,22 +67,25 @@ class Location(BaseModel):
                 self.trigger.require_crew_member is None or (self.trigger.require_crew_member in game.crew)
             ):
                 self.activate(game)
-                return self.trigger.activated_message
-            return self.trigger.not_activated_message
-        return ""
+                game.message = self.trigger.activated_message
+            else:
+                game.message = self.trigger.not_activated_message
 
 
 def create_galaxy(fn=DEFAULT_GALAXY):
     """Loads entire playing environment from a JSON file"""
     j = json.load(open(fn, encoding="utf-8"))
-    galaxy = [Location(**loc) for loc in j]
+    galaxy = {}
 
+    locs = [Location(galaxy=galaxy, **loc) for loc in j]
     # builds connection graph
-    for location in galaxy:
+    for location in locs:
+        location.galaxy = galaxy
+        galaxy[location.name] = location
         location.connected_locs = []
         for targetname in location.connected_names:
             target = None
-            for p in galaxy:
+            for p in locs:
                 if p.name == targetname:
                     target = p
             if target is None:

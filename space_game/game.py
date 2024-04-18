@@ -39,12 +39,13 @@ class SpaceGame(BaseModel):
     location: Optional[Location] = None
     cargo: str = ""
     crew: list[CrewMember] = ["panda"]
+    message: str = ""
 
     @property
     def solved(self) -> bool:
         """True when the game is finished"""
         location = self.location
-        return location.name == "Alien Space Station" and not location.active
+        return location.name == "Rainbow portal"
 
     def draw(self) -> None:
         """Draws the players inventory"""
@@ -59,10 +60,12 @@ class SpaceGame(BaseModel):
     def move_to(self, location: Location) -> None:
         """Callback function for move commands"""
         self.location = location
+        self.message = f"moved to {self.location.name}"
 
     def load_cargo(self, resource: str) -> None:
         """Callback function for picking up items"""
         self.cargo = resource
+        self.message = f"your ship loaded {self.cargo}"
 
     def get_commands(self) -> list[Command]:
         """

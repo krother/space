@@ -27,6 +27,7 @@ class Command(BaseModel):
     and a callback function that executes the command.
     Implements the Command pattern.
     """
+
     name: str
     callback: Callable
 
@@ -76,10 +77,7 @@ class SpaceGame(BaseModel):
         for location in self.location.connected_locs:
             transition = (self.location.type, location.type)
             prefix = TRANSITIONS.get(transition, "move to")
-            move = Command(
-                name=f"{prefix} {location.name}",
-                callback=partial(self.move_to, location)
-                )
+            move = Command(name=f"{prefix} {location.name}", callback=partial(self.move_to, location))
             commands.append(move)
         # load goods
         for resource in self.location.resources:
@@ -90,10 +88,7 @@ class SpaceGame(BaseModel):
             commands.append(load)
         # talk to people
         if self.location.active and self.location.trigger.action_name:
-            contact = Command(
-                name=self.location.trigger.action_name,
-                callback=partial(self.location.contact, self)
-            )
+            contact = Command(name=self.location.trigger.action_name, callback=partial(self.location.contact, self))
             commands.append(contact)
 
         return commands

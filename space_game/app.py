@@ -108,8 +108,7 @@ def action(game_id: str, command: str) -> GameData:
             description=f.sentence(),
         ),
         cargo=random.choice(["medical", "food", "gas", "minerals", "nucleons"]),
-        crew=["panda"]
-        + [random.choice(["hamster", "python", "pingu", "unicorn", "elephant"]) for _ in range(5)],
+        crew=["panda"] + [random.choice(["hamster", "python", "pingu", "unicorn", "elephant"]) for _ in range(5)],
         commands=[f.word() for _ in range(4)],
         message="done: " + command,
     )

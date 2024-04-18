@@ -15,6 +15,7 @@ class ActionTrigger(BaseModel):
     """
     Conditions and effects of puzzles at a location
     """
+
     action_name: Optional[str] = None
     require_good: Optional[str] = None
     require_crew_member: Optional[str] = None
@@ -31,6 +32,7 @@ class Location(BaseModel):
     """
     Planets, spaceships and special places on the ground
     """
+
     galaxy: dict
     name: str
     description: str

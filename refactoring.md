@@ -1,9 +1,9 @@
 
 # Refactoring
 
-## Disclaimer
+## Goal
 
-No real animals (pandas, pythons, unicorns etc.) were launched to space in the preparation of this tutorial.
+
 
 ## Prerequisites
 
@@ -46,6 +46,16 @@ If you have used Python exclusively in Jupyter or online editors until now, it m
 - isolate persistence layer
 11. Q & A
 
+
+    review the code
+    write a minimal test
+    add type annotations
+    extract core data structures
+    separate easily cleanable parts from very bad parts
+    remove excess dependencies
+    be very transparent about which features of the code you trust
+
+
 ## INTIME:
 - create module `boundary.py`
 - create data exchange classes GameData, LocationData
@@ -77,15 +87,45 @@ def execute_command(game_id: str, command: str) -> GameData:
 tODO: move message to game
 TODO: fix test containing slon
 
-## Extras:
+## Extra Challenge 1: Parallel games
 
-Make it possible to manage 2+ games in parallel:
+One thing the new interface should make possible is running two or more games in parallel.
+This was not possible in the original GUI (and did not make much sense either).
 
-import uuid
-str(uuid.uuid1())
+First, write a test that checks whether two games are different.
+
+    game1 = start_game()
+    game2 = start_game()
+    game1 = execute_command(game1.game_id, game1.commands[0])
+    game2 = execute_command(game2.game_id, game2.commands[0])
+    assert game1.location.name1 == game2.location.name
+
+The test should fail, if you assigned the same default id to all games.
+To make the test pass, you need somthing like:
+
+    import uuid
+ 
+    game_id = str(uuid.uuid1())
+
+## Extra Challenge 2: Persistence Layer
 
 store them in a 
 
-write a test that checks whether 2 games are different.
+https://www.cosmicpython.com/book/chapter_02_repository.html
+
 
 !! Tempting to add persistence layer (DB or similar) right away. This is a separate feature
+
+
+## Disclaimer
+
+No real animals (pandas, pythons, unicorns etc.) were launched to space in the preparation of this tutorial.
+
+## License
+
+Distributed under the conditions of the MIT License. See LICENSE file.
+
+With contributions by Kristian Rother, Tim Weber, Veit Schiele and Frank Hofmann.
+
+Some artwork has been adopted from the Naev game. See `images/ARTWORK_LICENSE` for details.
+The rest of the artwork was generated with [beta.dreamstudio.ai](https://beta.dreamstudio.ai/).

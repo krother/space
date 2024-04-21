@@ -136,7 +136,7 @@ Add the following to a new file `tests/test_facade.py`:
         """command modifies data"""
         game = start_game()
         command = game.commands[0]
-        game_new = execute_command(game.game_id)
+        game_new = execute_command(game.game_id, command)
         assert game_new.game_id == game.game_id
         assert game_new != game
 
@@ -235,7 +235,15 @@ Now **all** the tests you have should pass.
 
 If they work, you are done with the hard part. Congratulations!
 
-## 15. Connect the Web Interface
+## 15. Fix the game
+
+You may notice that the gui does not run anymore.
+
+There is a method in the `game` module that should be part of the graphical interface.
+
+The method `game.SpaceGame.draw()` needs to be moved to the `gui` module as a `draw_game()` method.
+
+## 16. Connect the Web Interface
 
 Let's turn for the pleasant part: The web app.
 
@@ -251,7 +259,7 @@ All we need to do is to pass through the API call to the Facade (and remove the 
     def action(game_id: str, command: str) -> GameData:
 
 
-## 16. Cleanup
+## 17. Cleanup
 
 A larger refactoring usually leaves a few piles of rubble.
 You might do the following:

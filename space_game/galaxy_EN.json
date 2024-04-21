@@ -21,7 +21,7 @@
     "type": "surface",
     "connected_names": ["Django Prime"],
     "trigger": {
-      "action_name": "talk to the doctor",
+      "action_name": "talk to doctor Slonik",
       "not_activated_message": "Slonik: I'm hungry. Do you have any snacks with you?",
       "require_good": "peanuts",
       "activated_message": "Slonik: You have any more of these? I'm coming with you!",
@@ -51,7 +51,7 @@
     }
 },
 {"name": "Kubernety",
-  "description": "An ocean planet rich in aquatic life forms.",
+  "description": "An ocean planet inhabited by powerful whales.",
   "image": "kubernety",
   "connected_names": ["Turing", "B-Soup", "Octygon", "Aqua City"],
   "trigger": {}
@@ -59,7 +59,7 @@
 {
     "name": "Aqua City",
     "type": "surface",
-    "description": "a submarine city inhabited by sentient whales.",
+    "description": "a harbor city with impressive docks.",
     "image": "aqua_city",
     "connected_names": ["Kubernety"],
     "resources": ["food"],
@@ -176,7 +176,7 @@
   }
 },
 {"name": "Flaming Fox Temple",
-  "description": "",
+  "description": "The archives of the known universe are kept in this place.",
   "image": "flaming_fox_temple",
   "type": "surface",
   "resources": ["lava"],
@@ -199,7 +199,7 @@
   "trigger": {}
 },
 {"name": "Gitla Beta",
-  "description": ".",
+  "description": "The people of this planet are known for never misplacing anything.",
   "image": "gitla_beta",
   "connected_names": ["X2475", "Cloning Laboratory"],
   "location": "AncientVault",
@@ -207,7 +207,7 @@
 },
 {
     "name": "Cloning Laboratory",
-    "description": "An alien research facility where all kinds of things get cloned.",
+    "description": "A research facility where all kinds of things get cloned.",
     "image": "cloning_lab",
     "type": "ship",
     "connected_names": ["Gitla Beta"],

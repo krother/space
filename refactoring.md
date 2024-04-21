@@ -10,7 +10,7 @@ In this tutorial, you will add a web interface to the game.
 In this tutorial, you will perform a larger refactoring.
 Let's disambiguate first. What is a larger refactoring?
 
-In a simple refactoring like in LINK, you would follow the workflow:
+In a simple refactoring like in [github.com/krother/refactoring_tutorial](https://github.com/krother/refactoring_tutorial), you would follow the workflow:
 
 1. run tests
 2. modify the code
@@ -39,6 +39,7 @@ If you have used Python exclusively in Jupyter or online editors until now, it m
 Create a virtual enironment using your preferred tooling. E.g. with `conda`:
 
     conda create -n space python=3.11
+    conda activate space
 
 Then install the dependencies with:
 
@@ -79,7 +80,7 @@ Take some time to read the code in `space_game/` so that you know what parts are
 
 ## 6. Advanced Refactoring Workflow
 
-Here is a workflow for more complex refactoring:
+Here is a workflow for more complex refactorings:
 
 1. run tests
 2. define a new interface
@@ -98,7 +99,7 @@ Here, we have the following problem:
 
     Both the web app and the GUI need to connect to the game.
     
-    The game and GUI are currently strongly intertwined.
+    The game and GUI are currently strongly coupled.
     Doing that for the GUI would duplicate code.
     At least, the interface is not clean.
 

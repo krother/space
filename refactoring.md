@@ -49,6 +49,8 @@ Also install the game with:
 
     python -m pip install -e .
 
+Also check out the [installation instructions of the arcade library](https://api.arcade.academy/en/latest/install/linux.html).
+
 ## 2. Run tests
 
 Run the tests:
@@ -65,7 +67,7 @@ You can run and play the game with a GUI interface:
 
 There is a prototype web interface that you can launch with:
 
-    uvicorn space_game.app::app
+    uvicorn --reload space_game.app:app
 
 Visit your browser at [http://localhost:8000](http://localhost:8000)
 
@@ -73,9 +75,7 @@ Visit your browser at [http://localhost:8000](http://localhost:8000)
 
 Take some time to read the code in `space_game/` so that you know what parts are there. The dependency graph may help you to get an overview:
 
-GRAPH
-
-CLASS DIAGRAM
+![dependency graph before](dependency_graph_before.png)
 
 ## 6. Advanced Refactoring Workflow
 
@@ -102,11 +102,10 @@ Here, we have the following problem:
     Doing that for the GUI would duplicate code.
     At least, the interface is not clean.
 
-The Facade Pattern addresses this situation. 
-LINK FACADE
+The [Facade Pattern](https://sourcemaking.com/design_patterns/facade) addresses this situation. 
 We want to introduce one common interface that both web app and GUI can use. 
 
-DIAGRAM: Facade
+![dependency graph with Facade](dependency_graph_after.png)
 
 To implement the Facade pattern for the game, we need two convenience functions:
 
@@ -270,18 +269,21 @@ Still the core workflow outlined above applies. You may want to be clear about w
 
 Nevertheless, it may happen that your refactoring runs into a dead end. Throwing away the code and starting over again is a viable strategy. Version control is your friend.
 
-## Extra Challenge 1: Parallel games
+## Extra Challenge 1: Multiple games
 
 One thing the new interface should make possible is running two or more games in parallel.
 This was not possible in the original GUI (and did not make much sense either).
 
 First, write a test that checks whether two games are different.
 
-    game1 = start_game()
-    game2 = start_game()
-    game1 = execute_command(game1.game_id, game1.commands[0])
-    game2 = execute_command(game2.game_id, game2.commands[0])
-    assert game1.location.name1 == game2.location.name
+    def test_multiple_games():
+        game1 = start_game()
+        game2 = start_game()
+        assert game1.game_id != game2.game_id
+
+        game1 = execute_command(game1.game_id, game1.commands[0])
+        game2 = execute_command(game2.game_id, game2.commands[0])
+        assert game1.location.name1 == game2.location.name
 
 The test should fail, if you assigned the same default id to all games.
 To make the test pass, you need somthing like:
@@ -292,11 +294,14 @@ To make the test pass, you need somthing like:
 
 ## Extra Challenge 2: Persistence Layer
 
-Tempting to add persistence layer (DB or similar) right away. This is a separate feature
+It is tempting to add a persistence layer (a database or similar) right away while building the Facade.
+The persistence layer is a separate refactoring.
+Doing two things at a time would complicate matters tremendously.
 
-store them in a database 
+However, it is a good idea.
+An easy way to store the games in a database is [SQLModel](https://sqlmodel.tiangolo.com/). You can reuse all the 
 
-https://www.cosmicpython.com/book/chapter_02_repository.html
+It is a good idea to move the code for the database into a separate module. The [Repository Pattern](https://www.cosmicpython.com/book/chapter_02_repository.html) is a good way to organize this type of functionality.
 
 
 ## Disclaimer
@@ -309,5 +314,5 @@ Distributed under the conditions of the MIT License. See LICENSE file.
 
 With contributions by Kristian Rother, Tim Weber, Veit Schiele and Frank Hofmann.
 
-Some artwork has been adopted from the Naev game. See `images/ARTWORK_LICENSE` for details.
+Some artwork has been adopted from the Naev game. See `static/images/ARTWORK_LICENSE` for details.
 The rest of the artwork was generated with [beta.dreamstudio.ai](https://beta.dreamstudio.ai/).

@@ -1,7 +1,6 @@
 """
-Space Traveller - main app
+Space Traveller - graphical user interface
 """
-
 
 import os
 import time
@@ -54,7 +53,6 @@ class SpaceGameWindow(arcade.Window):
             arcade.set_background_color(arcade.color.BLACK)
         self.game = start_new_game()
         self.commands = self.game.get_commands()
-        self.message = ""
         self._keylog = ""
 
     def on_draw(self):

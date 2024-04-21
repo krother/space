@@ -3,3 +3,4 @@ pytest
 pytest-cov
 pytest-flake8
 faker
+pre-commit==3.7.0

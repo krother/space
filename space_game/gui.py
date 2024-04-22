@@ -2,17 +2,14 @@
 Space Traveller - graphical user interface
 """
 
-import os
 import time
 
 import arcade
 from arcade import key as akeys
 from arcade.key import ESCAPE
 
+from space_game.facade import start_game, execute_command, GameData
 from space_game.lang import LANG, TEXT
-from space_game.location import create_galaxy
-from space_game.game import SpaceGame
-from space_game.config import BASE_PATH
 from space_game.views import IMAGES, FONT_SETTINGS, SLOW_MOTION, print_message
 
 
@@ -40,24 +37,18 @@ MOVES = {
 }
 
 
-def start_new_game():
-    galaxy = create_galaxy(os.path.join(BASE_PATH, f"galaxy_{LANG}.json"))
-    game = SpaceGame(location=galaxy["Pandalor"])
-    return game
-
-
 class SpaceGameWindow(arcade.Window):
     def __init__(self, no_window=False):
         if not no_window:
             super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)
             arcade.set_background_color(arcade.color.BLACK)
-        self.game = start_new_game()
-        self.commands = self.game.get_commands()
+        self.game = start_game()  # old: start_new_game()
+        # self.commands = self.game.get_commands() # removed
         self._keylog = ""
 
     def on_draw(self):
         arcade.start_render()
-        self.game.draw()
+        self.draw_game()  #self.game.draw()
         self.draw_location()
         self.draw_commands()
         if self.game.message:
@@ -72,10 +63,21 @@ class SpaceGameWindow(arcade.Window):
             arcade.pause(5.0)
             arcade.window_commands.close_window()
 
+    # moved here from game.py
+    def draw_game(self) -> None:
+        """Draws the players inventory"""
+        arcade.draw_text(text=TEXT['cargo bay'], start_x=800, start_y=600, **FONT_SETTINGS)
+        arcade.draw_text(text=TEXT['crew'], start_x=800, start_y=400, **FONT_SETTINGS)
+
+        if self.game.cargo:
+            IMAGES[self.game.cargo].draw_sized(870, 500, 128, 128)
+        for i, c in enumerate(self.game.crew):
+            IMAGES[c].draw_sized(870 + i * 120, 320, 96, 96)
+
     def draw_commands(self):
         commands = TEXT["Available commands"] + ":\n\n"
-        for i, cmd in enumerate(self.commands, 1):
-            commands += f"[{i}] {cmd.name}\n"
+        for i, cmd in enumerate(self.game.commands, 1):  # added game.
+            commands += f"[{i}] {cmd}\n"   # old: cmd.name
         commands += "\n[Esc] Exit"
         arcade.draw_text(
             text=commands,
@@ -95,12 +97,13 @@ class SpaceGameWindow(arcade.Window):
 
     def move(self, key):
         """Processes a key pressed"""
-        for i, cmd in enumerate(self.commands, 1):
+        for i, cmd in enumerate(self.game.commands, 1):  # old: self.commands
             if key == i:
                 if SLOW_MOTION:
                     time.sleep(3)
-                cmd.callback()
-                self.commands = self.game.get_commands()
+                # old: cmd.callback()
+                # old: self.commands = self.game.get_commands()
+                self.game = execute_command(self.game.game_id, cmd)
 
     def on_key_press(self, symbol, modifiers):
         """Handle player movement"""

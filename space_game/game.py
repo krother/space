@@ -48,15 +48,7 @@ class SpaceGame(BaseModel):
         location = self.location
         return location.name == "Rainbow portal"
 
-    def draw(self) -> None:
-        """Draws the players inventory"""
-        arcade.draw_text(text=TEXT['cargo bay'], start_x=800, start_y=600, **FONT_SETTINGS)
-        arcade.draw_text(text=TEXT['crew'], start_x=800, start_y=400, **FONT_SETTINGS)
-
-        if self.cargo:
-            IMAGES[self.cargo].draw_sized(870, 500, 128, 128)
-        for i, c in enumerate(self.crew):
-            IMAGES[c].draw_sized(870 + i * 120, 320, 96, 96)
+    # moved: def draw(self) -> None: to gui.py
 
     def move_to(self, location: Location) -> None:
         """Callback function for move commands"""

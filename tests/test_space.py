@@ -56,7 +56,8 @@ class TestSpace:
         travel(space_gui, [3, 2, 3, 4])
         assert "pingu" not in space_gui.game.crew
         assert space_gui.game.cargo == "bamboo"
-        assert space_gui.game.location.active
+        # next line exposed an internal attribute that should not be tested
+        # assert space_gui.game.location.active
         travel(space_gui, [3])
         assert "dna" in space_gui.game.cargo
 

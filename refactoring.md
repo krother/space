@@ -10,7 +10,7 @@ In this tutorial, you will add a web interface to the game.
 In this tutorial, you will perform a larger refactoring.
 Let's disambiguate first. What is a larger refactoring?
 
-In a simple refactoring like in LINK, you would follow the workflow:
+In a simple refactoring like in [github.com/krother/refactoring_tutorial](https://github.com/krother/refactoring_tutorial), you would follow the workflow:
 
 1. run tests
 2. modify the code
@@ -39,6 +39,7 @@ If you have used Python exclusively in Jupyter or online editors until now, it m
 Create a virtual enironment using your preferred tooling. E.g. with `conda`:
 
     conda create -n space python=3.11
+    conda activate space
 
 Then install the dependencies with:
 
@@ -48,6 +49,8 @@ Then install the dependencies with:
 Also install the game with:
 
     python -m pip install -e .
+
+Also check out the [installation instructions of the arcade library](https://api.arcade.academy/en/latest/install/linux.html).
 
 ## 2. Run tests
 
@@ -65,7 +68,7 @@ You can run and play the game with a GUI interface:
 
 There is a prototype web interface that you can launch with:
 
-    uvicorn space_game.app::app
+    uvicorn --reload space_game.app:app
 
 Visit your browser at [http://localhost:8000](http://localhost:8000)
 
@@ -73,13 +76,11 @@ Visit your browser at [http://localhost:8000](http://localhost:8000)
 
 Take some time to read the code in `space_game/` so that you know what parts are there. The dependency graph may help you to get an overview:
 
-GRAPH
-
-CLASS DIAGRAM
+![dependency graph before](dependency_graph_before.png)
 
 ## 6. Advanced Refactoring Workflow
 
-Here is a workflow for more complex refactoring:
+Here is a workflow for more complex refactorings:
 
 1. run tests
 2. define a new interface
@@ -98,15 +99,14 @@ Here, we have the following problem:
 
     Both the web app and the GUI need to connect to the game.
     
-    The game and GUI are currently strongly intertwined.
+    The game and GUI are currently strongly coupled.
     Doing that for the GUI would duplicate code.
     At least, the interface is not clean.
 
-The Facade Pattern addresses this situation. 
-LINK FACADE
+The [Facade Pattern](https://sourcemaking.com/design_patterns/facade) addresses this situation. 
 We want to introduce one common interface that both web app and GUI can use. 
 
-DIAGRAM: Facade
+![dependency graph with Facade](dependency_graph_after.png)
 
 To implement the Facade pattern for the game, we need two convenience functions:
 
@@ -136,7 +136,7 @@ Add the following to a new file `tests/test_facade.py`:
         """command modifies data"""
         game = start_game()
         command = game.commands[0]
-        game_new = execute_command(game.game_id)
+        game_new = execute_command(game.game_id, command)
         assert game_new.game_id == game.game_id
         assert game_new != game
 
@@ -235,7 +235,15 @@ Now **all** the tests you have should pass.
 
 If they work, you are done with the hard part. Congratulations!
 
-## 15. Connect the Web Interface
+## 15. Fix the game
+
+You may notice that the gui does not run anymore.
+
+There is a method in the `game` module that should be part of the graphical interface.
+
+The method `game.SpaceGame.draw()` needs to be moved to the `gui` module as a `draw_game()` method.
+
+## 16. Connect the Web Interface
 
 Let's turn for the pleasant part: The web app.
 
@@ -251,7 +259,7 @@ All we need to do is to pass through the API call to the Facade (and remove the 
     def action(game_id: str, command: str) -> GameData:
 
 
-## 16. Cleanup
+## 17. Cleanup
 
 A larger refactoring usually leaves a few piles of rubble.
 You might do the following:
@@ -270,18 +278,21 @@ Still the core workflow outlined above applies. You may want to be clear about w
 
 Nevertheless, it may happen that your refactoring runs into a dead end. Throwing away the code and starting over again is a viable strategy. Version control is your friend.
 
-## Extra Challenge 1: Parallel games
+## Extra Challenge 1: Multiple games
 
 One thing the new interface should make possible is running two or more games in parallel.
 This was not possible in the original GUI (and did not make much sense either).
 
 First, write a test that checks whether two games are different.
 
-    game1 = start_game()
-    game2 = start_game()
-    game1 = execute_command(game1.game_id, game1.commands[0])
-    game2 = execute_command(game2.game_id, game2.commands[0])
-    assert game1.location.name1 == game2.location.name
+    def test_multiple_games():
+        game1 = start_game()
+        game2 = start_game()
+        assert game1.game_id != game2.game_id
+
+        game1 = execute_command(game1.game_id, game1.commands[0])
+        game2 = execute_command(game2.game_id, game2.commands[0])
+        assert game1.location.name1 == game2.location.name
 
 The test should fail, if you assigned the same default id to all games.
 To make the test pass, you need somthing like:
@@ -292,11 +303,14 @@ To make the test pass, you need somthing like:
 
 ## Extra Challenge 2: Persistence Layer
 
-Tempting to add persistence layer (DB or similar) right away. This is a separate feature
+It is tempting to add a persistence layer (a database or similar) right away while building the Facade.
+The persistence layer is a separate refactoring.
+Doing two things at a time would complicate matters tremendously.
 
-store them in a database 
+However, it is a good idea.
+An easy way to store the games in a database is [SQLModel](https://sqlmodel.tiangolo.com/). You can reuse all the 
 
-https://www.cosmicpython.com/book/chapter_02_repository.html
+It is a good idea to move the code for the database into a separate module. The [Repository Pattern](https://www.cosmicpython.com/book/chapter_02_repository.html) is a good way to organize this type of functionality.
 
 
 ## Disclaimer
@@ -309,5 +323,5 @@ Distributed under the conditions of the MIT License. See LICENSE file.
 
 With contributions by Kristian Rother, Tim Weber, Veit Schiele and Frank Hofmann.
 
-Some artwork has been adopted from the Naev game. See `images/ARTWORK_LICENSE` for details.
+Some artwork has been adopted from the Naev game. See `static/images/ARTWORK_LICENSE` for details.
 The rest of the artwork was generated with [beta.dreamstudio.ai](https://beta.dreamstudio.ai/).

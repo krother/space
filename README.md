@@ -1,30 +1,36 @@
-# Space
+# Pandas go to Space
 
-[![Build Status](https://travis-ci.org/krother/space.svg?branch=master)](https://travis-ci.org/krother/space)
-[![codecov](https://codecov.io/gh/krother/space/branch/master/graph/badge.svg)](https://codecov.io/gh/krother/space)
+![title](static/images/title.jpg)
 
-contact: krother@academis.eu
+This is a small space traveling adventure. Warp between planets, recruit characters, trade goods, solve puzzles.
 
-This is a small space traveling adventure. Warp between planets, trade goods, solve puzzles.
+* see the [Refactoring Tutorial](refactoring.md)
 
-![screenshot](screenshot.png)
 
 ## Installation
 
+Install dependencies with:
+
     pip install -r requirements.txt
+
+Install the necessary modules with:
+
+    pip install -e .
 
 For development also do:
 
     pip install -r requirements_dev.txt
 
+You may need to checkout the [installation instructions of the arcade library](https://api.arcade.academy/en/latest/install/linux.html)
+
 ## Usage
 
+![screenshot](screenshot.png)
+
+The game is playable through a primitive GUI with keyboard entry:
+
     python space_game
 
-To activate the German translation:
-
-    export LANG=DE
-    python space_game
 
 ## Web Front-End
 
@@ -35,6 +41,8 @@ There is a prototype web front-end:
 ## License
 
 (c) 2024 Kristian Rother.
+
+contact: `kristian.rother@posteo.de`
 
 Tim Weber, Veit Schiele and Frank Hofmann contributed to the front-end code.
 

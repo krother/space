@@ -2,10 +2,9 @@ import json
 import os
 from typing import Optional
 
-import arcade
 from pydantic import BaseModel
 
-from space_game.views import BASE_PATH, FONT_SETTINGS, IMAGES
+from space_game.views import BASE_PATH
 
 
 DEFAULT_GALAXY = os.path.join(BASE_PATH, "galaxy_EN.json")

@@ -57,7 +57,7 @@ class SpaceGameWindow(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
-        self.game.draw()
+        self.draw_game()
         self.draw_location()
         self.draw_commands()
         if self.game.message:
@@ -85,6 +85,17 @@ class SpaceGameWindow(arcade.Window):
             multiline=True,
             **FONT_SETTINGS,
         )
+
+    def draw_game(self) -> None:
+        """Draws the players inventory"""
+        arcade.draw_text(text=TEXT['cargo bay'], start_x=800, start_y=600, **FONT_SETTINGS)
+        arcade.draw_text(text=TEXT['crew'], start_x=800, start_y=400, **FONT_SETTINGS)
+
+        if self.game.cargo:
+            IMAGES[self.game.cargo].draw_sized(870, 500, 128, 128)
+        for i, c in enumerate(self.game.crew):
+            IMAGES[c].draw_sized(870 + i * 120, 320, 96, 96)
+
 
     def draw_location(self) -> None:
         IMAGES[self.game.location.image].draw_sized(150, 850, 200, 200)

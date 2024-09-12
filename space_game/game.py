@@ -1,11 +1,9 @@
 from functools import partial
 from typing import Callable, Optional, Literal
 
-import arcade
 from pydantic import BaseModel
 
 from space_game.lang import TEXT
-from space_game.views import FONT_SETTINGS, IMAGES
 from space_game.location import Location
 
 
@@ -27,7 +25,6 @@ class Command(BaseModel):
     and a callback function that executes the command.
     Implements the Command pattern.
     """
-
     name: str
     callback: Callable
 
@@ -36,7 +33,6 @@ class SpaceGame(BaseModel):
     """
     Manages the complete game mechanics
     """
-
     location: Optional[Location] = None
     cargo: str = ""
     crew: list[CrewMember] = ["panda"]
@@ -47,16 +43,6 @@ class SpaceGame(BaseModel):
         """True when the game is finished"""
         location = self.location
         return location.name == "Rainbow portal"
-
-    def draw(self) -> None:
-        """Draws the players inventory"""
-        arcade.draw_text(text=TEXT['cargo bay'], start_x=800, start_y=600, **FONT_SETTINGS)
-        arcade.draw_text(text=TEXT['crew'], start_x=800, start_y=400, **FONT_SETTINGS)
-
-        if self.cargo:
-            IMAGES[self.cargo].draw_sized(870, 500, 128, 128)
-        for i, c in enumerate(self.crew):
-            IMAGES[c].draw_sized(870 + i * 120, 320, 96, 96)
 
     def move_to(self, location: Location) -> None:
         """Callback function for move commands"""

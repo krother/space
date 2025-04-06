@@ -3,6 +3,7 @@ Unit Tests for the GUI.
 
 These tests hijack the keyboard and enter keys.
 """
+
 import os
 
 import pytest
@@ -10,7 +11,7 @@ import pytest
 from space_game import views
 from space_game.gui import SpaceGameWindow
 
-TEST_DATA_PATH = os.path.split(__file__)[0]
+TEST_DATA_PATH = os.path.dirname(os.path.abspath(__file__))
 SOLUTION_FILE = os.path.join(TEST_DATA_PATH, "solution.txt")
 COMPLETE_SOLUTION = open(SOLUTION_FILE, encoding="utf-8").read().strip()
 

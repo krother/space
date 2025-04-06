@@ -1,15 +1,16 @@
-from typing import Callable
+"""
+Dynamic switch between JSON API and Jinja HTML templates
 
-from fastapi.responses import JSONResponse
+By default, FastAPI's JSONResponse will render the response
+and then forget the original data that has been passed in.
+We subclass the default behavior to keep the original Python object,
+so that we can later pass it into Jinja.
+"""
+from typing import Any, Callable
+
 from fastapi import Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from jinja2 import Environment, FileSystemLoader, Template, TemplateNotFound
-
-from typing import Any
-
-# By default, FastAPI's JSONResponse will render the response and then forget
-# the original data that has been passed in. We subclass the default behavior to
-# keep the original Python object, so that we can later pass it into Jinja.
 
 
 class PreserveJSONResponse(JSONResponse):
@@ -26,8 +27,8 @@ class PreserveJSONResponse(JSONResponse):
         # BaseHTTPMiddleware (and thus FastAPI's @app.middleware) will convert
         # responses into its own subclass, our middleware further down below
         # will no longer be able to access our `original_data` property.
-        # Therefore, we need another place to store it in, and the ASGI scope is
-        # a really good candidate ;)
+        # Therefore, we need another place to store it in,
+        # and the ASGI scope is a really good candidate ;)
         scope["preserved_json_data"] = self.original_data
         return super().__call__(scope, receive, send)
 
@@ -59,8 +60,8 @@ async def json_to_html(request: Request, call_next):
     # Compute the response.
     response = await call_next(request)
 
-    # Check whether the request is sent by HTMX. It always sets this header, see
-    # <https://htmx.org/docs/#request-headers>.
+    # Check whether the request is sent by HTMX. It always sets this header,
+    # see <https://htmx.org/docs/#request-headers>.
     is_hx = request.headers.get("HX-Request", "") == "true"
 
     # Check whether the client requested HTML. This is just a proof of concept,

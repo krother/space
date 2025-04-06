@@ -1,5 +1,6 @@
 from space_game.config import LANG
 
+
 DE = {
     "cargo bay": "Frachtraum",
     "artifacts": "Artefakte",

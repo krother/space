@@ -9,11 +9,11 @@ import arcade
 from arcade import key as akeys
 from arcade.key import ESCAPE
 
-from space_game.lang import LANG, TEXT
-from space_game.location import create_galaxy
-from space_game.game import SpaceGame
 from space_game.config import BASE_PATH
-from space_game.views import IMAGES, FONT_SETTINGS, SLOW_MOTION, print_message
+from space_game.galaxy import GalaxyGraph
+from space_game.game import SpaceGame
+from space_game.lang import LANG, TEXT
+from space_game.views import FONT_SETTINGS, IMAGES, SLOW_MOTION, print_message
 
 
 SIZEX, SIZEY = (1500, 1000)
@@ -41,7 +41,9 @@ MOVES = {
 
 
 def start_new_game():
-    galaxy = create_galaxy(os.path.join(BASE_PATH, f"galaxy_{LANG}.json"))
+    galaxy = GalaxyGraph.create_galaxy(
+        os.path.join(BASE_PATH, f"galaxy_{LANG}.json")
+    )
     game = SpaceGame(location=galaxy["Pandalor"])
     return game
 
@@ -52,7 +54,7 @@ class SpaceGameWindow(arcade.Window):
             super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)
             arcade.set_background_color(arcade.color.BLACK)
         self.game = start_new_game()
-        self.commands = self.game.get_commands()
+        self.commands = list(self.game.get_commands())
         self._keylog = ""
 
     def on_draw(self):
@@ -88,20 +90,40 @@ class SpaceGameWindow(arcade.Window):
 
     def draw_game(self) -> None:
         """Draws the players inventory"""
-        arcade.draw_text(text=TEXT['cargo bay'], start_x=800, start_y=600, **FONT_SETTINGS)
-        arcade.draw_text(text=TEXT['crew'], start_x=800, start_y=400, **FONT_SETTINGS)
+        arcade.draw_text(
+            text=TEXT["cargo bay"],
+            start_x=800,
+            start_y=600,
+            **FONT_SETTINGS,  # type: ignore
+        )
+        arcade.draw_text(
+            text=TEXT["crew"],
+            start_x=800,
+            start_y=400,
+            **FONT_SETTINGS,  # type: ignore
+        )
 
         if self.game.cargo:
             IMAGES[self.game.cargo].draw_sized(870, 500, 128, 128)
         for i, c in enumerate(self.game.crew):
             IMAGES[c].draw_sized(870 + i * 120, 320, 96, 96)
 
-
     def draw_location(self) -> None:
         IMAGES[self.game.location.image].draw_sized(150, 850, 200, 200)
-        arcade.draw_text(text=self.game.location.name, start_x=300, start_y=950, bold=True, **FONT_SETTINGS)
         arcade.draw_text(
-            text=self.game.location.description, start_x=300, start_y=900, multiline=True, width=600, **FONT_SETTINGS
+            text=self.game.location.name,
+            start_x=300,
+            start_y=950,
+            bold=True,
+            **FONT_SETTINGS,  # type: ignore
+        )
+        arcade.draw_text(
+            text=self.game.location.description,
+            start_x=300,
+            start_y=900,
+            multiline=True,
+            width=600,
+            **FONT_SETTINGS,  # type: ignore
         )
 
     def move(self, key):
@@ -110,8 +132,8 @@ class SpaceGameWindow(arcade.Window):
             if key == i:
                 if SLOW_MOTION:
                     time.sleep(3)
-                cmd.callback()
-                self.commands = self.game.get_commands()
+                cmd.execute()
+                self.commands = list(self.game.get_commands())
 
     def on_key_press(self, symbol, modifiers):
         """Handle player movement"""

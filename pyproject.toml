@@ -60,15 +60,14 @@ packages = ["space_game"]
 [tool.pytest.ini_options]
 addopts = "-v --tb=short"
 testpaths = ["space_game", "tests"]
-flake8-max-line-length = 120
+flake8-max-line-length = 79
 flake8-ignore = ["E203", "E266", "E501", "W503"]
 flake8-max-complexity = 18
 
 [tool.black]
-line-length = 120
+line-length = 79
 skip-string-normalization = true
-skip-numeric-underscore-normalization = true
-exclude = "/(\\.git|build|dist)/"
+exclude = "/(\\.git|build|dist|.venv)/"
 
 [tool.isort]
 src_paths = ["space_game", "tests"]
@@ -81,4 +80,3 @@ omit = ["*/__init__.py"]
 
 [tool.coverage.report]
 exclude_lines = ["raise NotImplementedError"]
-

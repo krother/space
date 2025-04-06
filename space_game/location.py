@@ -1,13 +1,6 @@
-import json
-import os
 from typing import Optional
 
 from pydantic import BaseModel
-
-from space_game.views import BASE_PATH
-
-
-DEFAULT_GALAXY = os.path.join(BASE_PATH, "galaxy_EN.json")
 
 
 class ActionTrigger(BaseModel):
@@ -43,8 +36,17 @@ class Location(BaseModel):
     active: bool = True
     trigger: ActionTrigger
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # FIXME: should galaxy be modified here?
+        self.galaxy = kwargs["galaxy"]  # dirty hack because pydantic copies
+        self.galaxy[self.name] = self
+
     def __repr__(self) -> str:
-        return f"<{self.name}: {self.type}; provides {self.resources}; {self.active}>"
+        return (
+            f"<{self.name}: {self.type};"
+            f"provides {self.resources}; {self.active}>"
+        )
 
     def add_connection(self, location) -> None:
         self.connected_locs.append(location)
@@ -60,37 +62,20 @@ class Location(BaseModel):
             game.cargo = self.trigger.activate_gain_cargo
         if self.trigger.activate_gain_connection:
             self.connected_names.append(self.trigger.activate_gain_connection)
-            self.connected_locs.append(self.galaxy[self.trigger.activate_gain_connection])
+            self.connected_locs.append(
+                self.galaxy[self.trigger.activate_gain_connection]
+            )
 
     def contact(self, game):
         if self.active:
-            if (self.trigger.require_good is None or (game.cargo == self.trigger.require_good)) and (
-                self.trigger.require_crew_member is None or (self.trigger.require_crew_member in game.crew)
+            if (
+                self.trigger.require_good is None
+                or (game.cargo == self.trigger.require_good)
+            ) and (
+                self.trigger.require_crew_member is None
+                or (self.trigger.require_crew_member in game.crew)
             ):
                 self.activate(game)
                 game.message = self.trigger.activated_message
             else:
                 game.message = self.trigger.not_activated_message
-
-
-def create_galaxy(fn=DEFAULT_GALAXY):
-    """Loads entire playing environment from a JSON file"""
-    j = json.load(open(fn, encoding="utf-8"))
-    galaxy = {}
-
-    locs = [Location(galaxy=galaxy, **loc) for loc in j]
-    # builds connection graph
-    for location in locs:
-        location.galaxy = galaxy
-        galaxy[location.name] = location
-        location.connected_locs = []
-        for targetname in location.connected_names:
-            target = None
-            for p in locs:
-                if p.name == targetname:
-                    target = p
-            if target is None:
-                raise ValueError(f"connection not found when building galaxy for '{targetname}'")
-            location.add_connection(target)
-
-    return galaxy

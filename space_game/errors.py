@@ -1,0 +1,2 @@
+class GalaxyConstructionError(Exception):
+    pass

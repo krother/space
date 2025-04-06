@@ -1,13 +1,14 @@
-from typing import Any, Optional
-
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
-from space_game.middleware import PreserveJSONResponse, json_to_html
+import random
+from typing import Optional
 
 # libs for testing
 from faker import Faker
-import random
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+
+from space_game.middleware import PreserveJSONResponse, json_to_html
+
 
 app = FastAPI(default_response_class=PreserveJSONResponse)
 
@@ -37,7 +38,11 @@ class GameData(BaseModel):
 def new_game() -> GameData:
     return GameData(
         game_id="1234",
-        location=LocationData(name="Pandalor", image="pandalor", description="a thick bamboo forest"),
+        location=LocationData(
+            name="Pandalor",
+            image="pandalor",
+            description="a thick bamboo forest",
+        ),
         cargo="bamboo",
         commands=["one", "two", "three"],
     )
@@ -54,7 +59,13 @@ def action(game_id: str, command: str) -> GameData:
             description=f.sentence(),
         ),
         cargo=random.choice(["peanuts", "starmap", "bamboo", "dna"]),
-        crew=["panda"] + [random.choice(["hamster", "python", "pingu", "unicorn", "elephant"]) for _ in range(5)],
+        crew=["panda"]
+        + [
+            random.choice(
+                ["hamster", "python", "pingu", "unicorn", "elephant"]
+            )
+            for _ in range(5)
+        ],
         commands=[f.word() for _ in range(4)],
         message="done: " + command,
     )

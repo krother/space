@@ -1,4 +1,5 @@
 import os
+from typing import Any
 
 import arcade
 from arcade import load_texture
@@ -9,14 +10,14 @@ from space_game.config import BASE_PATH
 IMAGE_PATH = os.path.join(BASE_PATH, "../static/images")
 
 FONT_SETTINGS = {
-    'color': arcade.color.GREEN,
-    'font_size': 20,
-    'font_name': "GARA",
-    'anchor_y': "top",
+    "color": arcade.color.GREEN,
+    "font_size": 20,
+    "font_name": "GARA",
+    "anchor_y": "top",
 }
 
 
-def load_images(path, image_dict):
+def load_images(path, image_dict: dict[str, Any]):
     """adds the png file in <path> to <image_dict>"""
     for fn in os.listdir(path):
         if fn.endswith(".png"):
@@ -39,7 +40,7 @@ def print_message(msg):
 
 
 # read image files
-IMAGES = {}
+IMAGES: dict[str, Any] = {}
 load_images(os.path.join(IMAGE_PATH, "planets"), IMAGES)
 load_images(os.path.join(IMAGE_PATH, "goods"), IMAGES)
 load_images(os.path.join(IMAGE_PATH, "characters"), IMAGES)

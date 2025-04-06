@@ -7,7 +7,6 @@ class ActionTrigger(BaseModel):
     """
     Conditions and effects of puzzles at a location
     """
-
     action_name: Optional[str] = None
     require_good: Optional[str] = None
     require_crew_member: Optional[str] = None
@@ -52,6 +51,7 @@ class Location(BaseModel):
         self.connected_locs.append(location)
 
     def activate(self, game):
+        """triggers an event"""
         if self.trigger.deactivate:
             self.active = False
         if self.trigger.activate_clear_cargo:

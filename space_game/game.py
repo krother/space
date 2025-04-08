@@ -1,11 +1,9 @@
-from functools import partial
-from typing import Any, Callable, Generator, Literal
-
-from pydantic import BaseModel
-
 from space_game.lang import TEXT
-from space_game.location import Location
+from pydantic import BaseModel
+from typing import Any, Callable, Generator, Literal
 from space_game.logging_util import logger
+from space_game.location import Location
+from functools import partial
 
 
 TRANSITIONS = {

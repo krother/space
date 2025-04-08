@@ -11,10 +11,10 @@ from unittest.mock import patch, MagicMock
 from space_game.cli import start_game, select_command
 
 
-TEST_DATA_PATH = os.path.dirname(os.path.abspath(__file__))
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+TEST_DATA_PATH = os.path.join(BASE_PATH, "test_data")
 SOLUTION_FILE = os.path.join(TEST_DATA_PATH, "solution.txt")
 COMPLETE_SOLUTION = open(SOLUTION_FILE, encoding="utf-8").read().strip()
-
 
 
 class TestSpace:

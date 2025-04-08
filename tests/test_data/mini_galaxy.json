@@ -1,0 +1,45 @@
+[
+{"name": "Pandalor",
+ "description": "The home of the space pandas",
+ "image": "pandalor",
+ "type": "surface",
+ "resources": ["fish"],
+ "connected_names": ["Space Port", "Space Bar"],
+ "trigger": {}
+},
+{"name": "Space Bar",
+ "description": "Lots of strange characters are hanging around",
+ "image": "pandalor",
+ "type": "surface",
+ "resources": [],
+ "connected_names": ["Pandalor"],
+ "trigger": {
+   "action_name": "talk to penguin",
+   "require_good": "fish",
+   "activated_message": "Of course I can fly this thing. Am I a bird or what?",
+   "not_activated_message": "Let me see some fish first!",
+   "gain_crew_member": "pingu"
+ }
+},
+{"name": "Space Port",
+ "description": "Your spaceship is waiting here",
+ "image": "pandalor",
+ "type": "surface",
+ "resources": ["fuel"],
+ "connected_names": ["Pandalor"],
+ "trigger": {
+   "action_name": "Launch",
+   "require_crew_member": "pingu",
+   "require_good": "fuel",
+   "activated_message": "3-2-1 Liftoff",
+   "not_activated_message": "Check: do you have a pilot and enough fuel?",
+   "gain_connection": "Rainbow portal"
+ }
+},
+{"name": "Rainbow portal",
+  "description": "You have found the rainbow portal. Lets go!",
+  "image": "rainbow",
+  "connected_names": [],
+  "trigger": {}
+}
+]

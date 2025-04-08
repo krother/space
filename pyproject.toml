@@ -41,7 +41,8 @@ dev = [
 ]
 
 [project.scripts]
-space = "space_game.gui:main"
+space = "space_game.cli:main"
+space_gui = "space_game.gui:main"
 
 [project.urls]
 Homepage = "https://github.com/krother/space"

@@ -9,6 +9,9 @@ from space_game.game import SpaceGame
 from space_game.lang import LANG
 
 
+DEFAULT_GALAXY = os.path.join(BASE_PATH, f"galaxy_{LANG}.json")
+
+
 class LocationData(BaseModel):
     name: str
     image: str
@@ -46,10 +49,8 @@ def _get_game_data(game_id, game):
     )
 
 
-def start_game() -> GameData:
-    galaxy = GalaxyGraph.create_galaxy(
-        os.path.join(BASE_PATH, f"galaxy_{LANG}.json")
-    )
+def start_game(filename=DEFAULT_GALAXY) -> GameData:
+    galaxy = GalaxyGraph.create_galaxy(filename)
     game = SpaceGame(location=galaxy["Pandalor"])  # core business object
     game_id = "1"
     GAMES[game_id] = game

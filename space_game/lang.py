@@ -13,6 +13,8 @@ DE = {
     "back to orbit of": "hochbeamen zu",
     "ore": "Erze",
     "gas": "Gas",
+    "fish": "Fisch",
+    "fuel": "Treibstoff",
     "food": "Nahrung",
     "lava": "Lava",
     "notebook": "Notebook",

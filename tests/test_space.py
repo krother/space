@@ -11,7 +11,8 @@ import pytest
 from space_game import views
 from space_game.gui import SpaceGameWindow
 
-TEST_DATA_PATH = os.path.dirname(os.path.abspath(__file__))
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+TEST_DATA_PATH = os.path.join(BASE_PATH, "test_data")
 SOLUTION_FILE = os.path.join(TEST_DATA_PATH, "solution.txt")
 COMPLETE_SOLUTION = open(SOLUTION_FILE, encoding="utf-8").read().strip()
 

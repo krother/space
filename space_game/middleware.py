@@ -52,7 +52,7 @@ def get_template(endpoint: Callable | None) -> Template | None:
     # template file.
     try:
         return jinja_env.get_template(f"{endpoint.__name__}.html")
-    except TemplateNotFound:
+    except TemplateNotFound as e:
         return None
 
 

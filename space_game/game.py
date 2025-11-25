@@ -1,11 +1,9 @@
 from functools import partial
 from typing import Callable, Optional, Literal
 
-import arcade
 from pydantic import BaseModel
 
 from space_game.lang import TEXT
-from space_game.views import FONT_SETTINGS, IMAGES
 from space_game.location import Location
 
 

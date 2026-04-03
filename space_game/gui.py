@@ -49,6 +49,7 @@ def start_new_game():
 
 
 class SpaceGameWindow(arcade.Window):
+    
     def __init__(self, no_window=False):
         if not no_window:
             super().__init__(SIZEX, SIZEY, "Space")
@@ -64,14 +65,10 @@ class SpaceGameWindow(arcade.Window):
         self.draw_commands()
         if self.game.message:
             print_message(self.game.message)
-        #arcade.finish_render()
-        #if self.game.message:
-        #    arcade.pause(0.1)
 
     def update(self, delta_time):
         # pylint: disable=unused-argument
         if self.game.solved:
-            #arcade.pause(5.0)
             arcade.window_commands.close_window()
 
     def draw_commands(self):

@@ -33,7 +33,7 @@ class Location(BaseModel):
     connected_locs: list["Location"] = []
     resources: list[str] = []
     active: bool = True
-    trigger: ActionTrigger
+    trigger: ActionTrigger|None = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

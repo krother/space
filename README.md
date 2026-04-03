@@ -11,36 +11,25 @@ This is a small space traveling adventure. Warp between planets, recruit charact
 
 Install dependencies with:
 
-    pip install -r requirements.txt
-
-Install the necessary modules with:
-
-    pip install -e .
-
-For development also do:
-
-    pip install -r requirements_dev.txt
-
-You may need to checkout the [installation instructions of the arcade library](https://api.arcade.academy/en/latest/install/linux.html)
+    uv sync
 
 ## Usage
 
 ![screenshot](screenshot.png)
 
-The game is playable through a primitive GUI with keyboard entry:
+The game is playable through a command-line interface:
 
-    python space_game
-
+    uv run space_game
 
 ## Web Front-End
 
 There is a prototype web front-end:
 
-    uvicorn --reload space_game.app:app
+    uv run fastapi --reload space_game/app.py
 
 ## License
 
-(c) 2024 Kristian Rother.
+(c) 2026 Kristian Rother
 
 contact: `kristian.rother@posteo.de`
 

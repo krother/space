@@ -23,14 +23,14 @@ def load_images(path, image_dict: dict[str, Any]):
         if fn.endswith(".png"):
             name = fn[:-4]
             fn = os.path.join(path, fn)
-            image_dict[name] = load_texture(fn, 0, 0)
+            image_dict[name] = load_texture(fn)
 
 
 def print_message(msg):
     arcade.draw_text(
         text=msg,
-        start_x=300,
-        start_y=220,
+        x=300,
+        y=220,
         width=800,
         multiline=True,
         color=arcade.color.LIGHT_CRIMSON,  # ALIZARIN_CRIMSON,

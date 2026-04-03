@@ -51,27 +51,27 @@ def start_new_game():
 class SpaceGameWindow(arcade.Window):
     def __init__(self, no_window=False):
         if not no_window:
-            super().__init__(SIZEX, SIZEY, "Space", update_rate=0.2)
+            super().__init__(SIZEX, SIZEY, "Space")
             arcade.set_background_color(arcade.color.BLACK)
         self.game = start_new_game()
         self.commands = list(self.game.get_commands())
         self._keylog = ""
 
     def on_draw(self):
-        arcade.start_render()
+        self.clear()
         self.draw_game()
         self.draw_location()
         self.draw_commands()
         if self.game.message:
             print_message(self.game.message)
-        arcade.finish_render()
-        if self.game.message:
-            arcade.pause(0.1)
+        #arcade.finish_render()
+        #if self.game.message:
+        #    arcade.pause(0.1)
 
     def update(self, delta_time):
         # pylint: disable=unused-argument
         if self.game.solved:
-            arcade.pause(5.0)
+            #arcade.pause(5.0)
             arcade.window_commands.close_window()
 
     def draw_commands(self):
@@ -81,8 +81,8 @@ class SpaceGameWindow(arcade.Window):
         commands += "\n[Esc] Exit"
         arcade.draw_text(
             text=commands,
-            start_x=300,
-            start_y=600,
+            x=300,
+            y=600,
             width=600,
             multiline=True,
             **FONT_SETTINGS,
@@ -92,35 +92,36 @@ class SpaceGameWindow(arcade.Window):
         """Draws the players inventory"""
         arcade.draw_text(
             text=TEXT["cargo bay"],
-            start_x=800,
-            start_y=600,
+            x=800,
+            y=600,
             **FONT_SETTINGS,  # type: ignore
         )
         arcade.draw_text(
             text=TEXT["crew"],
-            start_x=800,
-            start_y=400,
+            x=800,
+            y=400,
             **FONT_SETTINGS,  # type: ignore
         )
 
         if self.game.cargo:
-            IMAGES[self.game.cargo].draw_sized(870, 500, 128, 128)
+            arcade.draw_texture_rect(IMAGES[self.game.cargo], arcade.XYWH(870, 500, 128, 128))
         for i, c in enumerate(self.game.crew):
-            IMAGES[c].draw_sized(870 + i * 120, 320, 96, 96)
+            arcade.draw_texture_rect(IMAGES[c], arcade.XYWH(870 + i * 120, 320, 96, 96))
 
     def draw_location(self) -> None:
-        IMAGES[self.game.location.image].draw_sized(150, 850, 200, 200)
+        arcade.draw_texture_rect(IMAGES[self.game.location.image],
+                                 arcade.XYWH(150, 850, 200, 200))
         arcade.draw_text(
             text=self.game.location.name,
-            start_x=300,
-            start_y=950,
+            x=300,
+            y=950,
             bold=True,
             **FONT_SETTINGS,  # type: ignore
         )
         arcade.draw_text(
             text=self.game.location.description,
-            start_x=300,
-            start_y=900,
+            x=300,
+            y=900,
             multiline=True,
             width=600,
             **FONT_SETTINGS,  # type: ignore

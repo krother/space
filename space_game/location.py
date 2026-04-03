@@ -1,4 +1,3 @@
-from typing import Optional
 
 from pydantic import BaseModel
 
@@ -7,15 +6,15 @@ class ActionTrigger(BaseModel):
     """
     Conditions and effects of puzzles at a location
     """
-    action_name: Optional[str] = None
-    require_good: Optional[str] = None
-    require_crew_member: Optional[str] = None
-    activated_message: Optional[str] = None
-    not_activated_message: Optional[str] = None
-    activate_clear_cargo: Optional[str] = None
-    activate_gain_crew_member: Optional[str] = None
-    activate_gain_cargo: Optional[str] = None
-    activate_gain_connection: Optional[str] = None
+    action_name: str|None = None
+    require_good: str|None = None
+    require_crew_member: str|None = None
+    activated_message: str|None = None
+    not_activated_message: str|None = None
+    activate_clear_cargo: str|None = None
+    activate_gain_crew_member: str|None = None
+    activate_gain_cargo: str|None = None
+    activate_gain_connection: str|None = None
     deactivate: bool = True
 
 
@@ -33,7 +32,7 @@ class Location(BaseModel):
     connected_locs: list["Location"] = []
     resources: list[str] = []
     active: bool = True
-    trigger: ActionTrigger|None = None
+    trigger: ActionTrigger
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

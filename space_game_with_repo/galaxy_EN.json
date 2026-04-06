@@ -1,0 +1,223 @@
+[
+{"name": "Pandalor",
+ "description": "The home of the pandas covered in thick bamboo forests.",
+ "image": "pandalor",
+ "resources": ["bamboo", "peanuts"],
+ "connected_names": ["B-Soup", "Turing"],
+ "trigger": {}
+},
+{"name": "Django Prime",
+ "description": "A huge blazing red star with lots of interesting planets.",
+ "image": "django_prime",
+ "resources": ["gas"],
+ "connected_names": ["X2475", "Colabo", "Octygon", "Medical base"],
+ "trigger": {}
+},
+{
+    "name": "Medical base",
+    "description": "The biggest database on medical subjects in the known universe. The elephant doctor Slonik is working here",
+    "image": "medibase",
+    "resources": [],
+    "type": "surface",
+    "connected_names": ["Django Prime"],
+    "trigger": {
+      "action_name": "talk to doctor Slonik",
+      "not_activated_message": "Slonik: I'm hungry. Do you have any snacks with you?",
+      "require_good": "peanuts",
+      "activated_message": "Slonik: You have any more of these? I'm coming with you!",
+      "activate_clear_cargo": "True",
+      "activate_gain_crew_member": "elephant"
+    }
+},
+{"name": "Valuerro",
+  "description": "An icy world where something went terribly wrong. It is currently controlled by ransomware pirates.",
+  "image": "valuerro",
+  "resources": ["minerals"],
+  "connected_names": ["Octygon", "Adalov", "Ice cream mines"],
+  "trigger": {}
+},
+{
+    "name": "Ice cream mines",
+    "description": "A mine where poor creatures toil in slavery.",
+    "image": "snowy",
+    "type": "surface",
+    "connected_names": ["Valuerro"],
+    "trigger": {
+      "action_name": "rescue slaves",
+      "require_crew_member": "hamster",
+      "activated_message": "Hamster waves a hand and mutters: you don't need to see our root password. You manage to liberate Pingu the pilot!",
+      "not_activated_message": "the guards ask you for the root passord. After 3 guesses, they kick you out.",
+      "activate_gain_crew_member": "pingu"
+    }
+},
+{"name": "Kubernety",
+  "description": "An ocean planet inhabited by powerful whales.",
+  "image": "kubernety",
+  "connected_names": ["Turing", "B-Soup", "Octygon", "Aqua City"],
+  "trigger": {}
+},
+{
+    "name": "Aqua City",
+    "type": "surface",
+    "description": "a harbor city with impressive docks.",
+    "image": "aqua_city",
+    "connected_names": ["Kubernety"],
+    "resources": ["food"],
+    "trigger": {
+      "action_name": "contact the whales",
+      "require_good": "bamboo",
+      "activated_message": "Whales: here is a strange piece of DNA. Maybe you can figure out what species it is from.",
+      "activate_clear_cargo": "True",
+      "activate_gain_cargo": "dna",
+      "not_activated_message": "Whales: could you bring us a few containers of bamboo please?",
+      "deactivate": false
+    }
+},
+{"name": "X2475",
+  "description": "an asteroid belt. The rocks are dangerous to pass.",
+  "image": "asteroids",
+  "resources": ["ore"],
+  "connected_names": ["Django Prime"],
+  "trigger": {
+    "action_name": "navigate the asteroids",
+    "require_crew_member": "pingu",
+    "activated_message": "Pingu flies your ship safely through the asteroids. Pingu: 'Am I a bird or what?'",
+    "activate_gain_connection": "Gitla Beta",
+    "not_activated_message": "After a few asteroids bump into your shields you decide it is safer to turn back."
+  }
+},
+{"name": "Turing",
+  "description": "A sandy desert planet where all kinds of artificial intelligence are trained.",
+  "image": "turing",
+  "resources": ["ore"],
+  "connected_names": ["Pandalor", "B-Soup", "Kubernety", "Turing Desert"],
+  "trigger": {}
+},
+{
+    "name": "Turing Desert",
+    "description": "A desert with the occasional data center. Your old friend Python lives here.",
+    "image": "desert",
+    "type": "surface",
+    "connected_names": ["Turing"],
+    "trigger": {
+      "action_name": "talk to the Python",
+      "require_good": "notebook",
+      "activated_message": "Python: thank you for bringing me my notebook. Do you mind if I jump aboard?",
+      "activate_clear_cargo": "True",
+      "activate_gain_crew_member": "python",
+      "not_activated_message": "Python: did you see my notebook anywhere?"
+    }
+},
+{"name": "Octygon",
+  "description": "A rocky worlds that could use some terraforming. A single monolith stands our on the surface.",
+  "image": "octygon",
+  "resources": ["ore"],
+  "connected_names": ["Django Prime", "Valuerro", "Colabo", "Kubernety", "Monolith"],
+  "trigger": {}
+},
+{
+    "name": "Monolith",
+    "description": "The monolith is huge and black. It has a single hole with the diameter of a 4-week old bamboo.",
+    "image": "monolith",
+    "type": "surface",
+    "connected_names": ["Octygon"],
+    "trigger": {
+      "action_name": "examine the monolith",
+      "require_crew_member": "unicorn",
+      "activated_message": "Unicorns horn fits perfectly. The monolith decomposes into microservices, and a portal opens.",
+      "not_activated_message": "You cannot figure out how to work with the monolith. After a day, you return to your spaceship.",
+      "activate_gain_connection": "Rainbow portal"
+    }
+},
+{"name": "Rainbow portal",
+  "description": "You have found the rainbow portal, a road to the stars. Many more adventures await you. May the source be with you!",
+  "image": "rainbow",
+  "connected_names": [],
+  "trigger": {}
+},
+{"name": "Adalov",
+  "description": "The oldest star in the galaxy, featuring a purple gas planet. An old hyperspace route starts here.",
+  "image": "adalov",
+  "resources": ["gas"],
+  "connected_names": ["Colabo", "B-Soup", "Valuerro"],
+  "trigger": {
+    "action_name": "navigate the hyperspace route",
+    "require_good": "starmap",
+    "activated_message": "Python: after 200 parsecs, turn left.",
+    "not_activated_message": "Finding the route is difficult! You need a map, otherwise you will get lost.",
+    "activate_gain_connection": "Julia"
+  }
+},
+{"name": "Julia",
+  "description": "Swear not by the moon, that monthly changes in her circled orb, lest that thy love prove likewise variable.",
+  "image": "julia",
+  "connected_names": ["Adalov", "Spaceship"],
+  "trigger": {}
+},
+{"name": "Spaceship",
+  "description": "The spaceship is sending out a distress call!",
+  "image": "smugglers",
+  "connected_names": ["Julia"],
+  "trigger": {
+    "action_name": "aid the spaceship",
+    "require_crew_member": "panda",
+    "activated_message": "You rescue the single crew member, a hamster who has mastered the force",
+    "not_activated_message": "-not applicable-",
+    "activate_gain_crew_member": "hamster"
+  }
+},
+{"name": "B-Soup",
+  "description": "A volcanic world where hyperspace travel routes from all directions meet.",
+  "image": "hatitipi",
+  "connected_names": ["Adalov", "Pandalor", "Turing", "Flaming Fox Temple"],
+  "trigger": {
+    "action_name": "GET /",
+    "not_activated_message": "200 OK"
+  }
+},
+{"name": "Flaming Fox Temple",
+  "description": "The archives of the known universe are kept in this place.",
+  "image": "flaming_fox_temple",
+  "type": "surface",
+  "resources": ["lava"],
+  "connected_names": ["B-Soup"],
+  "location": "SpaceStation",
+  "trigger": {
+    "action_name": "search the archives",
+    "require_crew_member": "python",
+    "activated_message": "Python: here is an old star map!",
+    "activate_gain_cargo": "starmap",
+    "not_activated_message": "You spend days browsing the archives, but you are way too slow. Shouldn't there be a way to automate this boring task?",
+    "deactivate": false
+  }
+},
+{"name": "Colabo",
+  "description": "A thriving world full of clouds. The citizens of Colabo are famous collectors of notebooks.",
+  "image": "colabo",
+  "resources": ["notebook"],
+  "connected_names": ["Django Prime", "Octygon", "Adalov"],
+  "trigger": {}
+},
+{"name": "Gitla Beta",
+  "description": "The people of this planet are known for never misplacing anything.",
+  "image": "gitla_beta",
+  "connected_names": ["X2475", "Cloning Laboratory"],
+  "location": "AncientVault",
+  "trigger": {}
+},
+{
+    "name": "Cloning Laboratory",
+    "description": "A research facility where all kinds of things get cloned.",
+    "image": "cloning_lab",
+    "type": "ship",
+    "connected_names": ["Gitla Beta"],
+    "trigger": {
+      "action_name": "clone something",
+      "require_crew_member": "elephant",
+      "require_good": "dna",
+      "not_activated_message": "After cloning yourself a couple of times it gets kind of boring. You need a doctor and some DNA to try something new.",
+      "activated_message": "Elephant: We have managed to clone an unknown creature. Look, its a cyber unicorn!",
+      "activate_gain_crew_member": "unicorn"
+    }
+}
+]

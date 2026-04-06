@@ -1,0 +1,223 @@
+[
+{"name": "Pandalor",
+ "description": "Das Zuhause der Pandas, bedeckt von dichten Bambuswäldern.",
+ "image": "pandalor",
+ "resources": ["bamboo", "peanuts"],
+ "connected_names": ["B-Soup", "Turing"],
+ "trigger": {}
+},
+{"name": "Django Prime",
+ "description": "Ein riesiger, glühend roter Stern mit vielen interessanten Planeten.",
+ "image": "django_prime",
+ "resources": ["gas"],
+ "connected_names": ["X2475", "Colabo", "Octygon", "Medical base"],
+ "trigger": {}
+},
+{
+    "name": "Medical base",
+    "description": "Die größte Datenbank zu medizinischen Themen im bekannten Universum. Der Elefantendoktor Slonik arbeitet hier.",
+    "image": "medibase",
+    "resources": [],
+    "type": "surface",
+    "connected_names": ["Django Prime"],
+    "trigger": {
+      "action_name": "mit Doktor Slonik sprechen",
+      "not_activated_message": "Slonik: Ich bin hungrig. Hast du Snacks dabei?",
+      "require_good": "peanuts",
+      "activated_message": "Slonik: Hast du noch mehr davon? Ich komme mit euch!",
+      "activate_clear_cargo": "True",
+      "activate_gain_crew_member": "elephant"
+    }
+},
+{"name": "Valuerro",
+  "description": "Eine eisige Welt, auf der etwas schrecklich schiefgelaufen ist. Sie wird derzeit von Ransomware-Piraten kontrolliert.",
+  "image": "valuerro",
+  "resources": ["minerals"],
+  "connected_names": ["Octygon", "Adalov", "Ice cream mines"],
+  "trigger": {}
+},
+{
+    "name": "Ice cream mines",
+    "description": "Eine Mine, in der arme Wesen in der Sklaverei schuften.",
+    "image": "snowy",
+    "type": "surface",
+    "connected_names": ["Valuerro"],
+    "trigger": {
+      "action_name": "Sklaven befreien",
+      "require_crew_member": "hamster",
+      "activated_message": "Der Hamster winkt mit der Hand und murmelt: Du musst unser Root-Passwort nicht sehen. Du schaffst es, Pingu den Piloten zu befreien!",
+      "not_activated_message": "Die Wachen verlangen das Root-Passwort von dir. Nach 3 Versuchen werfen sie dich raus.",
+      "activate_gain_crew_member": "pingu"
+    }
+},
+{"name": "Kubernety",
+  "description": "Ein Ozeanplanet, bewohnt von mächtigen Walen.",
+  "image": "kubernety",
+  "connected_names": ["Turing", "B-Soup", "Octygon", "Aqua City"],
+  "trigger": {}
+},
+{
+    "name": "Aqua City",
+    "type": "surface",
+    "description": "Eine Hafenstadt mit beeindruckenden Docks.",
+    "image": "aqua_city",
+    "connected_names": ["Kubernety"],
+    "resources": ["food"],
+    "trigger": {
+      "action_name": "die Wale kontaktieren",
+      "require_good": "bamboo",
+      "activated_message": "Wale: Hier ist ein seltsames Stück DNS. Vielleicht kannst du herausfinden, von welcher Art es stammt.",
+      "activate_clear_cargo": "True",
+      "activate_gain_cargo": "dna",
+      "not_activated_message": "Wale: Könntest du uns ein paar Container Bambus bringen?",
+      "deactivate": false
+    }
+},
+{"name": "X2475",
+  "description": "Ein Asteroidengürtel. Die Felsen sind gefährlich zu passieren.",
+  "image": "asteroids",
+  "resources": ["ore"],
+  "connected_names": ["Django Prime"],
+  "trigger": {
+    "action_name": "durch die Asteroiden navigieren",
+    "require_crew_member": "pingu",
+    "activated_message": "Pingu fliegt dein Schiff sicher durch die Asteroiden. Pingu: 'Bin ich ein Vogel oder was?'",
+    "activate_gain_connection": "Gitla Beta",
+    "not_activated_message": "Nachdem ein paar Asteroiden in deine Schilde prallen, beschließt du, dass es sicherer ist umzukehren."
+  }
+},
+{"name": "Turing",
+  "description": "Ein sandiger Wüstenplanet, auf dem alle Arten von künstlicher Intelligenz trainiert werden.",
+  "image": "turing",
+  "resources": ["ore"],
+  "connected_names": ["Pandalor", "B-Soup", "Kubernety", "Turing Desert"],
+  "trigger": {}
+},
+{
+    "name": "Turing Desert",
+    "description": "Eine Wüste mit gelegentlichem Rechenzentrum. Dein alter Freund Python lebt hier.",
+    "image": "desert",
+    "type": "surface",
+    "connected_names": ["Turing"],
+    "trigger": {
+      "action_name": "mit Python sprechen",
+      "require_good": "notebook",
+      "activated_message": "Python: Danke, dass du mir mein Notizbuch gebracht hast. Macht es dir etwas aus, wenn ich an Bord springe?",
+      "activate_clear_cargo": "True",
+      "activate_gain_crew_member": "python",
+      "not_activated_message": "Python: Hast du mein Notizbuch irgendwo gesehen?"
+    }
+},
+{"name": "Octygon",
+  "description": "Eine felsige Welt, die Terraforming gut vertragen könnte. Ein einzelner Monolith ragt auf der Oberfläche heraus.",
+  "image": "octygon",
+  "resources": ["ore"],
+  "connected_names": ["Django Prime", "Valuerro", "Colabo", "Kubernety", "Monolith"],
+  "trigger": {}
+},
+{
+    "name": "Monolith",
+    "description": "Der Monolith ist riesig und schwarz. Er hat ein einzelnes Loch mit dem Durchmesser eines 4 Wochen alten Bambus.",
+    "image": "monolith",
+    "type": "surface",
+    "connected_names": ["Octygon"],
+    "trigger": {
+      "action_name": "den Monolith untersuchen",
+      "require_crew_member": "unicorn",
+      "activated_message": "Das Horn des Einhorns passt perfekt. Der Monolith zerfällt in Microservices und ein Portal öffnet sich.",
+      "not_activated_message": "Du kannst nicht herausfinden, wie du mit dem Monolith arbeiten sollst. Nach einem Tag kehrst du zu deinem Raumschiff zurück.",
+      "activate_gain_connection": "Rainbow portal"
+    }
+},
+{"name": "Rainbow portal",
+  "description": "Du hast das Regenbogenportal gefunden, eine Straße zu den Sternen. Viele weitere Abenteuer warten auf dich. Möge der Quellcode mit dir sein!",
+  "image": "rainbow",
+  "connected_names": [],
+  "trigger": {}
+},
+{"name": "Adalov",
+  "description": "Der älteste Stern in der Galaxis mit einem lila Gasplaneten. Eine alte Hyperraumroute beginnt hier.",
+  "image": "adalov",
+  "resources": ["gas"],
+  "connected_names": ["Colabo", "B-Soup", "Valuerro"],
+  "trigger": {
+    "action_name": "die Hyperraumroute navigieren",
+    "require_good": "starmap",
+    "activated_message": "Python: Nach 200 Parsec links abbiegen.",
+    "not_activated_message": "Die Route zu finden ist schwierig! Du brauchst eine Karte, sonst wirst du dich verirren.",
+    "activate_gain_connection": "Julia"
+  }
+},
+{"name": "Julia",
+  "description": "Schwöre nicht beim Mond, der monatlich seine kreisförmige Bahn verändert, damit deine Liebe nicht ebenso wechselhaft sei.",
+  "image": "julia",
+  "connected_names": ["Adalov", "Spaceship"],
+  "trigger": {}
+},
+{"name": "Spaceship",
+  "description": "Das Raumschiff sendet einen Notruf aus!",
+  "image": "smugglers",
+  "connected_names": ["Julia"],
+  "trigger": {
+    "action_name": "dem Raumschiff helfen",
+    "require_crew_member": "panda",
+    "activated_message": "Du rettest das einzige Besatzungsmitglied, einen Hamster, der die Macht gemeistert hat.",
+    "not_activated_message": "-nicht zutreffend-",
+    "activate_gain_crew_member": "hamster"
+  }
+},
+{"name": "B-Soup",
+  "description": "Eine vulkanische Welt, in der sich Hyperraumreiserouten aus allen Richtungen treffen.",
+  "image": "hatitipi",
+  "connected_names": ["Adalov", "Pandalor", "Turing", "Flaming Fox Temple"],
+  "trigger": {
+    "action_name": "GET /",
+    "not_activated_message": "200 OK"
+  }
+},
+{"name": "Flaming Fox Temple",
+  "description": "Die Archive des bekannten Universums werden an diesem Ort aufbewahrt.",
+  "image": "flaming_fox_temple",
+  "type": "surface",
+  "resources": ["lava"],
+  "connected_names": ["B-Soup"],
+  "location": "SpaceStation",
+  "trigger": {
+    "action_name": "die Archive durchsuchen",
+    "require_crew_member": "python",
+    "activated_message": "Python: Hier ist eine alte Sternenkarte!",
+    "activate_gain_cargo": "starmap",
+    "not_activated_message": "Du verbringst Tage damit, die Archive zu durchsuchen, aber du bist viel zu langsam. Sollte es nicht eine Möglichkeit geben, diese langweilige Aufgabe zu automatisieren?",
+    "deactivate": false
+  }
+},
+{"name": "Colabo",
+  "description": "Eine blühende Welt voller Wolken. Die Bürger von Colabo sind bekannte Sammler von Notizbüchern.",
+  "image": "colabo",
+  "resources": ["notebook"],
+  "connected_names": ["Django Prime", "Octygon", "Adalov"],
+  "trigger": {}
+},
+{"name": "Gitla Beta",
+  "description": "Die Menschen dieses Planeten sind dafür bekannt, dass sie nie etwas verlegen.",
+  "image": "gitla_beta",
+  "connected_names": ["X2475", "Cloning Laboratory"],
+  "location": "AncientVault",
+  "trigger": {}
+},
+{
+    "name": "Cloning Laboratory",
+    "description": "Eine Forschungseinrichtung, in der alle Arten von Dingen geklont werden.",
+    "image": "cloning_lab",
+    "type": "ship",
+    "connected_names": ["Gitla Beta"],
+    "trigger": {
+      "action_name": "etwas klonen",
+      "require_crew_member": "elephant",
+      "require_good": "dna",
+      "not_activated_message": "Nachdem du dich ein paar Mal geklont hast, wird es irgendwie langweilig. Du brauchst einen Arzt und etwas DNS, um etwas Neues auszuprobieren.",
+      "activated_message": "Elefant: Wir haben es geschafft, ein unbekanntes Wesen zu klonen. Schau, es ist ein Cyber-Einhorn!",
+      "activate_gain_crew_member": "unicorn"
+    }
+}
+]
